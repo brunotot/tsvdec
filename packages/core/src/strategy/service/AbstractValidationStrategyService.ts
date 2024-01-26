@@ -1,14 +1,14 @@
-import { type DecoratorArgs } from "@decorators";
-import { type Locale } from "@localization";
-import { ClassValidatorMetaService } from "@reflection/service/impl/ClassValidatorMetaService";
+import { type DecoratorArgs } from "../../decorators";
+import { type Locale } from "../../localization";
+import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
 import {
   FieldValidatorMetaService,
   type ControlDescriptor,
-} from "@reflection/service/impl/FieldValidatorMetaService";
-import { type EventEmitter } from "@utilities";
-import { Form } from "@validation/models/Form";
-import { type ValidationMetadata } from "@validation/models/ValidationMetadata";
-import type { FormConfig, ValidationResult } from "@validation/types";
+} from "../../reflection/service/impl/FieldValidatorMetaService";
+import { type EventEmitter } from "../../utilities";
+import { Form } from "../../validation/models/Form";
+import { type ValidationMetadata } from "../../validation/models/ValidationMetadata";
+import type { FormConfig, ValidationResult } from "../../validation/types";
 
 /**
  * The `AbstractValidationStrategyService` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.

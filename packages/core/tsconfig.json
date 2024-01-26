@@ -7,28 +7,5 @@
     "target": "ESNext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "baseUrl": ".",
-    "paths": {
-      "@decorators": ["src/decorators"],
-      "@decorators/*": ["src/decorators/*"],
-
-      "@utilities": ["src/utilities"],
-      "@utilities/*": ["src/utilities/*"],
-
-      "@validation": ["src/validation"],
-      "@validation/*": ["src/validation/*"],
-
-      "@reflection": ["src/reflection"],
-      "@reflection/*": ["src/reflection/*"],
-
-      "@overrides": ["src/overrides"],
-      "@overrides/*": ["src/overrides/*"],
-
-      "@strategy": ["src/strategy"],
-      "@strategy/*": ["src/strategy/*"],
-
-      "@localization": ["src/localization"],
-      "@localization/*": ["src/localization/*"],
-    },
   },
 }

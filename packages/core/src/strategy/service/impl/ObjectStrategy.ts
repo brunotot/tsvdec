@@ -1,11 +1,11 @@
-import { type DecoratorArgs } from "@decorators";
+import { type DecoratorArgs } from "../../../decorators";
 import {
   type DetailedErrorsResponse,
   type SimpleErrorsResponse,
   type evaluate,
-} from "@strategy/models/StrategyFactory";
-import { type Booleans } from "@utilities";
-import type { ValidationResult } from "@validation/types";
+} from "../../../strategy/models/StrategyFactory";
+import { type Booleans } from "../../../utilities";
+import type { ValidationResult } from "../../../validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 
 export namespace ObjectStrategy {

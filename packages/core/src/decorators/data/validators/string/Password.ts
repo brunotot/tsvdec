@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
-import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
-import { buildDecoratorMeta, buildMessageProp, type DecoratorOptions } from "@decorators/helper";
-import { type Locale } from "@localization";
-import { translate } from "@localization/service/TranslationService";
-import { type Objects } from "@utilities";
+import { DecoratorKeys } from "../../../../decorators/data/validators/DecoratorKeys";
+import { RegexConst } from "../../../../decorators/data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "../../../../decorators/helper";
+import { type Locale } from "../../../../localization";
+import { translate } from "../../../../localization/service/TranslationService";
+import { type Objects } from "../../../../utilities";
 
 /** Configurable options for `@Password` decorator. */
 export type PasswordRules = {

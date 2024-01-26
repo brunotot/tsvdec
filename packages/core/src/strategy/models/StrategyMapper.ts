@@ -1,6 +1,6 @@
-import { type AbstractValidationStrategyService } from "@strategy/service/AbstractValidationStrategyService";
-import * as Strategies from "@strategy/service/impl";
-import { type Types } from "@utilities";
+import { type AbstractValidationStrategyService } from "../../strategy/service/AbstractValidationStrategyService";
+import * as Strategies from "../../strategy/service/impl";
+import { type Types } from "../../utilities";
 
 /**
  * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.

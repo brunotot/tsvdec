@@ -1,13 +1,13 @@
-import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { DecoratorKeys } from "../../../../decorators/data/validators/DecoratorKeys";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators/factory/forField";
 import {
   buildDecoratorMeta,
   buildKeyProp,
   buildMessageProp,
   type DecoratorOptions,
-} from "@decorators/helper";
-import { translate } from "@localization/service/TranslationService";
-import { Objects } from "@utilities";
+} from "../../../../decorators/helper";
+import { translate } from "../../../../localization/service/TranslationService";
+import { Objects } from "../../../../utilities";
 
 /** Internal validation function for {@link ArrayContains} validator. */
 function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean {

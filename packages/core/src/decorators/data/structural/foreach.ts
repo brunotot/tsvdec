@@ -1,8 +1,8 @@
 import {
   createFieldDecorator,
   type FieldDecorator,
-} from "@decorators/factory/forField/createFieldDecorator";
-import { type Arrays, type Types } from "@utilities";
+} from "../../../decorators/factory/forField/createFieldDecorator";
+import { type Arrays, type Types } from "../../../utilities";
 
 /**
  * Creates a validator decorator which applies multiple validators to each element in array field.

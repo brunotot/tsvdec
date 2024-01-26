@@ -1,13 +1,13 @@
-import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { DecoratorKeys } from "../../../../decorators/data/validators/DecoratorKeys";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators/factory/forField";
 import {
   buildDecoratorMeta,
   buildKeyProp,
   buildMessageProp,
   type DecoratorOptions,
-} from "@decorators/helper";
-import { translate } from "@localization/service/TranslationService";
-import { type Objects } from "@utilities";
+} from "../../../../decorators/helper";
+import { translate } from "../../../../localization/service/TranslationService";
+import { type Objects } from "../../../../utilities";
 
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.

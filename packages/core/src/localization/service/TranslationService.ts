@@ -1,5 +1,5 @@
-import { type Locale } from "@localization/resolver/LocaleResolver";
-import { type MessageKey, readMessage } from "@localization/service/MessageReaderService";
+import { type Locale } from "../../localization/resolver/LocaleResolver";
+import { readMessage, type MessageKey } from "../../localization/service/MessageReaderService";
 
 /**
  * Formats a string by replacing placeholders with provided arguments.

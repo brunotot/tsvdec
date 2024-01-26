@@ -1,7 +1,7 @@
-import { type Locale } from "@localization";
-import { type EventEmitter, type Objects } from "@utilities";
-import { Events } from "@validation/models/Events";
-import type { ValidationMetadataEntry, ValidationResult } from "@validation/types";
+import { type Locale } from "../../localization";
+import { type EventEmitter, type Objects } from "../../utilities";
+import { Events } from "../../validation/models/Events";
+import type { ValidationMetadataEntry, ValidationResult } from "../../validation/types";
 
 /**
  * Manages a collection of validation rules for a specific field.

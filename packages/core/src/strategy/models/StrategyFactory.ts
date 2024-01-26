@@ -8,9 +8,9 @@ import {
   type PrimitiveArrayStrategy,
   type PrimitiveGetterStrategy,
   type PrimitiveStrategy,
-} from "@strategy/service/impl";
-import { type Booleans, type Objects, type Types } from "@utilities";
-import type { ValidationResult } from "@validation/types";
+} from "../../strategy/service/impl";
+import { type Booleans, type Objects, type Types } from "../../utilities";
+import type { ValidationResult } from "../../validation/types";
 
 /**
  * Evaluates a type, returning either an optional or mandatory evaluation based on the second type parameter.

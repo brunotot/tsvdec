@@ -21,5 +21,8 @@
   },
   "bugs": {
     "url": "https://github.com/brunotot/tsvdec/issues"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
   }
 }

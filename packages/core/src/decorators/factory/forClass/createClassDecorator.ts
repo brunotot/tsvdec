@@ -1,5 +1,5 @@
-import { ClassValidatorMetaService } from "@reflection";
-import { EventEmitter, type Types } from "@utilities";
+import { ClassValidatorMetaService } from "../../../reflection";
+import { EventEmitter, type Types } from "../../../utilities";
 
 /**
  * Represents a class decorator function.

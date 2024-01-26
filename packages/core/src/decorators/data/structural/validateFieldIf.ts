@@ -1,8 +1,8 @@
 import {
   createFieldDecorator,
   type FieldDecorator,
-} from "@decorators/factory/forField/createFieldDecorator";
-import { type DecoratorValidateIf } from "@decorators/helper";
+} from "../../../decorators/factory/forField/createFieldDecorator";
+import { type DecoratorValidateIf } from "../../../decorators/helper";
 
 export function validateFieldIf<Value, Class>(
   validateIf: DecoratorValidateIf<Class>,

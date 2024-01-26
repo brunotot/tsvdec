@@ -1,7 +1,7 @@
-import { type DecoratorMeta } from "@decorators";
-import { type Locale } from "@localization";
-import type { DetailedErrorsResponse, SimpleErrorsResponse } from "@strategy";
-import { type Objects } from "@utilities";
+import { type DecoratorMeta } from "../decorators";
+import { type Locale } from "../localization";
+import type { DetailedErrorsResponse, SimpleErrorsResponse } from "../strategy";
+import { type Objects } from "../utilities";
 
 /**
  * Represents a function that evaluates a value and returns a validation result.

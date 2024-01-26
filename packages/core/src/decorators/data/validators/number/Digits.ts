@@ -1,13 +1,13 @@
-import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { DecoratorKeys } from "../../../../decorators/data/validators/DecoratorKeys";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators/factory/forField";
 import {
   buildDecoratorMeta,
   buildKeyProp,
   buildMessageProp,
   type DecoratorOptions,
-} from "@decorators/helper";
-import { translate } from "@localization/service/TranslationService";
-import { type Objects } from "@utilities";
+} from "../../../../decorators/helper";
+import { translate } from "../../../../localization/service/TranslationService";
+import { type Objects } from "../../../../utilities";
 
 /** Internal validation function for {@link Digits} validator. */
 function isDigitsValid(number: Objects.Optional<number>, ints: number, decs: number): boolean {

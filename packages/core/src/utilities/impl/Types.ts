@@ -1,4 +1,4 @@
-import * as Overrides from "@overrides";
+import * as Overrides from "../../overrides";
 
 export namespace Types {
   /**

@@ -1,15 +1,15 @@
-import { getGlobalLocale, type Locale } from "@localization";
-import { ClassValidatorMetaService } from "@reflection/service/impl/ClassValidatorMetaService";
-import { FieldValidatorMetaService } from "@reflection/service/impl/FieldValidatorMetaService";
+import { getGlobalLocale, type Locale } from "../../localization";
+import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
+import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
 import {
   type DetailedErrorsResponse,
   type getStrategyResult,
   type SimpleErrorsResponse,
-} from "@strategy";
-import { EventEmitter, Objects, type Types } from "@utilities";
-import { Cache } from "@validation/models/Cache";
-import { Events } from "@validation/models/Events";
-import { ValidationMetadata } from "@validation/models/ValidationMetadata";
+} from "../../strategy";
+import { EventEmitter, Objects, type Types } from "../../utilities";
+import { Cache } from "../../validation/models/Cache";
+import { Events } from "../../validation/models/Events";
+import { ValidationMetadata } from "../../validation/models/ValidationMetadata";
 import type {
   AsyncEventHandler,
   AsyncEventHandlerProps,
@@ -17,7 +17,7 @@ import type {
   FormConfig,
   FormValidateResponse,
   ValidationResult,
-} from "@validation/types";
+} from "../../validation/types";
 /**
  * Checks if an error object has errors.
  * @typeParam T - The type of the errors.

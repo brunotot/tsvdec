@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as Decorators from "@decorators";
-import { getGlobalLocale, type Locale } from "@localization/resolver/LocaleResolver";
+import * as Decorators from "../../decorators";
+import { getGlobalLocale, type Locale } from "../../localization/resolver/LocaleResolver";
 
 import de from "../translations/de.json";
 import en from "../translations/en.json";

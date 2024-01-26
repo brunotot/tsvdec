@@ -1,15 +1,18 @@
-import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
-import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
-import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { DecoratorKeys } from "../../../../../../decorators/data/validators/DecoratorKeys";
+import { testRegex } from "../../../../../../decorators/data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../../decorators/data/validators/string/regex/shared/regex.constants";
+import {
+  createFieldValidator,
+  type FieldDecorator,
+} from "../../../../../../decorators/factory/forField";
 import {
   buildDecoratorMeta,
   buildKeyProp,
   buildMessageProp,
   type DecoratorOptions,
-} from "@decorators/helper";
-import { translate } from "@localization/service/TranslationService";
-import { Objects } from "@utilities";
+} from "../../../../../../decorators/helper";
+import { translate } from "../../../../../../localization/service/TranslationService";
+import { Objects } from "../../../../../../utilities";
 
 /** Internal validation function for {@link IPAddress} validator. */
 function isIPAddressValid<T extends Objects.Optional<string>>(value: T): boolean {

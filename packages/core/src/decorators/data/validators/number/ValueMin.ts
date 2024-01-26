@@ -1,13 +1,13 @@
-import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { DecoratorKeys } from "../../../../decorators/data/validators/DecoratorKeys";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators/factory/forField";
 import {
   buildDecoratorMeta,
   buildKeyProp,
   buildMessageProp,
   type DecoratorOptions,
-} from "@decorators/helper";
-import { translate } from "@localization/service/TranslationService";
-import { Objects } from "@utilities";
+} from "../../../../decorators/helper";
+import { translate } from "../../../../localization/service/TranslationService";
+import { Objects } from "../../../../utilities";
 
 /** Internal validation function for {@link ValueMin} validator. */
 function isValueMinValid(num: Objects.Optional<number>, min: number): boolean {

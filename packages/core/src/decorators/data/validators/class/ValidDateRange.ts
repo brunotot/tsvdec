@@ -1,13 +1,13 @@
-import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { createClassValidator, type ClassDecorator } from "@decorators/factory/forClass";
+import { DecoratorKeys } from "../../../../decorators/data/validators/DecoratorKeys";
+import { createClassValidator, type ClassDecorator } from "../../../../decorators/factory/forClass";
 import {
   buildDecoratorMeta,
   buildKeyProp,
   buildMessageProp,
   type DecoratorOptions,
-} from "@decorators/helper";
-import { translate } from "@localization/service/TranslationService";
-import { Objects, type Types } from "@utilities";
+} from "../../../../decorators/helper";
+import { translate } from "../../../../localization/service/TranslationService";
+import { Objects, type Types } from "../../../../utilities";
 
 /** Internal validation function for {@link ValidDateRange} validator. */
 function isValidDateRangeValid(value: any, startDateField: string, endDateField: string): boolean {

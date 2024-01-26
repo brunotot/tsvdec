@@ -1,5 +1,5 @@
-import { type Locale } from "@localization/resolver/LocaleResolver";
-import { type MessageProp } from "@overrides";
+import { type Locale } from "../../localization/resolver/LocaleResolver";
+import { type MessageProp } from "../../overrides";
 
 /**
  * Message parser definition.

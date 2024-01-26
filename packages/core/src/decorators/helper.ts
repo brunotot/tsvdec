@@ -1,6 +1,6 @@
-import { getMessageParser, type Locale } from "@localization";
-import { type MessageProp } from "@overrides";
-import { Objects } from "@utilities";
+import { getMessageParser, type Locale } from "../localization";
+import { type MessageProp } from "../overrides";
+import { Objects } from "../utilities";
 
 export type DecoratorGroup = string;
 

@@ -1,4 +1,4 @@
-import { Classes, type Types } from "@utilities";
+import { Classes, type Types } from "../../utilities";
 
 type FieldDecoratorCtx<T = unknown> = Readonly<{
   kind: "getter" | "method" | "field";

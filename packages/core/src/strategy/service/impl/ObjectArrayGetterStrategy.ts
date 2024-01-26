@@ -1,10 +1,10 @@
-import { type DecoratorArgs } from "@decorators";
+import { type DecoratorArgs } from "../../../decorators";
 import {
   type DetailedErrorsResponse,
   type SimpleErrorsResponse,
-} from "@strategy/models/StrategyFactory";
-import { type Arrays, type Booleans } from "@utilities";
-import type { ValidationResult } from "@validation/types";
+} from "../../../strategy/models/StrategyFactory";
+import { type Arrays, type Booleans } from "../../../utilities";
+import type { ValidationResult } from "../../../validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 import { ObjectStrategy } from "./ObjectStrategy";
 

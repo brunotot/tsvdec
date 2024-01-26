@@ -1,6 +1,6 @@
-import { type DecoratorArgs } from "@decorators/helper";
-import { FieldValidatorMetaService } from "@reflection";
-import { EventEmitter } from "@utilities";
+import { type DecoratorArgs } from "../../../decorators/helper";
+import { FieldValidatorMetaService } from "../../../reflection";
+import { EventEmitter } from "../../../utilities";
 
 /**
  * Represents a field decorator function that is used to decorate fields in a class.

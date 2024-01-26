@@ -1,10 +1,10 @@
 import {
   createFieldDecorator,
   type FieldDecorator,
-} from "@decorators/factory/forField/createFieldDecorator";
+} from "../../../decorators/factory/forField/createFieldDecorator";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { PrimitiveTypeOverride } from "@overrides";
-import { type Objects, type Types } from "@utilities";
+import { PrimitiveTypeOverride } from "../../../overrides";
+import { type Objects, type Types } from "../../../utilities";
 
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).

@@ -1,8 +1,15 @@
-import { DEFAULT_DECORATOR_META, type DecoratorMeta, type DecoratorValidateIf } from "@decorators";
-import { AbstractMetaService, type MetaStrategy } from "@reflection/service/AbstractMetaService";
-import { type EventEmitter, type Types } from "@utilities";
-import { ValidationMetadata } from "@validation/models/ValidationMetadata";
-import type { ValidationEvaluator } from "@validation/types";
+import {
+  DEFAULT_DECORATOR_META,
+  type DecoratorMeta,
+  type DecoratorValidateIf,
+} from "../../../decorators";
+import {
+  AbstractMetaService,
+  type MetaStrategy,
+} from "../../../reflection/service/AbstractMetaService";
+import { type EventEmitter, type Types } from "../../../utilities";
+import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
+import type { ValidationEvaluator } from "../../../validation/types";
 
 /**
  * Unwraps a MetaStrategy type to its inferred class.

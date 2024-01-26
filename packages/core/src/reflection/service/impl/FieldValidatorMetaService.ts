@@ -1,11 +1,14 @@
-import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "@decorators";
-import { AbstractMetaService, type MetaStrategy } from "@reflection/service/AbstractMetaService";
-import { type AbstractValidationStrategyService } from "@strategy";
-import { StrategyData } from "@strategy/models/StrategyMapper";
-import * as Strategies from "@strategy/service/impl";
-import { Classes, type EventEmitter, type Types } from "@utilities";
-import { ValidationMetadata } from "@validation/models/ValidationMetadata";
-import type { ValidationEvaluator } from "@validation/types";
+import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "../../../decorators";
+import {
+  AbstractMetaService,
+  type MetaStrategy,
+} from "../../../reflection/service/AbstractMetaService";
+import { type AbstractValidationStrategyService } from "../../../strategy";
+import { StrategyData } from "../../../strategy/models/StrategyMapper";
+import * as Strategies from "../../../strategy/service/impl";
+import { Classes, type EventEmitter, type Types } from "../../../utilities";
+import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
+import type { ValidationEvaluator } from "../../../validation/types";
 
 /**
  * Describes the reflection rules for a specific field within a class.

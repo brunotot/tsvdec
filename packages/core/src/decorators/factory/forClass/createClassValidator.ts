@@ -1,6 +1,6 @@
-import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "@decorators/helper";
-import { type Types } from "@utilities";
-import type { ValidationEvaluator } from "@validation/types";
+import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "../../../decorators/helper";
+import { type Types } from "../../../utilities";
+import type { ValidationEvaluator } from "../../../validation/types";
 import { createClassDecorator, type ClassDecorator } from "./createClassDecorator";
 
 /**

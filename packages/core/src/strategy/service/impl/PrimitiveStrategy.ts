@@ -1,6 +1,6 @@
-import { type DecoratorArgs } from "@decorators";
-import { type Booleans, type Types } from "@utilities";
-import type { ValidationResult } from "@validation/types";
+import { type DecoratorArgs } from "../../../decorators";
+import { type Booleans, type Types } from "../../../utilities";
+import type { ValidationResult } from "../../../validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 
 export namespace PrimitiveStrategy {

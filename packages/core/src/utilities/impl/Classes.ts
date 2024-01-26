@@ -1,4 +1,4 @@
-import { type Types } from "@utilities/impl/Types";
+import { type Types } from "../../utilities/impl/Types";
 
 export namespace Classes {
   /**

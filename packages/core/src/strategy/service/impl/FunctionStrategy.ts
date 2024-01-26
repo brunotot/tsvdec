@@ -1,6 +1,6 @@
-import { type Arrays, type Booleans, type Types } from "@utilities";
-import { Events } from "@validation/models/Events";
-import type { ValidationResult } from "@validation/types";
+import { type Arrays, type Booleans, type Types } from "../../../utilities";
+import { Events } from "../../../validation/models/Events";
+import type { ValidationResult } from "../../../validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 
 export namespace FunctionStrategy {

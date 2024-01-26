@@ -1,12 +1,15 @@
-import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  createFieldValidator,
+  type FieldDecorator,
+} from "../../../../../decorators/factory/forField";
 import {
   buildDecoratorMeta,
   buildKeyProp,
   buildMessageProp,
   type DecoratorOptions,
-} from "@decorators/helper";
-import { translate } from "@localization/service/TranslationService";
-import { type Objects } from "@utilities";
+} from "../../../../../decorators/helper";
+import { translate } from "../../../../../localization/service/TranslationService";
+import { type Objects } from "../../../../../utilities";
 
 /**
  * Tests if a value matches a regular expression pattern.
