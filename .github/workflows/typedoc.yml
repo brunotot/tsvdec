@@ -18,9 +18,6 @@ jobs:
       - name: 🤳 Install
         uses: ./.github/composite-actions/install
 
-      - name: 🚧 Build
-        run: pnpm build
-
       - name: 🔥 Generate documentation
         run: npm run build:docs
 
