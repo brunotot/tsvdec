@@ -1,9 +1,9 @@
 {
+  "private": true,
   "name": "tsvdec",
   "version": "1.0.0",
   "description": "🚀 Typescript form validation using Decorators 🚀",
   "main": "index.js",
-  "private": true,
   "type": "module",
   "author": "Bruno Tot <brunotot10000@gmail.com>",
   "license": "MIT",
