@@ -1,5 +1,5 @@
+import { Classes, Types } from "@tsvdec/core";
 import { useMemo } from "react";
-import { Utilities } from "tdv-core";
 import { type UseFormChangeHandlerMap, type UseFormSetterFn } from "../useForm/types";
 import { type UseChangeHandlersConfig } from "./types";
 
@@ -12,10 +12,10 @@ import { type UseChangeHandlersConfig } from "./types";
  * @returns An object containing form change handlers for each field in the class.
  */
 export function useChangeHandlers<TClass, TBody = TClass>(
-  clazz: Utilities.Types.Class<TClass>,
+  clazz: Types.Class<TClass>,
   { setForm }: UseChangeHandlersConfig<TBody>,
 ): UseFormChangeHandlerMap<TBody> {
-  const fields = useMemo(() => Utilities.Classes.getClassFieldNames(clazz), []);
+  const fields = useMemo(() => Classes.getClassFieldNames(clazz), []);
 
   const handleChange: UseFormSetterFn<TBody> = (key, value) => {
     setForm(prev => {

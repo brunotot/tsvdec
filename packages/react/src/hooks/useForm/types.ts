@@ -1,11 +1,12 @@
-import { type Dispatch, type SetStateAction } from "react";
 import {
-  type Decorators,
-  type Localization,
-  type Strategy,
-  type Utilities,
+  DecoratorArgs,
+  DetailedErrorsResponse,
+  Locale,
+  Objects,
+  SimpleErrorsResponse,
   type ValidationResult,
-} from "tdv-core";
+} from "@tsvdec/core";
+import { type Dispatch, type SetStateAction } from "react";
 import { type FormProviderProps } from "../../components";
 import { type UseResetReturn } from "../useReset/types";
 
@@ -13,16 +14,16 @@ import { type UseResetReturn } from "../useReset/types";
  * Configuration options for the `useForm` hook.
  */
 export type UseFormConfig<TClass> = {
-  defaultValue?: Utilities.Objects.Payload<TClass>;
+  defaultValue?: Objects.Payload<TClass>;
   validationGroups?: string[];
   validateImmediately?: boolean;
   standalone?: boolean;
-  resolveDecoratorArgs?: () => Decorators.DecoratorArgs;
+  resolveDecoratorArgs?: () => DecoratorArgs;
   onSubmit?: () => Promise<void> | void;
-  onSubmitValidationFail?: (errors: Strategy.SimpleErrorsResponse<TClass>) => void;
-  onChange?: (value: Utilities.Objects.Payload<TClass>) => void;
+  onSubmitValidationFail?: (errors: SimpleErrorsResponse<TClass>) => void;
+  onChange?: (value: Objects.Payload<TClass>) => void;
   asyncDelay?: number;
-  locale?: Localization.Locale;
+  locale?: Locale;
 };
 
 /**
@@ -32,11 +33,11 @@ export type UseFormData<TClass> = {
   isValid: boolean;
   isSubmitted: boolean;
   onSubmit: () => Promise<void>;
-  mutations: UseFormChangeHandlerMap<Utilities.Objects.Payload<TClass>>;
+  mutations: UseFormChangeHandlerMap<Objects.Payload<TClass>>;
   providerProps: Omit<FormProviderProps, "children">;
   globalErrors: ValidationResult[];
-  errors: Strategy.SimpleErrorsResponse<TClass>;
-  detailedErrors: Strategy.DetailedErrorsResponse<TClass>;
+  errors: SimpleErrorsResponse<TClass>;
+  detailedErrors: DetailedErrorsResponse<TClass>;
   reset: UseResetReturn<TClass>;
 };
 
@@ -44,8 +45,8 @@ export type UseFormData<TClass> = {
  * Type of the value returned by the `useForm` hook.
  */
 export type UseFormReturn<TClass> = readonly [
-  Utilities.Objects.Payload<TClass>,
-  Dispatch<SetStateAction<Utilities.Objects.Payload<TClass>>>,
+  Objects.Payload<TClass>,
+  Dispatch<SetStateAction<Objects.Payload<TClass>>>,
   UseFormData<TClass>,
 ];
 

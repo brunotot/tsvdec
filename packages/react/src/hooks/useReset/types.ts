@@ -1,22 +1,22 @@
-import { type Form, type Utilities } from "tdv-core";
+import { Booleans, Objects, type Form } from "@tsvdec/core";
 
 export type UseResetConfig<TClass> = {
   engine: Form<TClass>;
-  form: Utilities.Objects.Payload<TClass>;
-  setForm: (v: Utilities.Objects.Payload<TClass>) => void;
+  form: Objects.Payload<TClass>;
+  setForm: (v: Objects.Payload<TClass>) => void;
   submitted: boolean;
   handleSetSubmitted: (v: boolean) => void;
 };
 
 export type UseResetReturn<TClass> = ((
-  ...fieldPaths: Array<PayloadFieldPath<Utilities.Objects.Payload<TClass>>>
+  ...fieldPaths: Array<PayloadFieldPath<Objects.Payload<TClass>>>
 ) => void) & {};
 
 /**
  * A wrapper type for evaluation object paths as strings
  */
 export type ObjectPathEvaluator<T, K extends string> = K extends keyof T
-  ? K extends Utilities.Objects.Inputs<T>
+  ? K extends Objects.Inputs<T>
     ? K | `${K}.${PayloadFieldPath<T[K]>}`
     : ""
   : never;
@@ -26,13 +26,13 @@ export type ObjectPathEvaluator<T, K extends string> = K extends keyof T
  */
 export type PayloadFieldPathEvaluator<T> = {
   [K in keyof T]-?: K extends string
-    ? Utilities.Booleans.isFunction<T[K]> extends true
+    ? Booleans.isFunction<T[K]> extends true
       ? never
-      : Utilities.Booleans.isArray<T[K]> extends true
+      : Booleans.isArray<T[K]> extends true
         ? K
-        : Utilities.Booleans.isObject<T[K]> extends true
+        : Booleans.isObject<T[K]> extends true
           ? ObjectPathEvaluator<T, K>
-          : K extends Utilities.Objects.Inputs<T>
+          : K extends Objects.Inputs<T>
             ? K
             : never
     : never;
@@ -42,8 +42,8 @@ export type PayloadFieldPathEvaluator<T> = {
  * A central method for getting a union of all possible payload field paths
  */
 export type PayloadFieldPath<T> =
-  Utilities.Booleans.isFunction<T> extends true
+  Booleans.isFunction<T> extends true
     ? ""
-    : Utilities.Booleans.isObject<T> extends true
+    : Booleans.isObject<T> extends true
       ? PayloadFieldPathEvaluator<T>[keyof T]
       : "";

@@ -1,5 +1,5 @@
+import { Types, ValidationResult } from "@tsvdec/core";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Utilities, ValidationResult } from "tdv-core";
 import { FormContext } from "../../components/FormProvider";
 import { useChangeHandlers } from "../useChangeHandlers";
 import { useReset } from "../useReset";
@@ -32,7 +32,7 @@ import { UseFormConfig, UseFormData, UseFormReturn } from "./types";
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
 export function useForm<TClass>(
-  model: Utilities.Types.Class<TClass>,
+  model: Types.Class<TClass>,
   {
     defaultValue,
     onSubmit: onSubmitParam,

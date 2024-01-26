@@ -1,5 +1,5 @@
+import { FormConfig, Objects, Types } from "@tsvdec/core";
 import { useEffect, useState } from "react";
-import { type Utilities, type Validation } from "tdv-core";
 import { useEngine } from "../useEngine";
 import { type UseValidationConfig, type UseValidationReturn } from "./types";
 
@@ -26,15 +26,15 @@ import { type UseValidationConfig, type UseValidationReturn } from "./types";
  */
 // prettier-ignore
 export function useValidation<TClass>(
-  Class: Utilities.Types.Class<TClass>,
+  Class: Types.Class<TClass>,
   props: UseValidationConfig<TClass> = {}
 ): UseValidationReturn<TClass> {
   const { groups, defaultValue, asyncDelay, locale } = props;
   const resolveDecoratorArgs = props.resolveDecoratorArgs ?? (() => ({}));
   const decoratorArgs = resolveDecoratorArgs();
-  const formConfig = { groups, defaultValue, asyncDelay, locale } satisfies Validation.FormConfig<TClass>;
+  const formConfig = { groups, defaultValue, asyncDelay, locale } satisfies FormConfig<TClass>;
   const engine = useEngine<TClass>(Class, formConfig);
-  const [form, setForm] = useState<Utilities.Objects.Payload<TClass>>(engine.defaultValue);
+  const [form, setForm] = useState<Objects.Payload<TClass>>(engine.defaultValue);
   const [classSimpleErrors, setClassSimpleErrors] = useState(() => engine.validate(form, decoratorArgs).globalErrors);
   const [fieldDetailedErrors, setFieldDetailedErrors] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
   const [fieldSimpleErrors, setFieldSimpleErrors] = useState(() => engine.validate(form, decoratorArgs).errors);
