@@ -1,0 +1,31 @@
+name: Publish TypeDoc-generated docs
+
+on:
+  push:
+    paths:
+      - "packages/**"
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛒 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🤳 Install
+        uses: ./.github/composite-actions/install
+
+      - name: 🚧 Build
+        run: pnpm build
+
+      - name: 🔥 Generate documentation
+        run: npm run build:docs
+
+      - name: 🚢 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

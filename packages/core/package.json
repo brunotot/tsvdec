@@ -1,0 +1,25 @@
+{
+  "name": "@tsvdec/core",
+  "version": "0.0.1",
+  "description": "🚀 Typescript form validation using Decorators 🚀",
+  "keywords": [],
+  "author": "Bruno Tot <brunotot10000@gmail.com>",
+  "homepage": "https://github.com/brunotot/tsvdec#readme",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "src",
+    "tsconfig.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunotot/tsvdec.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/brunotot/tsvdec/issues"
+  }
+}

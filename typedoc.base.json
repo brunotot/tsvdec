@@ -1,0 +1,29 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "includeVersion": true,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@decorators": ["packages/core/src/decorators"],
+      "@decorators/*": ["packages/core/src/decorators/*"],
+
+      "@utilities": ["packages/core/src/utilities"],
+      "@utilities/*": ["packages/core/src/utilities/*"],
+
+      "@validation": ["packages/core/src/validation"],
+      "@validation/*": ["packages/core/src/validation/*"],
+
+      "@reflection": ["packages/core/src/reflection"],
+      "@reflection/*": ["packages/core/src/reflection/*"],
+
+      "@overrides": ["packages/core/src/overrides"],
+      "@overrides/*": ["packages/core/src/overrides/*"],
+
+      "@strategy": ["packages/core/src/strategy"],
+      "@strategy/*": ["packages/core/src/strategy/*"],
+
+      "@localization": ["packages/core/src/localization"],
+      "@localization/*": ["packages/core/src/localization/*"]
+    }
+  }
+}

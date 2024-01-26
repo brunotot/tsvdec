@@ -1,0 +1,10 @@
+{
+  "extends": ["./typedoc.base.json"],
+  "entryPoints": ["packages/*"],
+  "name": "🚀 Typescript form validation using Decorators 🚀",
+  "entryPointStrategy": "packages",
+  "includeVersion": false,
+  "excludeInternal": true,
+  "plugin": ["@mxssfd/typedoc-theme"],
+  "theme": "my-theme"
+}
