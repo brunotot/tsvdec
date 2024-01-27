@@ -12,7 +12,7 @@
   "author": "Bruno Tot",
   "homepage": "https://github.com/brunotot/tsvdec/tree/main/packages/react#readme",
   "license": "MIT",
-  "main": "dist/index.ts",
+  "main": "src/index.ts",
   "files": [
     "src"
   ],
