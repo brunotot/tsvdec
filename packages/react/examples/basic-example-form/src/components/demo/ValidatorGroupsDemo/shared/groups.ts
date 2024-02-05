@@ -1,0 +1,16 @@
+export enum ValidationGroup {
+  DEMO_ID = "DEMO_ID",
+  DEMO_DESCRIPTION = "DEMO_DESCRIPTION",
+  DEMO_CREATION_DATE = "DEMO_CREATION_DATE",
+  DEMO_DEADLINE_DATE = "DEMO_DEADLINE_DATE",
+}
+
+// prettier-ignore
+export const CodeText =
+`export enum ValidationGroup {
+  DEMO_ID = "DEMO_ID",
+  DEMO_DESCRIPTION = "DEMO_DESCRIPTION",
+  DEMO_CREATION_DATE = "DEMO_CREATION_DATE",
+  DEMO_DEADLINE_DATE = "DEMO_DEADLINE_DATE",
+}
+`;

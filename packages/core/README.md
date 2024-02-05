@@ -1,4 +1,4 @@
-<h1 align="center">🚀 tdv-core 🚀</h1>
+<h1 align="center">🚀 @tsvdec/core 🚀</h1>
 
 <p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
 <p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
@@ -12,7 +12,7 @@
  </a>
  
  <a href="https://www.npmjs.com/package/typescript-decorator-validation">
-  <img alt="NPM Version" src="https://img.shields.io/npm/v/tdv-core.svg" height="20"/>
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/@tsvdec/core.svg" height="20"/>
  </a>
  
  <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/contributors">
@@ -42,7 +42,7 @@
 ## Installation
 
 ```bash
-npm i tdv-core
+npm i @tsvdec/core
 ```
 
 ## Supported Frameworks
@@ -54,7 +54,7 @@ npm i tdv-core
 
 ## Documentation
 
-- [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
+- [@tsvdec/core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
 
 ## Contribution
 
@@ -74,7 +74,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 A basic TypeScript form can look something like
 
 ```typescript
-import { collection, ValidationEngine } from "tdv-core";
+import { collection, ValidationEngine } from "@tsvdec/core";
 
 /**
  *  This is an optional layer of abstraction if the class contains complex
@@ -153,14 +153,14 @@ And the result is
 
 ## Repository architecture
 
-The `tdv-core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
+The `@tsvdec/core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
 
 - A decorator factory for easy integration with TypeScript
 - Metadata management for dynamic behavior
 - Localization support
 - Built-in validators like `Email`, `Required`, etc.
 
-The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
+The core package serves as the foundation for implementation libraries like `@tsvdec/react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
 
 [comment]: # "### Comparison against similar solutions"
 [comment]: #

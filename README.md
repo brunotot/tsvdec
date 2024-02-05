@@ -6,7 +6,7 @@
  </a>
  
  <a href="https://www.npmjs.com/package/typescript-decorator-validation">
-  <img alt="NPM Version" src="https://img.shields.io/npm/v/tdv-core.svg" height="20"/>
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/@tsvdec/core.svg" height="20"/>
  </a>
  
  <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/contributors">
@@ -33,7 +33,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/brunotot/typescript-decorator-validation/blob/main/markdown/FAQ.md#tdv-core">
+  <a href="https://github.com/brunotot/typescript-decorator-validation/blob/main/markdown/FAQ.md#@tsvdec/core">
     🔎 Frequently Asked Questions (FAQ)
   </a>
 </p>
@@ -72,14 +72,14 @@
 
 ```bash
 npm install -d typescript@latest
-npm install tdv-core
-npm install tdv-react # when using in framework-specific environment
+npm install @tsvdec/core
+npm install @tsvdec/react # when using in framework-specific environment
 ```
 
 ### Quick start
 
 ```typescript
-import { validate, collection, ValidationEngine, Localization, TdvCore } from "tdv-core";
+import { validate, collection, ValidationEngine, Localization, TdvCore } from "@tsvdec/core";
 
 function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
   return validate<string>({
@@ -113,8 +113,8 @@ console.log(result.errors.email);
 
 ### Documentation
 
-- [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
-- [tdv-react](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
+- [@tsvdec/core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
+- [@tsvdec/react](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
 
 ### Contribution
 
@@ -134,7 +134,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 A basic TypeScript form can look something like
 
 ```typescript
-import { decorate, ValidationEngine } from "tdv-core";
+import { decorate, ValidationEngine } from "@tsvdec/core";
 
 /**
  *  This is an optional layer of abstraction if the class contains complex
@@ -226,14 +226,14 @@ And the result is
 
 ### Repository architecture
 
-The `tdv-core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
+The `@tsvdec/core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
 
 - A decorator factory for easy integration with TypeScript
 - Metadata management for dynamic behavior
 - Localization support
 - Built-in validators like `Email`, `Required`, etc.
 
-The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
+The core package serves as the foundation for implementation libraries like `@tsvdec/react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
 
 [comment]: # "### Comparison against similar solutions"
 [comment]: #

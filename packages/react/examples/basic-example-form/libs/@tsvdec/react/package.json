@@ -1,0 +1,53 @@
+{
+  "name": "@tsvdec/react",
+  "version": "0.0.1",
+  "description": "React library that allows form validation manipulation through TypeScript Decorators",
+  "keywords": [
+    "typescript",
+    "react",
+    "decorator",
+    "form",
+    "validation"
+  ],
+  "author": "Bruno Tot",
+  "homepage": "https://github.com/brunotot/tsvdec/tree/main/packages/react#readme",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunotot/tsvdec.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/brunotot/tsvdec/issues"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@tsvdec/core": "^0.0.2",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/plugin-proposal-decorators": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "@babel/preset-typescript": "^7.23.3",
+    "@jest/reporters": "^29.6.4",
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "jest": "^29.6.4",
+    "jest-environment-jsdom": "^29.6.4"
+  }
+}

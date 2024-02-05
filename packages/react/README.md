@@ -13,7 +13,7 @@
  </a>
  
  <a href="https://www.npmjs.com/package/typescript-decorator-validation">
-  <img alt="NPM Version" src="https://img.shields.io/npm/v/tdv-react.svg" height="20"/>
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/@tsvdec/react.svg" height="20"/>
  </a>
  
  <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/contributors">
@@ -46,7 +46,7 @@
 1. Install core and react related dependencies
 
 ```bash
-npm install typescript@latest --save-dev && npm install tdv-core tdv-react --force
+npm install typescript@latest --save-dev && npm install @tsvdec/core @tsvdec/react --force
 ```
 
 2. :rocket: Done. You are ready to go
@@ -81,7 +81,7 @@ git checkout -b "[react]-[issue-number]-issue-lorem-ipsum"
 A basic TypeScript form can look something like
 
 ```typescript
-import { collection, ValidationEngine } from "tdv-core";
+import { collection, ValidationEngine } from "@tsvdec/core";
 
 /**
  *  This is an optional layer of abstraction if the class contains complex
@@ -128,7 +128,7 @@ Finally, this would be the TSX component
 
 ```typescript
 import { useState } from "react";
-import { FormProvider, useForm } from "tdv-react";
+import { FormProvider, useForm } from "@tsvdec/react";
 import UserForm from "../../models/UserForm";
 import Input from "./../shared/Input";
 
