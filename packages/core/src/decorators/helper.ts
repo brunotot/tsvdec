@@ -21,7 +21,7 @@ export type DecoratorArgs = Record<string, any>;
 
 /** Generic validator decorator configurable options. */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export type DecoratorOptions<_This = any, Value = any> = {
+export type DecoratorOptions<This = any, _Value = any> = {
   /** Identifier of the validator decorator. */
   key?: string;
   /** Error message to be evaluated through a preprocessor, which can have a custom or default implementation based on library setup. */
@@ -29,7 +29,7 @@ export type DecoratorOptions<_This = any, Value = any> = {
   /** Unique list of groups for conditional validation. Validator triggers only if the form is applied on a listed group. */
   groups?: DecoratorGroup[];
   /** asdf */
-  validateIf?: DecoratorValidateIf<Value>;
+  validateIf?: DecoratorValidateIf<This>;
 };
 
 function parseMessage(locale: Locale, message: string, args: Record<string, string> = {}): string {
