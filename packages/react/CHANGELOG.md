@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 0.0.6
+
+### Patch Changes
+
+- 37ea7e6: Bump version
+- Updated dependencies [37ea7e6]
+  - @tsvdec/core@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes
