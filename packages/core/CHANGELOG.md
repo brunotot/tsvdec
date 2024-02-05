@@ -1,5 +1,11 @@
 # @tsvdec/core
 
+## 0.0.4
+
+### Patch Changes
+
+- 007c077: Bump
+
 ## 0.0.3
 
 ### Patch Changes
