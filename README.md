@@ -42,7 +42,19 @@
 
 **tsvdec** monorepo offers a more declarative way to manage model validation in TypeScript v5 using the latest [Stage 3 decorators](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators) that now comes with [built-in type-safety](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#writing-well-typed-decorators) and control over the decorator's return type specificity.
 
-![Old and new decorators type-safety comparison](resources/comparison.png)
+```ts
+class Stage2 {
+  // ❌ function Factory(): DecoratorType
+  @Factory()
+  value: string;
+}
+
+class Stage3 {
+  // ✅ function Factory<Stage3, string>(): DecoratorType<Stage3, string>
+  @Factory()
+  value: string;
+}
+```
 
 ### Packages
 
