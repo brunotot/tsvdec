@@ -4,7 +4,7 @@ import { ModelForm } from "./model";
 
 export function Component() {
   const [form, setForm, { errors, onSubmit }] = useForm(ModelForm, {
-    validationStrategy: "onSubmitOnce",
+    trigger: "onSubmitOnce",
     onSubmit: () => {
       alert(form);
     },

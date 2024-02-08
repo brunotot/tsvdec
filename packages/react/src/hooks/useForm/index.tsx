@@ -44,7 +44,7 @@ export function useForm<TClass>(
     onChange,
     asyncDelay,
     locale,
-    trigger: validationStrategy = "onFormChange",
+    trigger = "onFormChange",
   }: UseFormConfig<TClass> = {
     onSubmit: async () => {},
     standalone: true,
@@ -69,7 +69,7 @@ export function useForm<TClass>(
       resolveDecoratorArgs,
       asyncDelay,
       locale,
-      trigger: validationStrategy,
+      trigger: trigger,
       isSubmitted,
       submitTrigger,
     });

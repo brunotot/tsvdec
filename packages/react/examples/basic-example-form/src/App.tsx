@@ -6,6 +6,7 @@ import ConditionalValidationDemo from "./components/demo/ConditionalValidationDe
 import DecoratorExternalArgsDemo from "./components/demo/DecoratorExternalArgsDemo";
 import DemoList from "./components/demo/DemoList";
 import ErrorMessagesPreprocessorDemo from "./components/demo/ErrorMessagesPreprocessorDemo";
+import InnerFormOnChangeDemo from "./components/demo/InnerFormOnChangeDemo";
 import ModifyingErrorMessagesLocaleDemo from "./components/demo/ModifyingErrorMessagesLocaleDemo";
 import NestedFormValidationDemo from "./components/demo/NestedFormValidationDemo";
 import ValidatorGroupsDemo from "./components/demo/ValidatorGroupsDemo";
@@ -17,6 +18,7 @@ function App() {
     <Container maxWidth="md">
       <DemoList
         data={[
+          InnerFormOnChangeDemo,
           ModifyingErrorMessagesLocaleDemo,
           TriggerDemoList,
           DecoratorExternalArgsDemo,

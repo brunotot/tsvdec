@@ -33,6 +33,7 @@ export function useValidation<TClass>(
   const { groups, defaultValue, asyncDelay, locale, trigger: validationStrategy = "onFormChange", isSubmitted, submitTrigger} = props;
   const resolveDecoratorArgs = props.resolveDecoratorArgs ?? (() => ({}));
   const decoratorArgs = resolveDecoratorArgs();
+  console.log(decoratorArgs);
   const formConfig = { groups, defaultValue, asyncDelay, locale } satisfies FormConfig<TClass>;
   const engine = useEngine<TClass>(Class, formConfig);
   const [form, setForm] = useState<Objects.Payload<TClass>>(engine.defaultValue);

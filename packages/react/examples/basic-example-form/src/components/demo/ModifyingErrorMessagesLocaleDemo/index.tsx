@@ -17,19 +17,13 @@ const DemoProps = {
   description: (
     <div>
       <Typography variant="body2" color="text.secondary" gutterBottom paddingBlock={1}>
-        To modify error messages locale per individual form, you can supply{" "}
-        <code className="code">useForm</code> with <strong>locale</strong> property. The library
-        supports locales{" "}
-        <code className="code">"en" | "hr" | "de" | "es" | "fr" | "it" | "nl"</code> . You can also
-        globally define the locale. The example below showcases both types of supplying custom
-        locale to <strong>@tsvdec/core</strong>.
+        To modify error messages locale per individual form, you should supply the{" "}
+        <strong>locale</strong> to <code className="code">useForm</code> hook. The example below
+        showcases supplying custom locale via the languages radio buttons selection.
       </Typography>
     </div>
   ),
-  relatedFAQ: [
-    "how to modify the language of validation errors per single Form instance?",
-    "how to globally define the language of validation errors for all Form instances?",
-  ],
+  relatedFAQ: ["how to modify the language of validation errors per single useForm hook?"],
   codeData: [
     { name: "model.ts", lang: "typescript", code: MODEL_CODE },
     { name: "component.tsx", lang: "typescript", code: COMPONENT_CODE },

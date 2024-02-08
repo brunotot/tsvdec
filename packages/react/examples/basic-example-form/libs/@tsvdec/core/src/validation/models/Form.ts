@@ -201,7 +201,7 @@ export class Form<TClass> {
     payload?: Objects.Payload<TClass>,
     args: Record<string, any> = {},
   ): FormValidateResponse<TClass> {
-    if (Objects.deepEquals(payload, this.#cache.payload)) return this.#cache.cache;
+    // if (Objects.deepEquals(payload, this.#cache.payload)) return this.#cache.cache;
 
     const state: Objects.Payload<TClass> = toClass(this.#hostClass, payload) as any;
 
