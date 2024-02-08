@@ -1,4 +1,4 @@
-<h1 align="center">🚀 TypeScript Decorator Validation 🚀</h1>
+<h1 align="center">🚀 TypeScript Validation Decorators 🚀</h1>
 
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
@@ -38,11 +38,16 @@
   </a>
 </p>
 
-<br />
+<br /> 
 
-> 🌟 **Welcome to `tdv-monorepo`, the future of model validation in TypeScript.**
->
-> Leveraging TypeScript decorators, `tdv-monorepo` offers a declarative way to manage model validation. Suitable for both client-side and server-side projects, it comes with built-in extensibility and localization support.
+**tsvdec** monorepo offers a more declarative way to manage model validation in TypeScript v5 using the latest [Stage 3 decorators](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators) that now comes with [built-in type-safety](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#writing-well-typed-decorators) and control over the decorator's return type specificity.
+
+![Old and new decorators type-safety comparison](resources/comparison.png)
+
+### Packages
+
+- [@tsvdec/core](https://github.com/brunotot/tsvdec/tree/main/packages/core#readme) - core module responsible for manipulating class metadata
+- [@tsvdec/react](https://github.com/brunotot/tsvdec/tree/main/packages/react#readme) -  implementation of core module compatible with React v18+
 
 ### Features
 
@@ -55,8 +60,13 @@
 - provides a clean and declarative way of validating form fields
 - exports [Reflection](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/reflection/index.ts#L9) namespace containing useful reflection-related methods
 
-### Content
+## TOC
 
+- [General](#general)
+  - [What does `tdv-core` do?](#what-does-tdv-core-do)
+  - [Which versio![ray-so-export](https://github.com/brunotot/tsvdec/assets/53398175/4d83a959-638c-4b13-a3b4-0be914e3d6ff)
+ns of TypeScript are supported?](#which-versions-of-typescript-are-supported)
+- [Installation](#installation)
 - [Features](#features)
 - [Content](#content)
 - [Installation](#installation)
@@ -71,7 +81,7 @@
 ### Installation
 
 ```bash
-npm install -d typescript@latest
+npm install -D typescript@latest
 npm install @tsvdec/core
 npm install @tsvdec/react # when using in framework-specific environment
 ```
