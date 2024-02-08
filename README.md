@@ -44,13 +44,13 @@
 
 ```ts
 class Stage2 {
-  // ❌ function Factory(): DecoratorType
+  // ❌ inferred as: Factory() => DecoratorType
   @Factory()
   value: string;
 }
 
 class Stage3 {
-  // ✅ function Factory<Stage3, string>(): DecoratorType<Stage3, string>
+  // ✅ inferred as: Factory<Stage3, string>() => DecoratorType<Stage3, string>
   @Factory()
   value: string;
 }
