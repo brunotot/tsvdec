@@ -1,5 +1,11 @@
 # @tsvdec/core
 
+## 0.0.7
+
+### Patch Changes
+
+- 58211c5: Bump version
+
 ## 0.0.6
 
 ### Patch Changes

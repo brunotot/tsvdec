@@ -1,6 +1,6 @@
 {
   "name": "@tsvdec/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "🚀 Typescript form validation using Decorators 🚀",
   "keywords": [],
   "author": "Bruno Tot <brunotot10000@gmail.com>",
