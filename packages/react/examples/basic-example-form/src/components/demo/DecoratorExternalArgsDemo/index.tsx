@@ -1,11 +1,20 @@
+import { Input } from "@mui/icons-material";
 import { List, ListItem, Typography } from "@mui/material";
+import { PropertyIOMarker } from "../../shared/PropertyIOMarker";
 import { DemoCodeProps } from "../DemoList";
 import Component, { CodeText as COMPONENT_CODE } from "./code/component";
 import { CodeText as MODEL_CODE } from "./code/model";
 import { CodeText as VALIDATORS_CODE } from "./shared/validators";
 
 const DemoProps = {
-  title: "Decorator Provide External Arguments Demo",
+  title: (
+    <PropertyIOMarker
+      icon={<Input color="success" />}
+      title="Configurable input param: resolveDecoratorArgs"
+      name="resolveDecoratorArgs"
+    />
+  ),
+  shortDescription: "Handles retrieval of metadata for decorator usage.",
   description: (
     <div>
       <Typography variant="body2" color="text.secondary" gutterBottom paddingBlock={1}>

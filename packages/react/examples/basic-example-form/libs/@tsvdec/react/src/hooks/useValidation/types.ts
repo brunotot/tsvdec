@@ -8,6 +8,7 @@ import {
   type ValidationResult,
 } from "@tsvdec/core";
 import type { Dispatch, SetStateAction } from "react";
+import { ValidationTrigger } from "../useEventfulErrors/types";
 
 /**
  * Validation-specific properties object which is meant to be consumed in a React component
@@ -18,6 +19,7 @@ export type UseValidationData<TClass> = {
   errors: SimpleErrorsResponse<TClass>;
   engine: Form<TClass>;
   globalErrors: ValidationResult[];
+  validate: (field?: string) => void;
 };
 
 /**
@@ -38,4 +40,7 @@ export type UseValidationConfig<TClass> = {
   resolveDecoratorArgs?: () => DecoratorArgs;
   asyncDelay?: number;
   locale?: Locale;
+  trigger?: ValidationTrigger;
+  isSubmitted: boolean;
+  submitTrigger: boolean;
 };

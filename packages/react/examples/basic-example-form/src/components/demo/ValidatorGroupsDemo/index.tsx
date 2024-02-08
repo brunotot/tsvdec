@@ -1,11 +1,20 @@
+import { AlternateEmail } from "@mui/icons-material";
 import { Typography } from "@mui/material";
+import { PropertyIOMarker } from "../../shared/PropertyIOMarker";
 import { DemoCodeProps } from "../DemoList";
 import Component, { CodeText as COMPONENT_CODE } from "./code/component";
 import { CodeText as MODEL_CODE } from "./code/model";
 import { CodeText as GROUPS_CODE } from "./shared/groups";
 
 const DemoProps = {
-  title: "Validation Groups Demo",
+  title: (
+    <PropertyIOMarker
+      icon={<AlternateEmail color="warning" />}
+      title="Configurable decorator setting: groups"
+      name="groups"
+    />
+  ),
+  shortDescription: "Filters validation by group for targeted field checks.",
   description: (
     <div>
       <Typography variant="body2" color="text.secondary" gutterBottom paddingBlock={1}>

@@ -1,17 +1,17 @@
 import { Required, validateFieldIf } from "@tsvdec/core";
 
 export class ModelForm {
-  @Required({ message: "idRequired", validateIf: m => m.validationEnabled })
+  @Required({ message: "id is required", validateIf: m => m.validationEnabled })
   id: string = "";
 
   @validateFieldIf(m => m.validationEnabled)
-  @Required({ message: "descriptionRequired" })
+  @Required({ message: "description is required" })
   description: string = "";
 
-  @Required({ message: "creationDateRequired" })
+  @Required({ message: "creationDate is required" })
   creationDate: string = "";
 
-  @Required({ message: "deadlineDateRequired" })
+  @Required({ message: "deadlineDate is required" })
   deadlineDate: string = "";
 
   validationEnabled: boolean = false;
@@ -22,17 +22,17 @@ export const CodeText =
 `import { Required, validateFieldIf } from "@tsvdec/core";
 
 export class ModelForm {
-  @Required({ message: "idRequired", validateIf: m => m.validationEnabled })
+  @Required({ message: "id is required", validateIf: m => m.validationEnabled })
   id: string = "";
 
   @validateFieldIf(m => m.validationEnabled)
-  @Required({ message: "descriptionRequired" })
+  @Required({ message: "description is required" })
   description: string = "";
 
-  @Required({ message: "creationDateRequired" })
+  @Required({ message: "creationDate is required" })
   creationDate: string = "";
 
-  @Required({ message: "deadlineDateRequired" })
+  @Required({ message: "deadlineDate is required" })
   deadlineDate: string = "";
 
   validationEnabled: boolean = false;

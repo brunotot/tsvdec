@@ -34,15 +34,17 @@ export type ValidationResult = {
   valid: boolean;
 };
 
-/**
- * Defines the properties for an async event response.
- * @typeParam TClass - The type of the class being validated.
- */
-export type AsyncEventResponseProps<TClass> = {
+export type FormErrors<TClass> = {
   errors: SimpleErrorsResponse<TClass>;
   detailedErrors: DetailedErrorsResponse<TClass>;
   globalErrors: ValidationResult[];
 };
+
+/**
+ * Defines the properties for an async event response.
+ * @typeParam TClass - The type of the class being validated.
+ */
+export type AsyncEventResponseProps<TClass> = FormErrors<TClass>;
 
 /**
  * Defines the properties for an async event handler.

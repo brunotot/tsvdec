@@ -30,5 +30,4 @@ export class ModelForm {
 
   @Required()
   deadlineDate: string = "";
-}
-`;
+}`;

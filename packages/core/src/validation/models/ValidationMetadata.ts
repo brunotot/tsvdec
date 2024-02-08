@@ -57,9 +57,9 @@ export class ValidationMetadata<TFieldType> {
 
     const groupedValidators = this.#groupedValidators(this.#contents, groups);
     // eslint-disable-next-line @typescript-eslint/promise-function-async
-    const results = groupedValidators.map(({ validate }) =>
-      validate(value, payload, locale, args ?? {}),
-    );
+    const results = groupedValidators
+      .filter(({ meta }) => !meta.validateIf || meta.validateIf(payload))
+      .map(({ validate }) => validate(value, payload, locale, args ?? {}));
     // eslint-disable-next-line @typescript-eslint/array-type
     const asyncResults = results.filter(v => isPromise(v)) as Promise<ValidationResult>[];
     this.#handleAsyncResults(asyncResults, emitter, field);

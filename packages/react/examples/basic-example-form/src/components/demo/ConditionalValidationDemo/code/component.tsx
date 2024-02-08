@@ -1,34 +1,32 @@
 import * as MUI from "@mui/material";
 import { useForm } from "@tsvdec/react";
-import { useState } from "react";
 import { ModelForm } from "./model";
 
-const LANGUAGE_FLAG = {
-  en: "🇺🇸",
-  hr: "🇭🇷",
-} as const;
-
-type LANG_KEY = keyof typeof LANGUAGE_FLAG;
-
 export function Component() {
-  const [locale, setLocale] = useState<LANG_KEY>("en");
-  const [form, setForm, { errors }] = useForm(ModelForm, { locale });
+  const [form, setForm, { errors, onSubmit }] = useForm(ModelForm, {
+    trigger: "onSubmitOnce",
+    onSubmit: () => {
+      alert(form);
+    },
+  });
 
   const register = (field: keyof ModelForm, type: string) => ({
     label: field,
     placeholder: `Enter ${field}`,
     value: form[field],
-    onChange: (e: any) => setForm({ ...form, [field]: e.target.value }),
-    helperText: errors[field][0],
-    error: errors[field].length > 0,
+    helperText: errors[field]?.[0],
+    error: errors?.[field]?.length > 0,
     fullWidth: true,
     type,
     InputLabelProps: { shrink: type === "text" ? undefined : true },
+    onChange: (e: any) => {
+      setForm({
+        ...form,
+        [field]: e.target.value,
+        deadlineDate: field === "creationDate" ? e.target.value : form.deadlineDate,
+      });
+    },
   });
-
-  const handleLocaleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    setLocale(e.target.value as LANG_KEY);
-  };
 
   return (
     <MUI.Box display="flex" flexWrap="wrap" gap={2}>
@@ -44,20 +42,6 @@ export function Component() {
         />
       </MUI.Box>
 
-      <MUI.FormControl>
-        <MUI.FormLabel>Locale</MUI.FormLabel>
-        <MUI.RadioGroup row value={locale} onChange={handleLocaleChange}>
-          {Object.keys(LANGUAGE_FLAG).map(locale => (
-            <MUI.FormControlLabel
-              key={locale}
-              control={<MUI.Radio />}
-              label={`${LANGUAGE_FLAG[locale as LANG_KEY]} ${locale}`}
-              value={locale}
-            />
-          ))}
-        </MUI.RadioGroup>
-      </MUI.FormControl>
-
       <MUI.Grid container spacing={2}>
         <MUI.Grid item xs={12} md={6}>
           <MUI.TextField {...register("id", "text")} />
@@ -72,6 +56,10 @@ export function Component() {
           <MUI.TextField {...register("deadlineDate", "date")} />
         </MUI.Grid>
       </MUI.Grid>
+
+      <MUI.Button variant="contained" onClick={onSubmit}>
+        Submit
+      </MUI.Button>
     </MUI.Box>
   );
 }
@@ -80,35 +68,33 @@ export function Component() {
 export const CodeText =
 `import * as MUI from "@mui/material";
 import { useForm } from "@tsvdec/react";
-import { useState } from "react";
 import { ModelForm } from "./model";
 
-const LANGUAGE_FLAG = {
-  en: "🇺🇸",
-  hr: "🇭🇷",
-} as const;
-
-type LANG_KEY = keyof typeof LANGUAGE_FLAG;
-
 export function Component() {
-  const [locale, setLocale] = useState<LANG_KEY>("en");
-  const [form, setForm, { errors }] = useForm(ModelForm, { locale });
+  const [form, setForm, { errors, onSubmit }] = useForm(ModelForm, {
+    validationStrategy: "onSubmitOnce",
+    onSubmit: () => {
+      alert(form);
+    },
+  });
 
   const register = (field: keyof ModelForm, type: string) => ({
     label: field,
     placeholder: \`Enter \${field}\`,
     value: form[field],
-    onChange: (e: any) => setForm({ ...form, [field]: e.target.value }),
-    helperText: errors[field][0],
-    error: errors[field].length > 0,
+    helperText: errors[field]?.[0],
+    error: errors?.[field]?.length > 0,
     fullWidth: true,
     type,
     InputLabelProps: { shrink: type === "text" ? undefined : true },
+    onChange: (e: any) => {
+      setForm({
+        ...form,
+        [field]: e.target.value,
+        deadlineDate: field === "creationDate" ? e.target.value : form.deadlineDate,
+      });
+    },
   });
-
-  const handleLocaleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    setLocale(e.target.value as LANG_KEY);
-  };
 
   return (
     <MUI.Box display="flex" flexWrap="wrap" gap={2}>
@@ -124,20 +110,6 @@ export function Component() {
         />
       </MUI.Box>
 
-      <MUI.FormControl>
-        <MUI.FormLabel>Locale</MUI.FormLabel>
-        <MUI.RadioGroup row value={locale} onChange={handleLocaleChange}>
-          {Object.keys(LANGUAGE_FLAG).map(locale => (
-            <MUI.FormControlLabel
-              key={locale}
-              control={<MUI.Radio />}
-              label={\`\${LANGUAGE_FLAG[locale as LANG_KEY]} \${locale}\`}
-              value={locale}
-            />
-          ))}
-        </MUI.RadioGroup>
-      </MUI.FormControl>
-
       <MUI.Grid container spacing={2}>
         <MUI.Grid item xs={12} md={6}>
           <MUI.TextField {...register("id", "text")} />
@@ -152,6 +124,10 @@ export function Component() {
           <MUI.TextField {...register("deadlineDate", "date")} />
         </MUI.Grid>
       </MUI.Grid>
+
+      <MUI.Button variant="contained" onClick={onSubmit}>
+        Submit
+      </MUI.Button>
     </MUI.Box>
   );
 }

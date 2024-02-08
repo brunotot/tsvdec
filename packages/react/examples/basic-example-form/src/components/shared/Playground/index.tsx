@@ -17,11 +17,13 @@ import RelatedFAQ from "../RelatedFAQ";
 import "./index.css";
 
 export type PlaygroundProps = {
-  title: string;
+  title: ReactNode;
   description: ReactNode;
+  shortDescription?: string;
   codeData: DemoCodeData[];
   relatedFAQ: string[];
   children: ReactNode;
+  displayBullets?: boolean;
 };
 
 export default function Playground({
@@ -30,16 +32,20 @@ export default function Playground({
   codeData,
   children,
   relatedFAQ = [],
+  displayBullets = false,
+  shortDescription,
 }: PlaygroundProps) {
   const [currentCodeData, setCurrentCodeData] = useState(codeData[0]);
   const [expanded, setExpanded] = useState(true);
   return (
     <Accordion>
-      <AccordionSummary
-        id={title.toLowerCase().replace(new RegExp(" ", "g"), "-")}
-        expandIcon={<ExpandMore />}
-      >
-        <Typography padding={0}>{title}</Typography>
+      <AccordionSummary expandIcon={<ExpandMore />}>
+        <Typography sx={{ width: "33%", flexShrink: 0 }}>
+          {displayBullets ? "• " : ""} {title}
+        </Typography>
+        {shortDescription && (
+          <Typography sx={{ color: "text.secondary" }}>{shortDescription}</Typography>
+        )}
       </AccordionSummary>
       <AccordionDetails sx={{ padding: 0 }}>
         <Box paddingInline="2rem" paddingBottom="1rem" paddingTop={0}>

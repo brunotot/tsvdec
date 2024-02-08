@@ -92,6 +92,35 @@ export namespace Objects {
   }
 
   /**
+   * Calculates the difference between two objects.
+   * @param obj1 - The first object to compare.
+   * @param obj2 - The second object to compare.
+   * @returns An object containing the differences between obj1 and obj2.
+   */
+  export function diff(obj1: any, obj2: any): any {
+    const changedValues: any = {};
+    const allKeys = Object.keys({ ...obj1, ...obj2 });
+    for (const key of allKeys) {
+      if (obj1[key] === obj2[key]) continue;
+      if (
+        typeof obj1[key] === "object" &&
+        typeof obj2[key] === "object" &&
+        obj1[key] != null &&
+        obj2[key] != null
+      ) {
+        const deeperChanges = diff(obj1[key], obj2[key]);
+        if (Object.keys(deeperChanges).length > 0) {
+          changedValues[key] = deeperChanges;
+        }
+      } else if (!(key in obj1 && key in obj2 && deepEquals(obj1[key], obj2[key]))) {
+        changedValues[key] = obj2[key];
+      }
+    }
+
+    return changedValues;
+  }
+
+  /**
    * Recursively checks if two values are deep equal.
    */
   export function deepEquals(val1: any, val2: any): boolean {

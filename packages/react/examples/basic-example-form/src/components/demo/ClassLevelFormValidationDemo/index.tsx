@@ -1,11 +1,20 @@
+import { AlternateEmail } from "@mui/icons-material";
 import { Typography } from "@mui/material";
+import { PropertyIOMarker } from "../../shared/PropertyIOMarker";
 import { DemoCodeProps } from "../DemoList";
-import { Component, CodeText as COMPONENT_CODE } from "./code/component";
+import { CodeText as COMPONENT_CODE, Component } from "./code/component";
 import { CodeText as MODEL_CODE } from "./code/model";
 import { CodeText as VALIDATORS_CODE } from "./shared/validators";
 
 const DemoProps = {
-  title: "Type-Safe Custom Class-Level Validators",
+  title: (
+    <PropertyIOMarker
+      icon={<AlternateEmail color="warning" />}
+      title="Decorator factory: createClassValidator"
+      name="createClassValidator"
+    />
+  ),
+  shortDescription: "Factory for class-level validator decorators.",
   description: (
     <div>
       <Typography variant="body2" color="text.secondary" gutterBottom paddingBlock={1}>

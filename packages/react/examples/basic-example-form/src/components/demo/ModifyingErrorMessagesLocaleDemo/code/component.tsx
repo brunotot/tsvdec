@@ -1,11 +1,8 @@
 import * as MUI from "@mui/material";
-import { Locale, getGlobalLocale, setGlobalLocale } from "@tsvdec/core";
+import { Locale } from "@tsvdec/core";
 import { useForm } from "@tsvdec/react";
 import { useState } from "react";
 import { ModelForm } from "./model";
-
-/* Global locale configuration. */
-setGlobalLocale("en");
 
 const LANGUAGE_FLAG: Record<string, string> = {
   en: "🇺🇸",
@@ -18,8 +15,7 @@ const LANGUAGE_FLAG: Record<string, string> = {
 };
 
 export default function Component() {
-  const globalLocale = getGlobalLocale();
-  const [locale, setLocale] = useState<Locale>(globalLocale);
+  const [locale, setLocale] = useState<Locale>("en");
   const [form, setForm, { errors }] = useForm(ModelForm, { locale });
   const handleLocaleChange = (event: any) => setLocale(event.target.value);
 
@@ -37,9 +33,6 @@ export default function Component() {
 
   return (
     <MUI.Box display="flex" flexWrap="wrap" gap={2}>
-      <MUI.Typography width="100%">
-        Global locale is <code className="code">"{globalLocale}"</code>
-      </MUI.Typography>
       <MUI.FormControl>
         <MUI.FormLabel>Locale</MUI.FormLabel>
         <MUI.RadioGroup row value={locale} onChange={handleLocaleChange}>
@@ -75,13 +68,10 @@ export default function Component() {
 // prettier-ignore
 export const CodeText =
 `import * as MUI from "@mui/material";
-import { Locale, getGlobalLocale, setGlobalLocale } from "@tsvdec/core";
+import { Locale } from "@tsvdec/core";
 import { useForm } from "@tsvdec/react";
 import { useState } from "react";
 import { ModelForm } from "./model";
-
-/* Global locale configuration. */
-setGlobalLocale("en");
 
 const LANGUAGE_FLAG: Record<string, string> = {
   en: "🇺🇸",
@@ -94,8 +84,7 @@ const LANGUAGE_FLAG: Record<string, string> = {
 };
 
 export default function Component() {
-  const globalLocale = getGlobalLocale();
-  const [locale, setLocale] = useState<Locale>(globalLocale);
+  const [locale, setLocale] = useState<Locale>("en");
   const [form, setForm, { errors }] = useForm(ModelForm, { locale });
   const handleLocaleChange = (event: any) => setLocale(event.target.value);
 
@@ -113,9 +102,6 @@ export default function Component() {
 
   return (
     <MUI.Box display="flex" flexWrap="wrap" gap={2}>
-      <MUI.Typography width="100%">
-        Global locale is <code className="code">"{globalLocale}"</code>
-      </MUI.Typography>
       <MUI.FormControl>
         <MUI.FormLabel>Locale</MUI.FormLabel>
         <MUI.RadioGroup row value={locale} onChange={handleLocaleChange}>
@@ -146,5 +132,4 @@ export default function Component() {
       </MUI.Grid>
     </MUI.Box>
   );
-}
-`;
+}`;

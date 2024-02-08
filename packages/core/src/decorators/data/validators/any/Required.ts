@@ -15,6 +15,7 @@ import { type Objects } from "../../../../utilities";
  */
 function isRequiredValid<T>(value: T | undefined): boolean {
   return !(
+    Number.isNaN(value) ||
     value === undefined ||
     value === null ||
     value === false ||

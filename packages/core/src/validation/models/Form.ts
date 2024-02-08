@@ -201,12 +201,16 @@ export class Form<TClass> {
     payload?: Objects.Payload<TClass>,
     args: Record<string, any> = {},
   ): FormValidateResponse<TClass> {
+    // if (Objects.deepEquals(payload, this.#cache.payload)) return this.#cache.cache;
+
     const state: Objects.Payload<TClass> = toClass(this.#hostClass, payload) as any;
 
     const errors: any = {};
     const detailedErrors: any = {};
 
-    const classValidators = this.#classValidatorMetaService.data.contents;
+    const classValidators = this.#classValidatorMetaService.validateIf(state)
+      ? this.#classValidatorMetaService.data.contents
+      : [];
     const classReflectionRule = new ValidationMetadata(classValidators);
     const classValidationErrors = classReflectionRule.validate(
       state,
@@ -218,8 +222,7 @@ export class Form<TClass> {
     );
 
     this.#fieldValidatorMetaService.getFields().forEach(field => {
-      // @ts-expect-error Error!
-      const validation: any = this.#validateField(field as keyof TClass, state, args);
+      const validation: any = this.validateField(field as keyof TClass, state, args);
       detailedErrors[field] = validation[0];
       errors[field] = validation[1];
     });
@@ -263,10 +266,9 @@ export class Form<TClass> {
    *
    * @returns An array containing the detailed error message and the error message.
    */
-  #validateField<K extends keyof TClass>(
+  validateField<K extends keyof TClass>(
     fieldName: K,
-    // @ts-expect-error Error!
-    payload: Objects.Payload<TClass>[K],
+    payload: Objects.Payload<TClass>,
     args: Record<string, any> = {},
   ): getStrategyResult<TClass, K> {
     const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(
