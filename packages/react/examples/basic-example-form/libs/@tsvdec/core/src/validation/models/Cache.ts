@@ -14,6 +14,14 @@ export class Cache<CacheValue extends object & {}, Payload = any> {
   #payload: Payload;
   #changeFn: (state: Payload) => CacheValue;
 
+  get cache() {
+    return this.#cache;
+  }
+
+  get payload() {
+    return this.#payload;
+  }
+
   /**
    * Constructs a new `CacheMap` instance.
    *

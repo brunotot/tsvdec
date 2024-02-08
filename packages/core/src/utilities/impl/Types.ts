@@ -1,6 +1,12 @@
 import * as Overrides from "../../overrides";
 
 export namespace Types {
+  export type DeepPartial<T> = T extends object
+    ? {
+        [P in keyof T]?: DeepPartial<T[P]>;
+      }
+    : T;
+
   /**
    * Represents the JavaScript `Function` type.
    */

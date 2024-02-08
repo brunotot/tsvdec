@@ -9,6 +9,7 @@ import ErrorMessagesPreprocessorDemo from "./components/demo/ErrorMessagesPrepro
 import ModifyingErrorMessagesLocaleDemo from "./components/demo/ModifyingErrorMessagesLocaleDemo";
 import NestedFormValidationDemo from "./components/demo/NestedFormValidationDemo";
 import ValidatorGroupsDemo from "./components/demo/ValidatorGroupsDemo";
+import TriggerDemoList from "./components/demo/triggers";
 //import ComplexFormValidationDemo from "./components/demo/ComplexFormValidationDemo";
 
 function App() {
@@ -16,15 +17,16 @@ function App() {
     <Container maxWidth="md">
       <DemoList
         data={[
+          ModifyingErrorMessagesLocaleDemo,
+          TriggerDemoList,
+          DecoratorExternalArgsDemo,
+          ClassLevelFormValidationDemo,
+          ValidatorGroupsDemo,
           ConditionalValidationDemo,
           ErrorMessagesPreprocessorDemo,
-          ClassLevelFormValidationDemo,
           CompoundFieldsValidationDemo,
-          ModifyingErrorMessagesLocaleDemo,
           NestedFormValidationDemo,
-          DecoratorExternalArgsDemo,
           AsyncFieldValidationDemo,
-          ValidatorGroupsDemo,
         ]}
       />
     </Container>

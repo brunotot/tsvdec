@@ -53,7 +53,7 @@ importers:
   packages/react:
     dependencies:
       '@tsvdec/core':
-        specifier: ^0.0.2
+        specifier: ^0.0.6
         version: link:../core
       '@types/react':
         specifier: ^18.0.28

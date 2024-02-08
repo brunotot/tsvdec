@@ -8,6 +8,7 @@ import {
 } from "@tsvdec/core";
 import { type Dispatch, type SetStateAction } from "react";
 import { type FormProviderProps } from "../../components";
+import { ValidationTrigger } from "../useEventfulErrors/types";
 import { type UseResetReturn } from "../useReset/types";
 
 /**
@@ -24,6 +25,7 @@ export type UseFormConfig<TClass> = {
   onChange?: (value: Objects.Payload<TClass>) => void;
   asyncDelay?: number;
   locale?: Locale;
+  trigger?: ValidationTrigger;
 };
 
 /**
@@ -39,6 +41,7 @@ export type UseFormData<TClass> = {
   errors: SimpleErrorsResponse<TClass>;
   detailedErrors: DetailedErrorsResponse<TClass>;
   reset: UseResetReturn<TClass>;
+  validate: (field?: string) => void;
 };
 
 /**

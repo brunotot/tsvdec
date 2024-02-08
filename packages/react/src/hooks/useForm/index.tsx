@@ -1,6 +1,6 @@
 import { Types, ValidationResult } from "@tsvdec/core";
 import { useContext, useEffect, useRef, useState } from "react";
-import { FormContext } from "../../components/FormProvider";
+import { FormContext, FormProviderProps } from "../../components/FormProvider";
 import { useChangeHandlers } from "../useChangeHandlers";
 import { useReset } from "../useReset";
 import { useValidation } from "../useValidation";
@@ -44,6 +44,7 @@ export function useForm<TClass>(
     onChange,
     asyncDelay,
     locale,
+    trigger: validationStrategy = "onFormChange",
   }: UseFormConfig<TClass> = {
     onSubmit: async () => {},
     standalone: true,
@@ -59,14 +60,18 @@ export function useForm<TClass>(
   // prettier-ignore
   const instantContextValidation = standalone ? validateImmediately! : ctx? ctx.validateImmediately : validateImmediately!;
   const isSubmitted = instantContextValidation || submitted;
+  const [submitTrigger, setSubmitTrigger] = useState(false);
 
-  const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine }] =
+  const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine, validate }] =
     useValidation<TClass>(model, {
       defaultValue,
       groups,
       resolveDecoratorArgs,
       asyncDelay,
       locale,
+      trigger: validationStrategy,
+      isSubmitted,
+      submitTrigger,
     });
 
   //* Dispatcher function which fires only when
@@ -106,6 +111,7 @@ export function useForm<TClass>(
 
   const onSubmit = async () => {
     handleSetSubmitted(true);
+    setSubmitTrigger(prev => !prev);
     if (!isValid) {
       onSubmitValidationFail?.(errors);
       return;
@@ -117,7 +123,7 @@ export function useForm<TClass>(
     submitted: submitted,
     setSubmitted: handleSetSubmitted,
     validateImmediately: instantContextValidation,
-  };
+  } satisfies Omit<FormProviderProps, "children">;
 
   const reset = useReset({
     form,
@@ -128,6 +134,7 @@ export function useForm<TClass>(
   });
 
   const data: UseFormData<TClass> = {
+    validate,
     mutations: useChangeHandlers(model, { setForm }),
     isValid,
     isSubmitted,
@@ -142,6 +149,7 @@ export function useForm<TClass>(
   return [form, setForm, data];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function clearErrors(data: Record<string, any>): Record<string, any> {
   function isEmptyArrayStringOrValidationResult(
     value: any,

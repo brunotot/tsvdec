@@ -6,12 +6,10 @@
   "scripts": {
     "load-modules": "bash load-modules.sh",
     "start": "npm run load-modules && npm run dev",
-    "dev": "npm run code:write:silent && rm -rf node_modules/.vite && vite",
+    "dev": "rm -rf node_modules/.vite && vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "code:write": "node ./codeWriter.js",
-    "code:write:silent": "node ./codeWriter.js --silent"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",

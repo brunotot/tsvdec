@@ -1,10 +1,19 @@
+import { Input } from "@mui/icons-material";
 import { Typography } from "@mui/material";
+import { PropertyIOMarker } from "../../shared/PropertyIOMarker";
 import { DemoCodeProps } from "../DemoList";
 import Component, { CodeText as COMPONENT_CODE } from "./code/component";
 import { CodeText as MODEL_CODE } from "./code/model";
 
 const DemoProps = {
-  title: "Modifying Error Messages Locale Demo",
+  title: (
+    <PropertyIOMarker
+      icon={<Input color="success" />}
+      title="Configurable input param: locale"
+      name="locale"
+    />
+  ),
+  shortDescription: "Specifies the locale of error messages.",
   description: (
     <div>
       <Typography variant="body2" color="text.secondary" gutterBottom paddingBlock={1}>

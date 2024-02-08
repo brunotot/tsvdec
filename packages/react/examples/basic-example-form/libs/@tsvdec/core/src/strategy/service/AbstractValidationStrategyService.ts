@@ -26,7 +26,7 @@ export abstract class AbstractValidationStrategyService<
   readonly #groups: string[];
   readonly #engineCfg: FormConfig<any>;
   readonly #classRules: ValidationMetadata<TClass>;
-  readonly #descriptor: ControlDescriptor<any, any>;
+  readonly #classDescriptor: ControlDescriptor<any, any>;
   readonly #defaultParent: TClass;
   #fieldDescriptor?: ControlDescriptor<TClass, any>;
   #eventEmitter: EventEmitter;
@@ -34,11 +34,11 @@ export abstract class AbstractValidationStrategyService<
   /**
    * Initializes the `#descriptor` and `#defaultParent` fields.
    *
-   * @param descriptor The reflection descriptor for the field.
+   * @param classDescriptor The reflection descriptor for the field.
    * @param defaultValue The default value for the parent object.
    */
   constructor(
-    descriptor: ControlDescriptor<TClass, any>,
+    classDescriptor: ControlDescriptor<TClass, any>,
     defaultValue: TClass,
     groups: string[],
     locale: Locale,
@@ -46,7 +46,7 @@ export abstract class AbstractValidationStrategyService<
     asyncDelay: number,
   ) {
     this.#eventEmitter = eventEmitter;
-    this.#descriptor = descriptor;
+    this.#classDescriptor = classDescriptor;
     this.#defaultParent = defaultValue;
     this.#groups = groups;
     this.#locale = locale;
@@ -56,7 +56,7 @@ export abstract class AbstractValidationStrategyService<
       asyncDelay,
     };
     this.#classRules = ClassValidatorMetaService.inject(
-      this.#descriptor.hostClass!,
+      this.#classDescriptor.hostClass!,
       this.eventEmitter,
     ).data;
   }
@@ -70,7 +70,7 @@ export abstract class AbstractValidationStrategyService<
   }
 
   protected get fieldEngine(): Form<TClass> {
-    return new Form<TClass>(this.#descriptor.thisClass!, this.engineCfg);
+    return new Form<TClass>(this.#classDescriptor.thisClass!, this.engineCfg);
   }
 
   protected get engineCfg(): FormConfig<any> {
@@ -99,7 +99,7 @@ export abstract class AbstractValidationStrategyService<
   protected get fieldDescriptor(): ControlDescriptor<TClass, any, undefined> {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
     this.#fieldDescriptor = FieldValidatorMetaService.inject(
-      this.#descriptor.hostClass!,
+      this.#classDescriptor.hostClass!,
       this.#eventEmitter,
     ).getUntypedDescriptor(this.fieldName, this.eventEmitter);
     return this.#fieldDescriptor;
@@ -111,7 +111,7 @@ export abstract class AbstractValidationStrategyService<
    * @returns The name of the field.
    */
   protected get fieldName(): string {
-    return this.#descriptor.thisName!;
+    return this.#classDescriptor.thisName!;
   }
 
   /**
@@ -129,6 +129,7 @@ export abstract class AbstractValidationStrategyService<
   }
 
   protected getClassErrors(fieldValue: any, parentValue: any): ValidationResult[] {
+    if (!this.#classDescriptor.validateIf(parentValue)) return [];
     return this.classRules.validate(fieldValue, parentValue, this.groups, this.locale);
   }
 
@@ -137,8 +138,7 @@ export abstract class AbstractValidationStrategyService<
     parentValue: any,
     args: DecoratorArgs,
   ): ValidationResult[] {
-    if (this.fieldDescriptor.validateIf && !this.fieldDescriptor.validateIf(parentValue)) return [];
-
+    if (!this.fieldDescriptor.validateIf(parentValue)) return [];
     return this.fieldDescriptor.validations.root.validate(
       fieldValue,
       parentValue,
@@ -151,8 +151,6 @@ export abstract class AbstractValidationStrategyService<
   }
 
   protected getArrayItemErrors(arrayItem: any, parentValue: any): ValidationResult[] {
-    if (this.fieldDescriptor.validateIf && !this.fieldDescriptor.validateIf(parentValue)) return [];
-
     return this.fieldDescriptor.validations.foreach.validate(
       arrayItem,
       parentValue,

@@ -1,6 +1,7 @@
 import { FormConfig, Objects, Types } from "@tsvdec/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useEngine } from "../useEngine";
+import { useEventfulErrors } from "../useEventfulErrors";
 import { type UseValidationConfig, type UseValidationReturn } from "./types";
 
 /**
@@ -27,36 +28,22 @@ import { type UseValidationConfig, type UseValidationReturn } from "./types";
 // prettier-ignore
 export function useValidation<TClass>(
   Class: Types.Class<TClass>,
-  props: UseValidationConfig<TClass> = {}
+  props: UseValidationConfig<TClass> = {isSubmitted: false, submitTrigger: false}
 ): UseValidationReturn<TClass> {
-  const { groups, defaultValue, asyncDelay, locale } = props;
+  const { groups, defaultValue, asyncDelay, locale, trigger: validationStrategy = "onFormChange", isSubmitted, submitTrigger} = props;
   const resolveDecoratorArgs = props.resolveDecoratorArgs ?? (() => ({}));
   const decoratorArgs = resolveDecoratorArgs();
   const formConfig = { groups, defaultValue, asyncDelay, locale } satisfies FormConfig<TClass>;
   const engine = useEngine<TClass>(Class, formConfig);
   const [form, setForm] = useState<Objects.Payload<TClass>>(engine.defaultValue);
-  const [classSimpleErrors, setClassSimpleErrors] = useState(() => engine.validate(form, decoratorArgs).globalErrors);
-  const [fieldDetailedErrors, setFieldDetailedErrors] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
-  const [fieldSimpleErrors, setFieldSimpleErrors] = useState(() => engine.validate(form, decoratorArgs).errors);
-
-  useEffect(() => {
-    engine.registerAsync(({ errors, detailedErrors, globalErrors }) => {
-      setFieldDetailedErrors(detailedErrors);
-      setFieldSimpleErrors(errors);
-      setClassSimpleErrors(globalErrors);
-    });
-
-    return () => {
-      engine.unregisterAsync();
-    };
-  }, [engine]);
-
-  useEffect(() => {
-    const { errors, detailedErrors, globalErrors } = engine.validate(form, decoratorArgs);
-    setFieldDetailedErrors(detailedErrors);
-    setFieldSimpleErrors(errors);
-    setClassSimpleErrors(globalErrors);
-  }, [form, engine, JSON.stringify(decoratorArgs)]);
+  const { errors: fieldSimpleErrors, detailedErrors: fieldDetailedErrors, globalErrors: classSimpleErrors, validate } = useEventfulErrors({
+    decoratorArgs,
+    engine,
+    form,
+    validationStrategy,
+    isSubmitted,
+    submitTrigger
+  });
 
   return [
     form,
@@ -67,6 +54,7 @@ export function useValidation<TClass>(
       detailedErrors: fieldDetailedErrors,
       globalErrors: classSimpleErrors,
       engine,
+      validate
     },
   ];
 }
