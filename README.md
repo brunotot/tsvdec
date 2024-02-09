@@ -2,33 +2,16 @@
 
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
-  <img alt="Downloads per month" src="https://img.shields.io/npm/dm/typescript-decorator-validation" height="20"/>
+  <img alt="Downloads per month" src="https://img.shields.io/npm/dm/@tsvdec/core" height="20"/>
  </a>
- 
  <a href="https://www.npmjs.com/package/typescript-decorator-validation">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/@tsvdec/core.svg" height="20"/>
  </a>
- 
- <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/contributors">
-  <img alt="Contributors" src="https://img.shields.io/github/contributors/brunotot/typescript-decorator-validation" height="20"/>
- </a>
- 
- <a href="#">
-  <img alt="Awesome badge" src="https://awesome.re/badge.svg" height="20"/>
- </a>
-</p>
-
-<p align="center">
  <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/commit-activity">
   <img alt="Maintained" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" height="20"/>
  </a>
-
  <a href="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/tests.yml">
   <img alt="Tests" src="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/tests.yml/badge.svg" height="20"/>
- </a>
-
- <a href="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/docs.yml">
-  <img alt="TypeDocs" src="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/docs.yml/badge.svg" height="20"/>
  </a>
 </p>
 
@@ -56,206 +39,72 @@ class Stage3 {
 }
 ```
 
-### Packages
+## TOC
+
+- [Features](#features)
+- [Packages](#packages)
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Documentation](#documentation)
+- [Contribution](#contribution)
+
+## Features
+
+- provides clean and declarative way of validating classes and fields
+- small in bundle size with no external dependencies
+- built-in i18n localization support
+- comprehensive documentation and extensive guides, making it easy to get started
+- seamless integration with any native TypeScript v5+ project
+- supported in both NodeJS and browser environment
+
+## Packages
 
 - [@tsvdec/core](https://github.com/brunotot/tsvdec/tree/main/packages/core#readme) - core module responsible for manipulating class metadata
 - [@tsvdec/react](https://github.com/brunotot/tsvdec/tree/main/packages/react#readme) -  implementation of core module compatible with React v18+
 
-### Features
+## Installation
 
-- powered by TypeScript's [stage-3](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators) decorators (type-safety included)
-- small in bundle size with no dependencies
-- built-in [i18n localization](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/localization/index.ts#L6) support to supply the messages in the user's native language
-- well-documented code and extensive guides for making it easy to get started
-- designed to play nice with popular testing frameworks like [Jest](https://jestjs.io/)
-- integrates seamlessly within any native TypeScript v5+ project
-- provides a clean and declarative way of validating form fields
-- exports [Reflection](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/reflection/index.ts#L9) namespace containing useful reflection-related methods
-
-## TOC
-
-- [General](#general)
-  - [What does `tdv-core` do?](#what-does-tdv-core-do)
-  - [Which versio![ray-so-export](https://github.com/brunotot/tsvdec/assets/53398175/4d83a959-638c-4b13-a3b4-0be914e3d6ff)
-ns of TypeScript are supported?](#which-versions-of-typescript-are-supported)
-- [Installation](#installation)
-- [Features](#features)
-- [Content](#content)
-- [Installation](#installation)
-- [Quick start](#quick-start)
-- [Supported Frameworks](#supported-frameworks)
-- [Documentation](#documentation)
-- [Contribution](#contribution)
-- [Future goals](#future-goals)
-- [Examples](#examples)
-- [Repository architecture](#repository-architecture)
-
-### Installation
+1. Install dependencies
 
 ```bash
 npm install -D typescript@latest
 npm install @tsvdec/core
-npm install @tsvdec/react # when using in framework-specific environment
 ```
 
-### Quick start
+2. (Optional) Configure Babel for browser environment
 
-```typescript
-import { validate, collection, ValidationEngine, Localization, TdvCore } from "@tsvdec/core";
-
-function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
-  return validate<string>({
-    groups,
-    isValid: (value: string, _parent: Foo, _locale: Localization.Locale) => ({
-      key: "MinSize",
-      valid: value.length >= min,
-      message: `Input must contain at least ${min} characters`,
-    }),
-  });
-}
-
-class Foo {
-  @collection.string.Email() // predefined
-  @MinSize(10) // custom
-  email!: string;
-}
-
-const engine = new ValidationEngine(Foo);
-const result = engine.validate({ email: "invalid" });
-console.log(result.errors.email);
-// [ 'Input must contain at least 10 characters', 'Value is not a valid email' ]
-```
-
-### Supported Frameworks
-
-- [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
-- [ ] Angular
-- [ ] Svelte
-- [ ] Vue
-
-### Documentation
-
-- [@tsvdec/core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
-- [@tsvdec/react](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
-
-### Contribution
-
-To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
-Branch will be ready for merge after all CI tests pass and a review has been made.
-
-### Future goals
-
-- [x] Implement strict type checking
-- [x] Implement predefined decorator validators
-- [x] Provide source code documentation
-- [x] Implement concise tests for various scenarios
-- [ ] Build implementation packages for popular front-end frameworks
-
-### Examples
-
-A basic TypeScript form can look something like
-
-```typescript
-import { decorate, ValidationEngine } from "@tsvdec/core";
-
-/**
- *  This is an optional layer of abstraction if the class contains complex
- *  validation evaluations which shouldn't be registered as properties.
- *  In this example the "passwordsMatch" field isn't a settable property.
- */
-export type UserFormFields = {
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  url: string;
-  age: number;
-};
-
-export default class UserForm implements UserFormFields {
-  @collection.string.MinLength(5)
-  @collection.string.Required()
-  firstName!: string;
-
-  @collection.string.Required()
-  lastName!: string;
-
-  @collection.string.Required()
-  @collection.string.Password()
-  password!: string;
-
-  confirmPassword!: string;
-
-  @collection.string.URL()
-  url!: string;
-
-  @collection.number.ValueRange({ min: 18, max: 100 })
-  age!: number;
-
-  @collection.boolean.Truthy("Passwords must match")
-  get passwordsMatch(): boolean {
-    return this.password === this.confirmPassword;
-  }
-}
-```
-
-And a sample value of type UserForm may look something like
-
-```typescript
-const dummy: Partial<UserFormFields> = {
-  firstName: "",
-  lastName: "",
-  password: "12345",
-  confirmPassword: "",
-  url: "",
-  age: 10,
-};
-```
-
-Now we can inspect the errors of the given sample value
-
-```typescript
-const engine = new ValidationEngine(UserForm);
-const { errors } = engine.validate(dummy);
-console.log(errors);
-```
-
-And the result is
-
-```typescript
+```ts
 {
-  firstName: [
-    "Field is mandatory",
-    "Field must contain at least 5 characters"
-  ],
-  lastName: [
-    "Field is mandatory"
-  ],
-  password: [
-    "Password must be at least 8 characters long"
-  ],
-  url: [
-    // EMPTY
-  ],
-  age: [
-    "Value must be greater than or equal to 18 and less than or equal to 100 but is 10"
-  ],
-  passwordsMatch: [
-    "Passwords must match"
-  ]
+  presets: ["@babel/preset-typescript"],
+  plugins: [["@babel/plugin-proposal-decorators", { version: "2023-05" }]],
 }
 ```
 
-### Repository architecture
+## Quick start
 
-The `@tsvdec/core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
+```ts
+import { Form, Required } from "@tsvdec/core";
 
-- A decorator factory for easy integration with TypeScript
-- Metadata management for dynamic behavior
-- Localization support
-- Built-in validators like `Email`, `Required`, etc.
+class MyClass {
+  @Required()
+  value: string = "";
+}
 
-The core package serves as the foundation for implementation libraries like `@tsvdec/react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
+const form = new Form(MyClass);
+const result = form.validate({ value: "" });
+const errors = result.errors.value;
+console.log(errors); // ["Field is required"]
+```
+
+## Documentation
+
+- [API Documentation](https://brunotot.github.io/tsvdec/index.html)
+- [FAQ](https://github.com/brunotot/typescript-decorator-validation/blob/main/markdown/FAQ.md#@tsvdec/core)
+
+## Contribution
+
+To contribute, simply clone the main branch, commit and push changes to a local branch, then open pull request.</br>
+Branch will be ready for merge after all CI tests pass and a review has been made.
 
 [comment]: # "### Comparison against similar solutions"
 [comment]: #
