@@ -59,8 +59,8 @@ class Stage3 {
 
 ## Packages
 
-- [@tsvdec/core](https://github.com/brunotot/tsvdec/tree/main/packages/core#readme) - core module responsible for manipulating class metadata
-- [@tsvdec/react](https://github.com/brunotot/tsvdec/tree/main/packages/react#readme) -  implementation of core module compatible with React v18+
+- [@tsvdec/core](https://www.npmjs.com/package/@tsvdec/core) - core module responsible for manipulating class metadata
+- [@tsvdec/react](https://www.npmjs.com/package/@tsvdec/react) -  implementation of core module compatible with React v18+
 
 ## Installation
 
