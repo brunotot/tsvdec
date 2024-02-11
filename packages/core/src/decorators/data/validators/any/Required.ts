@@ -7,7 +7,7 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type Objects } from "../../../../utilities";
+import { Types } from "../../../../utilities";
 
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
@@ -63,7 +63,7 @@ function isRequiredValid<T>(value: T | undefined): boolean {
  * }
  * ```
  */
-export function Required<This, Value extends Objects.Optional>(
+export function Required<This, Value extends Types.PrimitiveUnion>(
   options?: DecoratorOptions<This, Value>,
 ): FieldDecorator<This, Value> {
   return createFieldValidator<This, Value>(

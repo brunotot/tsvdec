@@ -1,5 +1,4 @@
 import {
-  type FunctionStrategy,
   type ObjectArrayGetterStrategy,
   type ObjectArrayStrategy,
   type ObjectGetterStrategy,
@@ -48,10 +47,7 @@ export type evaluateMandatory<T, R> = {
  */
 // prettier-ignore
 export type fieldEvaluation<T, K extends keyof T, R> =
-    true extends FunctionStrategy.matches<T, K>
-    ? FunctionStrategy.handler<T, K, R>
-
-    : true extends PrimitiveArrayStrategy.matches<T, K>
+    true extends PrimitiveArrayStrategy.matches<T, K>
     ? PrimitiveArrayStrategy.handler<T, K, R>
 
     : true extends PrimitiveGetterStrategy.matches<T, K>
@@ -90,10 +86,7 @@ export type getStrategyResult<T, K extends keyof T> = ReturnType<getStrategyClas
  */
 // prettier-ignore
 export type getStrategyClass<T, K extends keyof T> =
-    true extends FunctionStrategy.matches<T, K>
-    ? FunctionStrategy.StrategyResolver<T[K]>
-
-    : true extends PrimitiveArrayStrategy.matches<T, K>
+    true extends PrimitiveArrayStrategy.matches<T, K>
     ? PrimitiveArrayStrategy.StrategyResolver<T[K]>
 
     : true extends PrimitiveGetterStrategy.matches<T, K>

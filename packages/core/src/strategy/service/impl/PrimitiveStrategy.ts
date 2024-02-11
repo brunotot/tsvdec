@@ -56,7 +56,7 @@ export namespace PrimitiveStrategy {
      *
      * @param value - The value to be validated.
      * @param context - The context in which the validation is taking place.
-     * @param groups - Optional validation groups to consider during validation.
+     * @param args - Decorator arguments.
      *
      * @returns A tuple containing an array of detailed validation results (`ValidationResult[]`) and an array of simplified error messages (`string[]`).
      */

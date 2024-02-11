@@ -1,19 +1,25 @@
-import { type Arrays } from "./Arrays";
-import { type Booleans } from "./Booleans";
+import type * as Booleans from "./Booleans";
+import { type Types } from "./Types";
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Objects {
   /**
    * A type that represents an optional value.
    *
    * @typeParam T - The type of the optional value.
    */
-  export type Optional<T = undefined> = T extends undefined ? any : T | undefined | null;
+  export type Optional<T = undefined> = T extends Types.FunctionType
+    ? never
+    : T extends undefined
+      ? any
+      : T | undefined | null;
 
   /**
    * A predicate function for filtering arrays.
    *
    * @typeParam T - The type of the array elements.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   export type ArrayPredicate<T> = ((value: T, index: number, array: T[]) => boolean) & {};
 
   /**
@@ -27,9 +33,7 @@ export namespace Objects {
     ]>
       ? never
       : true extends Booleans.isArray<T[K]>
-        ? true extends Booleans.isPrimitive<Arrays.getArrayType<T[K]>>
-          ? T[K]
-          : Arrays.setArrayDepth<Payload<Arrays.getArrayType<T[K]>>, Arrays.getArrayDepth<T[K]>>
+        ? T[K]
         : true extends Booleans.isPrimitive<T[K]>
           ? T[K]
           : Payload<T[K]>
@@ -241,6 +245,7 @@ export namespace Objects {
    * @param delay - The delay time in milliseconds.
    * @returns A debounced function.
    */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   export function debounce(fn: Function, delay: number): Function {
     let timeoutID: any = null;
     return (...args: any[]) => {
@@ -270,6 +275,7 @@ export namespace Objects {
     throwTypeMismatchError(type, value);
   }
 
+  // eslint-disable-next-line no-inner-declarations
   function throwTypeMismatchError(type: FieldType, value: any): never {
     throw new Error(`Type '${type}' is not assignable to type ${JSON.stringify(value)}`);
   }

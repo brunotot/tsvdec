@@ -1,18 +1,8 @@
+import { FieldDecoratorCtx } from "../../decorators/factory/forField/createFieldDecorator";
 import { Classes, type Types } from "../../utilities";
 
-type FieldDecoratorCtx<T = unknown> = Readonly<{
-  kind: "getter" | "method" | "field";
-  static: boolean;
-  private: boolean;
-  name: string;
-  metadata?: globalThis.DecoratorMetadataObject;
-  access: {
-    get: (object: any) => T;
-  };
-}>;
-
 /** Type alias for strategies that can either be a decorator context or a class. */
-export type MetaStrategy = FieldDecoratorCtx<any> | Types.Class<any> | DecoratorContext;
+export type MetaStrategy = FieldDecoratorCtx<any, any> | Types.Class<any> | DecoratorContext;
 
 /**
  * Abstract class for managing metadata.
@@ -23,7 +13,7 @@ export abstract class AbstractMetaService<Entry> {
   readonly #injectionKey: string;
   readonly #initial: () => Entry;
   #class?: Types.Class<any>;
-  protected context?: FieldDecoratorCtx<any>;
+  protected context?: FieldDecoratorCtx<any, any>;
 
   /**
    * Constructor for AbstractMetaService.

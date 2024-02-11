@@ -18,5 +18,4 @@ export const StrategyData: Record<string, Types.Class<AbstractValidationStrategy
     Strategies.PrimitiveArrayGetterStrategy.StrategyResolver,
   [Strategies.ObjectArrayGetterStrategy.Name]:
     Strategies.ObjectArrayGetterStrategy.StrategyResolver,
-  [Strategies.FunctionStrategy.Name]: Strategies.FunctionStrategy.StrategyResolver,
 };

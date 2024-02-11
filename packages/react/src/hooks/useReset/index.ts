@@ -5,11 +5,7 @@ import { type UseResetConfig, type UseResetReturn } from "./types";
  * Resets the form values and submission status.
  * If no arguments are provided, the form is reset to its default values.
  * If specific paths are provided, only those paths are reset to their default values.
- * @param engine - The form engine instance.
- * @param form - The current form values.
- * @param setForm - The function to update the form values.
- * @param submitted - The current submission status.
- * @param handleSetSubmitted - The function to update the submission status.
+ * @param {UseResetConfig} props - The configuration object.
  * @returns The reset function.
  */
 export function useReset<TClass>({

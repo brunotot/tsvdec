@@ -1,7 +1,5 @@
-export * from "./impl/Arrays";
-export * from "./impl/Booleans";
-export * from "./impl/Classes";
+export * as Booleans from "./impl/Booleans";
+export * as Classes from "./impl/Classes";
 export * from "./impl/Objects";
-export * from "./impl/Strings";
 export * from "./impl/Types";
 export * from "./misc/EventEmitter";

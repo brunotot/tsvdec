@@ -5,6 +5,6 @@
   "entryPointStrategy": "packages",
   "includeVersion": false,
   "excludeInternal": true,
-  "plugin": ["@mxssfd/typedoc-theme"],
-  "theme": "my-theme"
+  "themeColor": "#8787f5",
+  "plugin": ["typedoc-material-theme"]
 }

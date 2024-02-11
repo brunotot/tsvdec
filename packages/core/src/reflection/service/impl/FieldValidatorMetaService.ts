@@ -122,20 +122,6 @@ export class ControlDescriptor<
       const meta = FieldValidatorMetaService.inject(this.hostClass!, this.eventEmitter);
       const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(this.thisName!);
 
-      if (
-        value instanceof Promise ||
-        (value &&
-          typeof value === "object" &&
-          "key" in value &&
-          typeof value.key === "string" &&
-          "valid" in value &&
-          typeof value.valid === "boolean" &&
-          "message" in value &&
-          typeof value.message === "string")
-      ) {
-        return Strategies.FunctionStrategy.Name;
-      }
-
       return Array.isArray(value)
         ? descriptor.thisClass
           ? Strategies.ObjectArrayStrategy.Name
@@ -145,7 +131,7 @@ export class ControlDescriptor<
           : Strategies.PrimitiveStrategy.Name;
     };
 
-    const descriptor = Classes.getClassFieldDescriptor(this.hostClass, fieldName);
+    const descriptor = Classes.getFieldDescriptor(this.hostClass, fieldName);
     const isGetter = descriptor?.get && !descriptor.set;
 
     if (isGetter) {
@@ -153,13 +139,7 @@ export class ControlDescriptor<
       return `get (): ${getNativeStrategy(value)}` as any;
     }
 
-    const value = instance[fieldName];
-
-    if (typeof value === "function") {
-      return getNativeStrategy(value.bind(this.hostDefault ?? new this.hostClass())());
-    }
-
-    return getNativeStrategy(value);
+    return getNativeStrategy(instance[fieldName]);
   }
 }
 
@@ -209,7 +189,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    *
    * @param field - The name of the field.
    * @param validate - The validation function.
-   * @param groups - Optional validation groups.
+   * @param meta - Decorator meta.
    */
   addValidator(
     field: string,
@@ -287,7 +267,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * It also ensures that untyped descriptors are created for each field.
    */
   #handleClassInit(clazz: Types.Class<any>): void {
-    this.#fields = Classes.getClassFieldNames(clazz) as string[];
+    this.#fields = Classes.getFieldNames(clazz) as string[];
     this.#fields.forEach(name => this.getUntypedDescriptor(name));
   }
 
@@ -298,6 +278,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * @remarks
    * This method sets the `#fields` array to an empty array as no class fields are available.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   #handleContextInit(_context: FieldDecoratorCtx<any>): void {
     this.#fields = [];
   }

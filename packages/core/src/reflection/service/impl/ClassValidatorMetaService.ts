@@ -49,7 +49,7 @@ export class ClassValidatorMetaService<TStrategy extends MetaStrategy> extends A
   /**
    * Adds a class-level validator to the provided class.
    * @param validate - The validation function.
-   * @param groups - Optional validation groups.
+   * @param meta - Decorator meta
    */
   addValidator(
     validate: ValidationEvaluator<Types.UnwrapClass<TStrategy>>,

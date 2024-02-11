@@ -55,7 +55,7 @@ export class Cache<CacheValue extends object & {}, Payload = any> {
    * Patches the cache with new values.
    *
    * @param partialCache - An object containing the new cache values.
-   * @param payload - The payload to use for this patch operation.
+   * @param _payload - The payload to use for this patch operation.
    *
    * @returns The updated cache object.
    */

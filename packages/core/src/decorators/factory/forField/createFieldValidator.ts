@@ -7,7 +7,7 @@ import { createFieldDecorator, type FieldDecorator } from "./createFieldDecorato
  *
  * @typeParam T - The type of the value being validated.
  * @param validate - The callback that defines the validation logic.
- * @param groups - Validation groups.
+ * @param decoratorMeta - Decorator meta.
  * @returns A decorator function that can be applied to class properties to add the validation logic.
  *
  * @example

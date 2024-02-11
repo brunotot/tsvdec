@@ -30,7 +30,9 @@ export type FieldDecoratorSupplier<This, Value> = ((
   args: DecoratorArgs,
 ) => void) & {};
 
-/** Represents the context of a field decorator. */
+/**
+ * Represents the context of a field decorator.
+ */
 export type FieldDecoratorCtx<This, Value> = Readonly<{
   kind: "getter" | "method" | "field";
   static: boolean;

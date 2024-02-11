@@ -89,13 +89,6 @@ export abstract class AbstractValidationStrategyService<
     return this.#locale;
   }
 
-  /**
-   * Constructs and returns the configuration object for entity processing.
-   *
-   * @param groups Validation groups to consider during validation.
-   *
-   * @returns An `ValidationEngineNs.Config` object configured for the field type.
-   */
   protected get fieldDescriptor(): ControlDescriptor<TClass, any, undefined> {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
     this.#fieldDescriptor = FieldValidatorMetaService.inject(
@@ -164,7 +157,7 @@ export abstract class AbstractValidationStrategyService<
    *
    * @param value The value to be validated.
    * @param context The context in which the validation is taking place.
-   * @param groups Optional validation groups to consider during validation.
+   * @param args - Decorator arguments.
    *
    * @returns A tuple containing the detailed result (`TDetailedResult`) and the simplified result (`TSimpleResult`).
    *

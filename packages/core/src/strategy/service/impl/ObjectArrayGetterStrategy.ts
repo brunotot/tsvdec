@@ -3,7 +3,7 @@ import {
   type DetailedErrorsResponse,
   type SimpleErrorsResponse,
 } from "../../../strategy/models/StrategyFactory";
-import { type Arrays, type Booleans } from "../../../utilities";
+import { type Booleans, type Types } from "../../../utilities";
 import type { ValidationResult } from "../../../validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 import { ObjectStrategy } from "./ObjectStrategy";
@@ -48,9 +48,9 @@ export namespace ObjectArrayGetterStrategy {
   // prettier-ignore
   export type matches<T, K extends keyof T> =
       true extends Booleans.isGetter<T, K>
-        ? Arrays.getArrayType<NonNullable<T[K]>> extends never
+        ? Types.UnpackArray<NonNullable<T[K]>> extends never
           ? false
-          : Booleans.isObject<Arrays.getArrayType<NonNullable<T[K]>>>
+          : Booleans.isObject<Types.UnpackArray<NonNullable<T[K]>>>
         : false;
 
   /**
@@ -79,7 +79,7 @@ export namespace ObjectArrayGetterStrategy {
      *
      * @param value - The array of object values to be validated.
      * @param context - The context in which the validation is taking place.
-     * @param groups - Optional validation groups to consider during validation.
+     * @param args - Decorator arguments.
      *
      * @returns A tuple containing `ObjectArrayGetterDetailedErrors<F>` and `ObjectArrayGetterSimpleErrors<F>`.
      *

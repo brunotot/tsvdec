@@ -2,7 +2,7 @@ import {
   createFieldDecorator,
   type FieldDecorator,
 } from "../../../decorators/factory/forField/createFieldDecorator";
-import { type Arrays, type Types } from "../../../utilities";
+import { type Types } from "../../../utilities";
 
 /**
  * Creates a validator decorator which applies multiple validators to each element in array field.
@@ -18,8 +18,8 @@ import { type Arrays, type Types } from "../../../utilities";
  * }
  * ```
  */
-export function foreach<T extends NonNullable<Types.ArrayType | (() => Types.ArrayType)>, Class>(
-  ...validators: Array<FieldDecorator<Arrays.getArrayType<T>, Class>>
+export function foreach<T extends Types.ArrayType, Class>(
+  ...validators: Array<FieldDecorator<Types.UnpackArray<T>, Class>>
 ): FieldDecorator<T, Class> {
   return createFieldDecorator<T, Class>((meta, property, context) => {
     const validationProcessor = meta.getUntypedDescriptor(property);

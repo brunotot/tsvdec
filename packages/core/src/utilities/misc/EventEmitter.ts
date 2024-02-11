@@ -1,4 +1,13 @@
-/** Event emitter class. */
+/**
+ * TypeScript native implementation of the EventEmitter pattern.
+ * @remarks This class is used to create a simple event emitter that can be used to emit and listen to events.
+ * @example
+ * ```typescript
+ * const emitter = new EventEmitter();
+ * emitter.on("myEvent", data => console.log(data));
+ * emitter.emit("myEvent", "Hello, world!");
+ * ```
+ */
 export class EventEmitter {
   #id: string;
   #asyncDelay: number;
@@ -10,7 +19,7 @@ export class EventEmitter {
     return this.#id;
   }
 
-  constructor(id: string, asyncDelay: number = 500) {
+  constructor(id: string = "", asyncDelay: number = 500) {
     this.events = new Map();
     this.handlersTimeout = new Map();
     this.#id = id;

@@ -11,6 +11,9 @@ export type DecoratorMeta<Class> = {
   validateIf?: DecoratorValidateIf<Class>;
 };
 
+/**
+ * @hidden
+ */
 export const DEFAULT_DECORATOR_META: DecoratorMeta<any> = {
   groups: [],
   validateIf: () => true,
@@ -37,7 +40,8 @@ function parseMessage(locale: Locale, message: string, args: Record<string, stri
     return getMessageParser()(locale, message, args);
   } catch (error) {
     const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
-    const descr = `To fix, check your Localization.configureParser() implementation or review stack-trace.`;
+    const descr =
+      "To fix, check your Localization.configureParser() implementation or review stack-trace.";
     const stacktrace = `\n\n${String(error)}`;
     throw new Error(`${title} ${descr} ${stacktrace}`);
   }

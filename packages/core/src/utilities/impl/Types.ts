@@ -1,5 +1,6 @@
 import * as Overrides from "../../overrides";
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Types {
   export type DeepPartial<T> = T extends object
     ? {
@@ -10,14 +11,19 @@ export namespace Types {
   /**
    * Represents the JavaScript `Function` type.
    */
-  export type FunctionType = (() => any) & {};
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  export type FunctionType = ((...args: any[]) => any) & {};
 
   /**
    * Represents the generic array type.
    */
   export type ArrayType = any[];
 
+  export type UnpackArray<T> = T extends (infer U)[] ? U : never;
+
   export type PrimitiveType = Overrides.PrimitiveType;
+
+  export type PrimitiveUnion = UnpackArray<PrimitiveType>;
 
   /**
    * Represents a class constructor that can create instances of type `T`.
@@ -37,6 +43,7 @@ export namespace Types {
    * // Creates an instance of MyClass
    * ```
    */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   export type Class<T = {}> = (new (...args: any[]) => T) & {};
 
   /**
@@ -57,5 +64,6 @@ export namespace Types {
    */
   export type Prettify<T> = {
     [K in keyof T]: T[K];
+    // eslint-disable-next-line @typescript-eslint/ban-types
   } & {};
 }

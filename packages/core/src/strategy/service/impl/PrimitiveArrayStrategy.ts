@@ -1,5 +1,5 @@
 import { type DecoratorArgs } from "../../../decorators";
-import { type Arrays, type Booleans, type Types } from "../../../utilities";
+import { type Booleans, type Types } from "../../../utilities";
 import type { ValidationResult } from "../../../validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 
@@ -38,9 +38,9 @@ export namespace PrimitiveArrayStrategy {
    */
   // prettier-ignore
   export type matches<T, K extends keyof T> =
-  Arrays.getArrayType<T[K]> extends never
+  Types.UnpackArray<T[K]> extends never
       ? false
-  : Booleans.isAnyOf<Arrays.getArrayType<T[K]>, Types.PrimitiveType>
+  : Booleans.isAnyOf<Types.UnpackArray<T[K]>, Types.PrimitiveType>
 
   /**
    * Type for the handler function based on the field and result types.
@@ -71,7 +71,7 @@ export namespace PrimitiveArrayStrategy {
      *
      * @param value - The array of values to be validated.
      * @param context - The context in which the validation is taking place.
-     * @param groups - Optional validation groups to consider during validation.
+     * @param args - Decorator arguments.
      *
      * @returns A tuple containing `PrimitiveArrayDetailedErrors` and `PrimitiveArraySimpleErrors`.
      *

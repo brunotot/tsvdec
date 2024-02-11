@@ -21,6 +21,7 @@ import type {
 /**
  * Checks if an error object has errors.
  * @typeParam T - The type of the errors.
+ * @hidden
  */
 export function hasErrors<T>(data: SimpleErrorsResponse<T>): boolean {
   const data0: any = data;
@@ -40,6 +41,7 @@ export function hasErrors<T>(data: SimpleErrorsResponse<T>): boolean {
  * @param object - The object to transform.
  * @typeParam TClass - The type of the class.
  * @returns An instance of TClass.
+ * @hidden
  */
 export function toClass<const TClass extends Types.Class<any>>(
   clazz: TClass,

@@ -15,7 +15,7 @@ export function useChangeHandlers<TClass, TBody = TClass>(
   clazz: Types.Class<TClass>,
   { setForm }: UseChangeHandlersConfig<TBody>,
 ): UseFormChangeHandlerMap<TBody> {
-  const fields = useMemo(() => Classes.getClassFieldNames(clazz), []);
+  const fields = useMemo(() => Classes.getFieldNames(clazz), []);
 
   const handleChange: UseFormSetterFn<TBody> = (key, value) => {
     setForm(prev => {

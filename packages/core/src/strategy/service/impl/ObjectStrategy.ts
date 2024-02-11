@@ -76,7 +76,7 @@ export namespace ObjectStrategy {
      *
      * @param value - The object value to be validated.
      * @param context - The context in which the validation is taking place.
-     * @param groups - Optional validation groups to consider during validation.
+     * @param args - Decorator arguments.
      *
      * @returns A tuple containing `ObjectDetailedErrors<F>` and `ObjectSimpleErrors<F>`.
      *

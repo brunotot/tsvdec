@@ -1,7 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { type evaluate } from "./../strategy/models/StrategyFactory";
+
 /**
  * An overridable interface designed for disabling nested validation on custom object types.
  * - when specified ***(example 1)***: an object type is considered primitive and it's simplified errors render as `string[]`
- * - when not specified ***(example 2)***: an object type is considered as is and it's simplified errors are evaluated by {@link Strategy.Impl.Errors evaluate<T, string[]>})
+ * - when not specified ***(example 2)***: an object type is considered as is and it's simplified errors are evaluated by {@link evaluate evaluate<T, string[]>})
  *
  * @example
  * 1: Disabling nested form validation for `Coordinate` class by augmenting the `PrimitiveTypeOverride` interface from `@tsvdec/core`. This is a way of treating custom object types as primitives and avoiding recursive field validation

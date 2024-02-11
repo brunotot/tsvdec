@@ -6,6 +6,7 @@
  * ```ts
  * const isURL = RegexConst.URL.test("https://example.com");
  * ```
+ * @hidden
  */
 // prettier-ignore
 export const RegexConst = {

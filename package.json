@@ -21,8 +21,9 @@
     "version:dev": "changeset version --snapshot dev",
     "release:dev": "changeset publish --tag dev",
     "build": "for package in packages/*/; do (cd $package && pnpm run build); done",
-    "build:docs": "typedoc",
-    "build:docs:dev": "npx typedoc --validation.notDocumented --treatValidationWarningsAsErrors",
+    "build:docs": "typedoc && npm run sanitize-docs --silent",
+    "build:docs:dev": "npx typedoc --validation.notDocumented --treatValidationWarningsAsErrors && npm run sanitize-docs --silent",
+    "sanitize-docs": "echo '' >> docs/assets/style.css && cat resources/doc-style-override.css >> docs/assets/style.css",
     "format:check": "prettier --check packages --cache",
     "format:write": "prettier --write packages --cache"
   },
@@ -30,7 +31,6 @@
     "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.4.4",
     "@commitlint/config-conventional": "^18.4.4",
-    "@mxssfd/typedoc-theme": "^1.1.3",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "eslint": "^8.56.0",
@@ -39,6 +39,7 @@
     "prettier": "^3.2.4",
     "tsup": "^8.0.1",
     "typedoc": "^0.25.7",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "typedoc-material-theme": "^1.0.2"
   }
 }
