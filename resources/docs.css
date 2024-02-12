@@ -100,3 +100,9 @@ g[id="icon-64"] > path {
 }
 
 /* tsvdec override end */
+
+.custom-search-input {
+  width: 89%;
+  margin-inline: 0.5rem;
+  min-height: 1.5rem;
+}

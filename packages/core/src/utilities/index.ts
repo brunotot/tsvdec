@@ -3,3 +3,4 @@ export * as Classes from "./impl/Classes";
 export * from "./impl/Objects";
 export * from "./impl/Types";
 export * from "./misc/EventEmitter";
+export * as TypeChecker from "./misc/TypeChecker";

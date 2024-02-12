@@ -40,17 +40,6 @@ export namespace Objects {
   }>;
 
   /**
-   * A conditional type that checks if types `X` and `Y` are equal. It returns type `A` if they are equal, and type `B` if they are not.
-   *
-   * @typeParam X - The first type.
-   * @typeParam Y - The second type.
-   * @typeParam A - The type to return if `X` and `Y` are equal.
-   * @typeParam B - The type to return if `X` and `Y` are not equal.
-   */
-  export type IfEquals<X, Y, A = X, B = never> =
-    (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
-
-  /**
    * A type that excludes properties with values of type `TExclude` from `TParent`.
    *
    * @typeParam TParent - The parent type.
@@ -78,8 +67,18 @@ export namespace Objects {
   export type Values<T> = T[keyof T];
 
   /**
-   * A type that extracts input properties from an object type `T`.
+   * A conditional type that checks if types `X` and `Y` are equal. It returns type `A` if they are equal, and type `B` if they are not.
    *
+   * @typeParam X - The first type.
+   * @typeParam Y - The second type.
+   * @typeParam A - The type to return if `X` and `Y` are equal.
+   * @typeParam B - The type to return if `X` and `Y` are not equal.
+   */
+  export type IfEquals<X, Y, A = X, B = never> =
+    (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
+
+  /**
+   * A type that extracts input properties from an object type `T`.
    * @typeParam T - The object type.
    */
   export type Inputs<T> = {
@@ -254,29 +253,5 @@ export namespace Objects {
       }
       timeoutID = setTimeout(() => fn(...args), delay);
     };
-  }
-
-  export type FieldType = "date" | "array" | "string" | "number" | "boolean" | "object";
-
-  export function assertType(type: FieldType, value: any): void | never {
-    if (value == null) return;
-
-    if (type === "date") {
-      if (value instanceof Date) return;
-      throwTypeMismatchError(type, value);
-    }
-
-    if (type === "array") {
-      if (Array.isArray(value)) return;
-      throwTypeMismatchError(type, value);
-    }
-
-    if (typeof value === type) return;
-    throwTypeMismatchError(type, value);
-  }
-
-  // eslint-disable-next-line no-inner-declarations
-  function throwTypeMismatchError(type: FieldType, value: any): never {
-    throw new Error(`Type '${type}' is not assignable to type ${JSON.stringify(value)}`);
   }
 }

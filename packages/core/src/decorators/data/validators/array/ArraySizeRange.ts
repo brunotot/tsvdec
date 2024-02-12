@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link ArraySizeRange} validator. */
 function isArraySizeRangeValid(array: any[], min: number, max: number): boolean {
-  Objects.assertType("array", array);
+  TypeChecker.checkType("array", array);
   return (array ?? []).length >= min && (array ?? []).length <= max;
 }
 

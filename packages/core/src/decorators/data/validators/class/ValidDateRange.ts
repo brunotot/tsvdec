@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects, type Types } from "../../../../utilities";
+import { TypeChecker, type Types } from "../../../../utilities";
 
 /** Internal validation function for {@link ValidDateRange} validator. */
 function isValidDateRangeValid(value: any, startDateField: string, endDateField: string): boolean {
-  Objects.assertType("object", value);
+  TypeChecker.checkType("object", value);
   return value[startDateField].getTime() < value[endDateField].getTime();
 }
 

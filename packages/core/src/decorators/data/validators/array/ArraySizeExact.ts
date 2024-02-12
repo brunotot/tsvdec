@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link ArraySizeExact} validator. */
 function isArraySizeExactValid(array: any[]): boolean {
-  Objects.assertType("array", array);
+  TypeChecker.checkType("array", array);
   return (array ?? []).length === 0;
 }
 

@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link Integer} validator. */
 function isIntegerValid(num: Objects.Optional<number>): boolean {
-  Objects.assertType("number", num);
+  TypeChecker.checkType("number", num);
   return num !== undefined && num !== null && Number.isInteger(num);
 }
 

@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link ValueRange} validator. */
 function isValueRangeValid(num: Objects.Optional<number>, min: number, max: number): boolean {
-  Objects.assertType("number", num);
+  TypeChecker.checkType("number", num);
   return num == null ? true : num >= min && num <= max;
 }
 

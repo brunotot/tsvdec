@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link ValueMax} validator. */
 function isValueMaxValid(num: Objects.Optional<number>, max: number): boolean {
-  Objects.assertType("number", num);
+  TypeChecker.checkType("number", num);
   return num == null ? true : num <= max;
 }
 

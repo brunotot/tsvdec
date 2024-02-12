@@ -7,14 +7,14 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link ArrayOne} validator. */
 function isArrayOneValid<K, T extends K[]>(
   array: T,
   predicate: Objects.ArrayPredicate<K>,
 ): boolean {
-  Objects.assertType("array", array);
+  TypeChecker.checkType("array", array);
   return (array ?? []).filter(predicate).length === 1;
 }
 

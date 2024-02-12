@@ -1,3 +1,4 @@
+import { TypeChecker } from "../../../..";
 import { DecoratorKeys } from "../../../../decorators/data/validators/DecoratorKeys";
 import { createFieldValidator, type FieldDecorator } from "../../../../decorators/factory/forField";
 import {
@@ -7,11 +8,10 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
 
 /** Internal validation function for {@link ArrayContains} validator. */
 function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean {
-  Objects.assertType("array", value);
+  TypeChecker.checkType("array", value);
   return (value ?? []).includes(contains);
 }
 

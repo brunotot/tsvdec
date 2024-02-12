@@ -12,11 +12,11 @@ import {
   type DecoratorOptions,
 } from "../../../../../../decorators/helper";
 import { translate } from "../../../../../../localization/service/TranslationService";
-import { Objects } from "../../../../../../utilities";
+import { Objects, TypeChecker } from "../../../../../../utilities";
 
 /** Internal validation function for {@link Uppercase} validator. */
 function isUppercaseValid<T extends Objects.Optional<string>>(value: T): boolean {
-  Objects.assertType("string", value);
+  TypeChecker.checkType("string", value);
   return testRegex(RegexConst.UPPERCASE, value);
 }
 

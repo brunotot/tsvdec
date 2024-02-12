@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link FutureDate} validator. */
 function isFutureDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
-  Objects.assertType("date", date);
+  TypeChecker.checkType("date", date);
   return date && date.getTime() > new Date().getTime();
 }
 

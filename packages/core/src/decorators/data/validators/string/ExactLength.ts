@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link ExactLength} validator. */
 function isExactLengthValid(value: Objects.Optional<string>, exact: number): boolean {
-  Objects.assertType("string", value);
+  TypeChecker.checkType("string", value);
   return (value ?? "").length === exact;
 }
 

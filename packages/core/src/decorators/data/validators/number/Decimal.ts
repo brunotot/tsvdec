@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link Decimal} validator. */
 function isDecimalValid<T extends Objects.Optional<number>>(value: T): boolean {
-  Objects.assertType("number", value);
+  TypeChecker.checkType("number", value);
   return value !== undefined && value !== null && !Number.isInteger(value);
 }
 

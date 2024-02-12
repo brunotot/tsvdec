@@ -4,7 +4,7 @@ import {
   type MetaStrategy,
 } from "../../../reflection/service/AbstractMetaService";
 import { type AbstractValidationStrategyService } from "../../../strategy";
-import { StrategyData } from "../../../strategy/models/StrategyMapper";
+import { StrategyData, StrategyKey } from "../../../strategy/models/StrategyMapper";
 import * as Strategies from "../../../strategy/service/impl";
 import { Classes, type EventEmitter, type Types } from "../../../utilities";
 import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
@@ -107,7 +107,7 @@ export class ControlDescriptor<
    * 2. Checks if the field name is defined.
    * 3. Determines the strategy based on the field type and its metadata.
    */
-  public get strategy(): string {
+  public get strategy(): StrategyKey {
     if (!this.hostClass) {
       return "unknown";
     }

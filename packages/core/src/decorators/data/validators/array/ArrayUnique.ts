@@ -7,11 +7,11 @@ import {
   type DecoratorOptions,
 } from "../../../../decorators/helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { Objects } from "../../../../utilities";
+import { Objects, TypeChecker } from "../../../../utilities";
 
 /** Internal validation function for {@link ArrayUnique} validator. */
 function isArrayUniqueValid(array: any[]): boolean {
-  Objects.assertType("array", array);
+  TypeChecker.checkType("array", array);
   const hashFn = Objects.hash;
   function isArrayUnique<T>(arr: T[], equals: (a: T, b: T) => boolean): boolean {
     const set = new Set<T>();

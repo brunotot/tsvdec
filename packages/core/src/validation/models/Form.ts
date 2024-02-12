@@ -285,22 +285,6 @@ export class Form<TClass> {
       this.#eventEmitter,
     );
 
-    if (descriptor.strategy === "function") {
-      if (!this.#debounceMap[fieldName]) {
-        this.#debounceMap[fieldName] = Objects.debounce((value: any, context: any) => {
-          stratImpl.test(value, context, args);
-        }, this.#asyncDelay);
-      }
-
-      // @ts-expect-error Error!
-      this.#debounceMap[fieldName](payload[fieldName], payload, args);
-
-      return [
-        (this.#cache.get("detailedErrors") as any)?.[fieldName],
-        (this.#cache.get("errors") as any)?.[fieldName],
-      ] as getStrategyResult<TClass, K>;
-    }
-
     // @ts-expect-error Error!
     return stratImpl.test(payload[fieldName], payload, args);
   }
