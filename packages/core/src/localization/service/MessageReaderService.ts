@@ -11,14 +11,13 @@ import it from "../translations/it.json";
 import nl from "../translations/nl.json";
 
 /** All translation json files content in map, grouped by {@link Locale `Locale`}. */
-const MESSAGE_COLLECTION = { hr, de, en, es, fr, it, nl } as const;
+export const MessageCollection = { hr, de, en, es, fr, it, nl } as const;
 
 /**
  * Represents the union of all predefined validator decorator keys (and extras) which `@tsvdec/core` provides.
- * For example, {@link Decorators.Alpha @Alpha\(\)} decorator has a key defined as {@link Decorators.DecoratorKeys.ALPHA ALPHA}
- * (which is also available at the root import through {@link Decorators} module).
+ * For example, {@link Decorators.Alpha @Alpha\(\)} decorator has a key defined as {@link Decorators.DecoratorKeys.ALPHA ALPHA}.
  */
-export type MessageKey = keyof typeof en;
+export type MessageKey = keyof typeof MessageCollection.en;
 
 /**
  * Returns localized message by key, allowing `locale` to be optional (defaults to global `locale`).
@@ -29,7 +28,7 @@ export type MessageKey = keyof typeof en;
  */
 export function readMessage(messageKey: MessageKey, locale?: Locale | null): string {
   const computedLocale = locale ?? getGlobalLocale();
-  const computedLocaleMessages = MESSAGE_COLLECTION[computedLocale];
+  const computedLocaleMessages = MessageCollection[computedLocale];
   const decoratorMessage = computedLocaleMessages[messageKey];
   return decoratorMessage;
 }
