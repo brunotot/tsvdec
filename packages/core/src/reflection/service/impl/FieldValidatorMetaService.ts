@@ -3,7 +3,7 @@ import {
   AbstractMetaService,
   type MetaStrategy,
 } from "../../../reflection/service/AbstractMetaService";
-import { type AbstractValidationStrategyService } from "../../../strategy";
+import { type StrategyService } from "../../../strategy";
 import { StrategyData, StrategyKey } from "../../../strategy/models/StrategyMapper";
 import * as Strategies from "../../../strategy/service/impl";
 import { Classes, type EventEmitter, type Types } from "../../../utilities";
@@ -89,7 +89,7 @@ export class ControlDescriptor<
    * Gets the implementation of the reflection strategy.
    * @throws {Error} If the strategy is not implemented.
    */
-  public get StrategyImpl(): Types.Class<AbstractValidationStrategyService> {
+  public get StrategyImpl(): Types.Class<StrategyService.AbstractValidationStrategyService> {
     const strategy = this.strategy;
     if (!(strategy in StrategyData)) {
       const error = `Validation strategy not implemented for field type '${strategy}'`;

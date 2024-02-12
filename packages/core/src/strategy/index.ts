@@ -1,2 +1,2 @@
 export * from "./models";
-export * from "./service";
+export * as StrategyService from "./service";

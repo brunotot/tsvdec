@@ -3,7 +3,7 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { type PrimitiveGetterStrategy } from "../../strategy";
+import { type StrategyService } from "../../strategy";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { type PrimitiveTypeOverride } from "../../overrides";
 import { type Objects } from "../../utilities/impl/Objects";
@@ -66,7 +66,7 @@ export type isFunction<TValue> = NonNullable<TValue> extends Types.FunctionType 
  * type T1 = Booleans.isGetter<{ get a(): 1 }, "a">; // true
  * type T2 = Booleans.isGetter<{ a: 1 }, "a">; // false
  * ```
- * @see {@link PrimitiveGetterStrategy.matches} - When checking if a field is a primitive getter, notice how the `isGetter` utility is used.
+ * @see {@link StrategyService.PrimitiveGetterStrategy.matches} - When checking if a field is a primitive getter, notice how the `isGetter` utility is used.
  */
 export type isGetter<TObj, TKey extends keyof TObj> =
   TKey extends Objects.Inputs<TObj> ? false : true;

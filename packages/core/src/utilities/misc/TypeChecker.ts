@@ -14,7 +14,7 @@ import { TypePredicateData, TypePredicateKey } from "../../overrides/TypePredica
 export type TypePredicate<T = any> = (value: any) => value is T;
 
 /** @see {@link TypePredicateData} */
-export const typePredicateData: TypePredicateData = {
+const TYPE_PREDICATE_DATA: TypePredicateData = {
   /** @see {@link TypePredicateData.date} */
   date: (value: any): value is Date => value instanceof Date,
   /** @see {@link TypePredicateData.array} */
@@ -30,16 +30,24 @@ export const typePredicateData: TypePredicateData = {
 };
 
 /**
+ * Retrieves the type predicate map.
+ * @returns The type predicate map.
+ */
+export function getTypePredicates(): TypePredicateData {
+  return TYPE_PREDICATE_DATA;
+}
+
+/**
  * Registers a type predicate.
  * @typeParam TName - type predicate key (includes commons and overrides)
  * @param type - The name of the type.
  * @param predicate - The type predicate function.
  */
-export function registerTypePredicate<TName extends TypePredicateKey>(
+export function setTypePredicate<TName extends TypePredicateKey>(
   type: TName,
   predicate: TypePredicate,
 ): void {
-  typePredicateData[type] = predicate;
+  TYPE_PREDICATE_DATA[type] = predicate;
 }
 
 /**
@@ -50,7 +58,7 @@ export function registerTypePredicate<TName extends TypePredicateKey>(
  */
 export function checkType(type: TypePredicateKey, value: any): void | never {
   if (value == null) return;
-  if (typePredicateData[type](value)) return;
+  if (TYPE_PREDICATE_DATA[type](value)) return;
   handleMismatch(type, value);
 }
 

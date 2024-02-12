@@ -6,5 +6,5 @@
   "includeVersion": false,
   "excludeInternal": true,
   "themeColor": "#8787f5",
-  "plugin": ["typedoc-material-theme"]
+  "plugin": ["typedoc-material-theme", "typedoc-plugin-remove-references"]
 }

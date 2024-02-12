@@ -12,7 +12,6 @@ import type { FormConfig, ValidationResult } from "../../validation/types";
 
 /**
  * The `AbstractValidationStrategyService` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
- *
  * @typeParam TClass The type of the field being validated.
  * @typeParam TDetailedResult The detailed result of the validation.
  * @typeParam TSimpleResult A simplified version of the validation result.
