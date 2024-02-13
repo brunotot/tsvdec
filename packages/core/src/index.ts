@@ -6,6 +6,7 @@ import * as LocalizationResolver from "./localization/resolver";
 import * as TypeChecker from "./utilities/misc/TypeChecker";
 
 export * from "./decorators";
+export * from "./events";
 export * from "./localization";
 export * from "./overrides";
 export * from "./reflection";
@@ -26,6 +27,7 @@ export namespace Configuration {
 }
 
 export * as Decorators from "./decorators";
+export * as Events from "./events";
 export * as Localization from "./localization";
 export * as Overrides from "./overrides";
 export * as Reflection from "./reflection";

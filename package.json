@@ -38,7 +38,7 @@
     "lint-staged": "^15.2.0",
     "prettier": "^3.2.4",
     "tsup": "^8.0.1",
-    "typedoc": "^0.25.7",
+    "typedoc": "^0.25.8",
     "typedoc-material-theme": "^1.0.2",
     "typedoc-plugin-remove-references": "^0.0.6",
     "typescript": "^5.3.3"

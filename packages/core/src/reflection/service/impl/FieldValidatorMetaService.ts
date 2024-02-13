@@ -1,4 +1,5 @@
 import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "../../../decorators";
+import { EventEmitter } from "../../../events";
 import {
   AbstractMetaService,
   type MetaStrategy,
@@ -6,7 +7,7 @@ import {
 import { type StrategyService } from "../../../strategy";
 import { StrategyData, StrategyKey } from "../../../strategy/models/StrategyMapper";
 import * as Strategies from "../../../strategy/service/impl";
-import { Classes, type EventEmitter, type Types } from "../../../utilities";
+import { Classes, type Types } from "../../../utilities";
 import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
 import type { ValidationEvaluator } from "../../../validation/types";
 

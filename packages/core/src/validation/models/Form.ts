@@ -1,23 +1,24 @@
+import { type DecoratorArgs } from "../../decorators";
+import { EventEmitter } from "../../events";
+import { EventHandlers, getRegisteredEventHandlers } from "../../events/handlers/impl/register";
 import { getGlobalLocale, type Locale } from "../../localization";
 import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
 import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
 import {
   type DetailedErrorsResponse,
-  type getStrategyResult,
   type SimpleErrorsResponse,
+  type getStrategyResult,
 } from "../../strategy";
-import { EventEmitter, Objects, type Types } from "../../utilities";
+import { Objects, type Types } from "../../utilities";
 import { Cache } from "../../validation/models/Cache";
-import { Events } from "../../validation/models/Events";
 import { ValidationMetadata } from "../../validation/models/ValidationMetadata";
 import type {
-  AsyncEventHandler,
-  AsyncEventHandlerProps,
   AsyncEventResponseProps,
   FormConfig,
   FormValidateResponse,
   ValidationResult,
 } from "../../validation/types";
+
 /**
  * Checks if an error object has errors.
  * @typeParam T - The type of the errors.
@@ -81,32 +82,28 @@ export function toClass<const TClass extends Types.Class<any>>(
 
 /**
  * A class responsible for processing and validating class instances through its decorated validators.
- *
  * @typeParam TClass - The type of the class being processed.
  * @typeParam TBody - The type of the payload body. Defaults to `TClass`.
- *
- * @remarks
- * This class uses a `CacheMap` to store validation results for better performance.
- * It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
+ * @remarks This class uses `Cache` class to store validation results for better performance. It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
 export class Form<TClass> {
-  __id: string;
-  locale: Locale;
-  #eventListener?: AsyncEventHandler<TClass>;
-  readonly #eventEmitter: EventEmitter;
-  readonly #fieldValidatorMetaService: FieldValidatorMetaService;
   // @ts-expect-error Error!
   readonly #classValidatorMetaService: ClassValidatorMetaService<TClass>;
+  readonly #fieldValidatorMetaService: FieldValidatorMetaService;
   readonly #groups: string[];
   readonly #defaultValue: Objects.Payload<TClass>;
-  readonly #cache: Cache<FormValidateResponse<TClass>>;
+  readonly #cache: Cache<FormValidateResponse<TClass>, Objects.Payload<TClass>>;
   readonly #hostClass: Types.Class<TClass>;
-  readonly #asyncDelay: number;
-  readonly #debounceMap: {
-    [key in keyof TClass]: ReturnType<typeof Objects.debounce>;
-  } = {} as any;
+  /** @hidden */
+  readonly #eventHandlers: EventHandlers<TClass>;
+  readonly #eventEmitter: EventEmitter;
+  locale: Locale;
 
   // TODO!!! - DecoratorMeta!!!
+
+  public get cache() {
+    return this.#cache;
+  }
 
   /**
    * Gets the default host value.
@@ -117,58 +114,67 @@ export class Form<TClass> {
 
   /**
    * Constructs a new `ValidationEngine` instance.
-   *
    * @param clazz - The class type to be processed.
    * @param config - Optional configuration settings.
    */
   constructor(clazz: Types.Class<TClass>, config?: FormConfig<TClass>) {
-    this.#asyncDelay = config?.asyncDelay ?? 500;
-    this.__id = Math.random().toString(36).substring(2, 8);
-    this.#eventEmitter = new EventEmitter(this.__id, this.#asyncDelay);
+    this.#eventHandlers = getRegisteredEventHandlers<TClass>(this, config?.asyncDelay ?? 500);
+    this.#eventEmitter = this.#eventHandlers.asyncValidationComplete.emitter;
     this.#hostClass = clazz;
     this.locale = config?.locale ?? getGlobalLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#defaultValue = config?.defaultValue ?? (toClass(clazz) as Objects.Payload<TClass>);
     this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz, this.#eventEmitter);
     this.#classValidatorMetaService = ClassValidatorMetaService.inject(clazz, this.#eventEmitter);
-    this.#cache = new Cache(state => this.validate.bind(this)(state));
+    this.#cache = new Cache((state: Objects.Payload<TClass>, args: DecoratorArgs) =>
+      this.validate.bind(this)(state, args),
+    );
   }
 
   /**
    * Checks if the given payload is valid.
-   *
    * @param payload - The payload to validate.
-   *
    * @returns `true` if valid, `false` otherwise.
    */
-  public isValid(payload: Objects.Payload<TClass>): boolean {
-    return this.#cache.get("valid", payload);
+  public isValid(payload: Objects.Payload<TClass>, args: DecoratorArgs = {}): boolean {
+    return this.#cache.get("valid", payload, args);
   }
 
   /**
    * Retrieves detailed error messages for the given payload.
-   *
    * @param payload - The payload to validate.
-   *
    * @returns An object containing detailed error messages.
    */
-  public getDetailedErrors(payload?: Objects.Payload<TClass>): DetailedErrorsResponse<TClass> {
-    return this.#cache.get("detailedErrors", payload);
+  public getDetailedErrors(
+    payload?: Objects.Payload<TClass>,
+    args: DecoratorArgs = {},
+  ): DetailedErrorsResponse<TClass> {
+    return this.#cache.get("detailedErrors", payload, args);
   }
 
   /**
    * Retrieves error messages for the given payload.
-   *
    * @param payload - The payload to validate.
-   *
    * @returns An object containing error messages.
    */
-  public getErrors(payload?: Objects.Payload<TClass>): SimpleErrorsResponse<TClass> {
-    return this.#cache.get("errors", payload);
+  public getErrors(
+    payload?: Objects.Payload<TClass>,
+    args: DecoratorArgs = {},
+  ): SimpleErrorsResponse<TClass> {
+    return this.#cache.get("errors", payload, args);
   }
 
-  public getGlobalErrors(payload?: Objects.Payload<TClass>): ValidationResult[] {
-    return this.#cache.get("globalErrors", payload);
+  /**
+   * Retrieves the global errors for the form.
+   * @param payload - The payload object.
+   * @param args - The decorator arguments.
+   * @returns An array of ValidationResult objects representing the global errors.
+   */
+  public getGlobalErrors(
+    payload?: Objects.Payload<TClass>,
+    args: DecoratorArgs = {},
+  ): ValidationResult[] {
+    return this.#cache.get("globalErrors", payload, args);
   }
 
   /**
@@ -241,31 +247,10 @@ export class Form<TClass> {
   }
 
   /**
-   * Registers an event listener for the specified event.
-   * @param event - The name of the event to listen for.
-   * @param handler - The event handler function.
-   */
-  public listen(event: string, handler: (this: Form<TClass>) => void): void {
-    this.#eventEmitter.on(event, handler);
-  }
-
-  /**
-   * Emits an event with optional data.
-   * @param event - The name of the event to emit.
-   * @param data - Optional data to pass along with the event.
-   */
-  public emit(event: string, data?: any): void {
-    this.#eventEmitter.emit(event, data);
-  }
-
-  /**
    * Validates a single field within the entity.
-   *
    * @typeParam K - The key type of the field.
-   *
    * @param payload - The payload containing the field value.
    * @param fieldName - The name of the field to validate.
-   *
    * @returns An array containing the detailed error message and the error message.
    */
   validateField<K extends keyof TClass>(
@@ -290,60 +275,10 @@ export class Form<TClass> {
   }
 
   public registerAsync(handler: (props: AsyncEventResponseProps<TClass>) => void): void {
-    this.unregisterAsync();
-    this.#eventListener = ({ key, value }: AsyncEventHandlerProps<TClass>) => {
-      const { valid } = value;
-      const currentErrors: any = this.#cache.get("errors");
-      const currentDetailedErrors: any = this.#cache.get("detailedErrors");
-      let currentGlobalErrors: any = this.#cache.get("globalErrors");
-
-      if (key) {
-        let simpleResults = currentErrors[key] as string[];
-        let detailedResults = currentDetailedErrors[key] as ValidationResult[];
-
-        if (valid) {
-          detailedResults = detailedResults.filter(r => r.key !== value.key);
-          simpleResults = simpleResults.filter(r => r !== value.message);
-        } else {
-          const existing = detailedResults.find(r => r.key === value.key);
-          if (!existing) {
-            detailedResults = [...detailedResults, value];
-            simpleResults = [...simpleResults, value.message];
-          }
-        }
-
-        currentErrors[key] = simpleResults;
-        currentDetailedErrors[key] = detailedResults;
-      } else {
-        if (valid) {
-          currentGlobalErrors = currentGlobalErrors.filter((r: any) => r.key !== value.key);
-        } else {
-          const existing = currentGlobalErrors.find((r: any) => r.key === value.key);
-          if (!existing) {
-            currentGlobalErrors = [...currentGlobalErrors, value];
-          }
-        }
-      }
-
-      const patched = this.#cache.patch({
-        valid,
-        detailedErrors: { ...currentDetailedErrors },
-        errors: { ...currentErrors },
-        globalErrors: [...currentGlobalErrors] as any,
-      });
-
-      handler({
-        errors: patched.errors,
-        detailedErrors: patched.detailedErrors,
-        globalErrors: patched.globalErrors,
-      });
-    };
-    this.#eventEmitter.on(Events.ASYNC_VALIDATION_COMPLETE, this.#eventListener);
+    this.#eventHandlers.asyncValidationComplete.listen(handler);
   }
 
   public unregisterAsync(): void {
-    if (this.#eventListener != null) {
-      this.#eventEmitter.off(Events.ASYNC_VALIDATION_COMPLETE, this.#eventListener);
-    }
+    this.#eventHandlers.asyncValidationComplete.dispose();
   }
 }

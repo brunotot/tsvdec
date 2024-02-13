@@ -1,6 +1,6 @@
+import { EventEmitter, EventMap } from "../../events";
 import { type Locale } from "../../localization";
-import { type EventEmitter, type Objects } from "../../utilities";
-import { Events } from "../../validation/models/Events";
+import { type Objects } from "../../utilities";
 import type { ValidationMetadataEntry, ValidationResult } from "../../validation/types";
 
 /**
@@ -76,7 +76,7 @@ export class ValidationMetadata<TFieldType> {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     Promise.all(asyncResults).then(results => {
       results.forEach(value => {
-        emitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
+        emitter.emit(EventMap.ASYNC_VALIDATION_COMPLETE, {
           key: field,
           value,
         });

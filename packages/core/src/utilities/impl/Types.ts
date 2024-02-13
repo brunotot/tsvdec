@@ -2,6 +2,8 @@ import * as Overrides from "../../overrides";
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Types {
+  export type Object = Record<string | number | symbol, any>;
+
   export type DeepPartial<T> = T extends object
     ? {
         [P in keyof T]?: DeepPartial<T[P]>;

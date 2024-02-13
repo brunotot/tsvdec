@@ -9,21 +9,16 @@
  * ```
  */
 export class EventEmitter {
-  #id: string;
-  #asyncDelay: number;
-  public static EMPTY = new EventEmitter("EMPTY");
+  public static EMPTY = new EventEmitter();
+
+  #delay: number;
   private readonly events: Map<string, Array<(data?: any) => void>>;
   private readonly handlersTimeout: Map<string, number>;
 
-  get id() {
-    return this.#id;
-  }
-
-  constructor(id: string = "", asyncDelay: number = 500) {
+  constructor(delay: number = 500) {
     this.events = new Map();
     this.handlersTimeout = new Map();
-    this.#id = id;
-    this.#asyncDelay = asyncDelay;
+    this.#delay = delay;
   }
 
   emit(event: string, data?: any): void {
@@ -37,7 +32,7 @@ export class EventEmitter {
         }
         const timeout = setTimeout(() => {
           handler(data);
-        }, this.#asyncDelay);
+        }, this.#delay);
         this.handlersTimeout.set(handlerKey, timeout as any);
       });
     }

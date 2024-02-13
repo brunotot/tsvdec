@@ -1,90 +1,85 @@
-import { Objects } from "../../utilities";
+import { Objects, Types } from "../../utilities";
 
 /**
  * A generic caching utility class used by `ValidationEngine`.
- *
  * @typeParam CacheValue - The type of the cache object.
  * @typeParam Payload - The type of the payload object.
- *
- * @remarks
- * This class provides methods to get and patch cached values based on a payload.
+ * @remarks This class provides methods to get and patch cached values based on a payload.
  */
-export class Cache<CacheValue extends object & {}, Payload = any> {
-  #cache: CacheValue;
-  #payload: Payload;
-  #changeFn: (state: Payload) => CacheValue;
+export class Cache<TCache extends Types.Object, TPayload extends Types.Object> {
+  #metadata: Types.Object;
+  #cache: TCache;
+  #payload: TPayload;
+  #refresh: (payload: TPayload, metadata: Types.Object) => TCache;
 
-  get cache() {
-    return this.#cache;
-  }
-
-  get payload() {
-    return this.#payload;
+  /**
+   * Constructs a new `Cache` instance.
+   * @param refresh - Callback which evaluates new cache value based on the given payload.
+   */
+  constructor(refresh: (payload: TPayload, metadata: Types.Object) => TCache) {
+    this.#metadata = {};
+    this.#cache = {} as TCache;
+    this.#payload = {} as TPayload;
+    this.#refresh = refresh;
   }
 
   /**
-   * Constructs a new `CacheMap` instance.
-   *
-   * @param changeFn - A function that takes a payload and returns a new cache value.
-   * @param initialValue - An optional initial value for the cache.
+   * Sets a value in the cache for the specified cache key.
+   * @typeParam CacheKey - The type of the cache key.
+   * @param {CacheKey} cacheKey - The cache key.
+   * @param {TCache[CacheKey]} value - The value to set in the cache.
    */
-  constructor(changeFn: (state: Payload) => CacheValue, initialValue?: CacheValue) {
-    this.#cache = initialValue ?? ({} as CacheValue);
-    this.#payload = {} as Payload;
-    this.#changeFn = changeFn;
+  set<CacheKey extends keyof TCache>(cacheKey: CacheKey, value: TCache[CacheKey]): void {
+    this.#cache[cacheKey] = value;
   }
 
   /**
    * Retrieves a value from the cache.
-   *
    * @typeParam CacheKey - The key type of the cache value.
-   *
-   * @param cacheKey - The key to retrieve the value for.
+   * @param key - The key to retrieve the value for.
    * @param payload - An optional payload to use for cache retrieval.
-   *
    * @returns The cached value for the given key.
    */
-  // prettier-ignore
-  get<CacheKey extends keyof CacheValue>(cacheKey: CacheKey, payload?: Payload): CacheValue[CacheKey] {
-    return payload !== undefined
-      ? this.#fromCache(payload, cacheKey)
-      : this.#cache[cacheKey];
+  get<CacheKey extends keyof TCache>(
+    key: CacheKey,
+    payload?: TPayload,
+    metadata?: Types.Object,
+  ): TCache[CacheKey] {
+    const isPayloadUndefined = payload !== undefined;
+    if (isPayloadUndefined) return this.#refreshAndGet(key, payload, metadata);
+    return this.#cache[key];
   }
 
   /**
    * Patches the cache with new values.
-   *
    * @param partialCache - An object containing the new cache values.
-   * @param _payload - The payload to use for this patch operation.
-   *
+   * @param payload - The payload to use for this patch operation.
+   * @param metadata - Metadata.
    * @returns The updated cache object.
    */
-  patch(partialCache: Partial<CacheValue>, _payload?: Payload): CacheValue {
-    const payload = _payload ?? this.#payload;
-    this.#payload = payload;
-    Object.entries(partialCache).forEach(([key, value]) => ((this.#cache as any)[key] = value));
+  patch(partialCache: Partial<TCache>, payload?: TPayload, metadata?: Types.Object): TCache {
+    this.#payload = payload ?? this.#payload;
+    this.#metadata = metadata ?? this.#metadata;
+    const entries = Object.entries(partialCache);
+    entries.forEach(([key, value]) => this.set(key, value));
     return this.#cache;
   }
 
   /**
    * Internal method to retrieve a value from the cache based on a payload.
-   *
    * @typeParam CacheKey - The key type of the cache value.
-   *
    * @param payload - The payload to use for cache retrieval.
-   * @param cacheKey - The key to retrieve the value for.
-   *
+   * @param key - The key to retrieve the value for.
    * @returns The cached value for the given key.
-   *
-   * @private
    */
-  #fromCache<CacheKey extends keyof CacheValue>(
-    payload: Payload,
-    cacheKey: CacheKey,
-  ): CacheValue[CacheKey] {
-    const cacheValue: CacheValue[CacheKey] = this.#cache[cacheKey];
-    return cacheValue !== undefined && Objects.deepEquals(this.#payload, payload)
-      ? cacheValue
-      : this.#changeFn(payload)[cacheKey];
+  #refreshAndGet<CacheKey extends keyof TCache>(
+    key: CacheKey,
+    payload: TPayload,
+    metadata: Types.Object = {},
+  ): TCache[CacheKey] {
+    const value: TCache[CacheKey] = this.#cache[key];
+    const useCache = value !== undefined && Objects.deepEquals(this.#payload, payload);
+    if (useCache) return value;
+    return this.#refresh(payload, metadata)[key];
   }
 }

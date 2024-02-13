@@ -3,11 +3,12 @@ import {
   type DecoratorMeta,
   type DecoratorValidateIf,
 } from "../../../decorators";
+import { EventEmitter } from "../../../events";
 import {
   AbstractMetaService,
   type MetaStrategy,
 } from "../../../reflection/service/AbstractMetaService";
-import { type EventEmitter, type Types } from "../../../utilities";
+import { type Types } from "../../../utilities";
 import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
 import type { ValidationEvaluator } from "../../../validation/types";
 

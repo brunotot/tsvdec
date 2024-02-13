@@ -1,11 +1,11 @@
 import { type DecoratorArgs } from "../../decorators";
+import { type EventEmitter } from "../../events";
 import { type Locale } from "../../localization";
 import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
 import {
   FieldValidatorMetaService,
   type ControlDescriptor,
 } from "../../reflection/service/impl/FieldValidatorMetaService";
-import { type EventEmitter } from "../../utilities";
 import { Form } from "../../validation/models/Form";
 import { type ValidationMetadata } from "../../validation/models/ValidationMetadata";
 import type { FormConfig, ValidationResult } from "../../validation/types";
