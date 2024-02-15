@@ -21,6 +21,8 @@ function isArraySomeValid<K, T extends K[]>(
 /**
  * Checks if at least one element of decorated array satisfies the given predicate criteria.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_SOME}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

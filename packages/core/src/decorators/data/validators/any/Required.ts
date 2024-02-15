@@ -28,6 +28,8 @@ function isRequiredValid<T>(value: T | undefined): boolean {
 /**
  * Creates a validator decorator which requires that a value must be present.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.REQUIRED}
  * @typeParam T - The type of the decorated property (any class field).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

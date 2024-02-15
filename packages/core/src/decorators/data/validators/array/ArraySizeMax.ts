@@ -18,6 +18,8 @@ function isArraySizeMaxValid(array: any[], max: number): boolean {
 /**
  * Checks if the decorated array contains up to `max` number of elements.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_SIZE_MAX}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

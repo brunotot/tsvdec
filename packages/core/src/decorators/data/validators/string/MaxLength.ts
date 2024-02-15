@@ -18,6 +18,8 @@ function isMaxLengthValid(value: Objects.Optional<string>, max: number): boolean
 /**
  * Checks if decorated string contains a specific number of characters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.MAX_LENGTH}
  * @typeParam T - The type of the string property.
  * @param max - Maximum length value.

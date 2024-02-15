@@ -31,6 +31,8 @@ function isArrayUniqueValid(array: any[]): boolean {
 /**
  * Checks if all elements in decorated array are unique.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_UNIQUE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

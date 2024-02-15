@@ -21,6 +21,8 @@ function isArrayNoneValid<K, T extends K[]>(
 /**
  * Checks if no elements of decorated array satisfy the given predicate criteria.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_NONE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

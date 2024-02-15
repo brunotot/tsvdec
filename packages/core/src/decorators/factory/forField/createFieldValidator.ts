@@ -4,7 +4,7 @@ import { createFieldDecorator, type FieldDecorator } from "./createFieldDecorato
 
 /**
  * Creates validation decorators for fields.
- *
+ * [@Decorator]
  * @typeParam T - The type of the value being validated.
  * @param validate - The callback that defines the validation logic.
  * @param decoratorMeta - Decorator meta.

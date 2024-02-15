@@ -5,6 +5,7 @@ import { createClassDecorator, type ClassDecorator } from "./createClassDecorato
 
 /**
  * Creates validation decorators for classes.
+ * [@Decorator]
  * @typeParam T - The type of class being validated.
  * @param validate - The callback that defines the validation logic.
  * @param decoratorMeta - Decorator meta.

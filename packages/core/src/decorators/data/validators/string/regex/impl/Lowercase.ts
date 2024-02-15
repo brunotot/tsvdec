@@ -23,6 +23,8 @@ function isLowercaseValid<T extends Objects.Optional<string>>(value: T): boolean
 /**
  * Checks if decorated string contains only lowercase characters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.LOWERCASE}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

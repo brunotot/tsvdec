@@ -23,6 +23,8 @@ function isURLValid<T extends Objects.Optional<string>>(value: T): boolean {
 /**
  * Checks if decorated string is a valid URL.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.URL}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

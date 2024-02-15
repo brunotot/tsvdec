@@ -24,6 +24,8 @@ function isTodayDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 /**
  * Checks if a {@link Date} is the today's date based on year, month and day.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.TODAY_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

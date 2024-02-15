@@ -23,6 +23,8 @@ function isEmailValid<T extends Objects.Optional<string>>(value: T): boolean {
 /**
  * Checks if decorated string is a valid email.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.EMAIL}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

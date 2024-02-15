@@ -40,6 +40,7 @@
     "tsup": "^8.0.1",
     "typedoc": "^0.25.8",
     "typedoc-material-theme": "^1.0.2",
+    "typedoc-plugin-custom-tags": "^1.0.2",
     "typedoc-plugin-remove-references": "^0.0.6",
     "typescript": "^5.3.3"
   }

@@ -24,7 +24,7 @@
  * class Consumer {
  *   // "message" prop is now of type: keyof typeof Messages
  *   // and will throw a type error if the key is not found in Messages
- *   \@Decorators.Required({ message: "key1" })
+ *   \@Required({ message: "key1" })
  *   field!: string;
  * }
  *

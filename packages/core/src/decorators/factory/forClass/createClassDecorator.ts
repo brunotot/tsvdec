@@ -40,7 +40,7 @@ export type ClassDecoratorCtx<T extends Types.Class> = ClassDecoratorContext<T>;
 
 /**
  * Creates a new class decorator function using the provided supplier.
- *
+ * [@Decorator]
  * @typeParam T - The type of the class being decorated.
  * @param supplier - A callback that defines the basic class decorator behavior and returns the modified class.
  * @returns A basic class decorator factory.

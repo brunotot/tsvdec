@@ -63,11 +63,13 @@ function getCurrentQuery() {
   return query;
 }
 
-function onDocumentLoad() {
-  generateCustomSearchInput();
-  render(getCurrentQuery());
+function overrideTitle() {
+  return;
+  // generateCustomSearchInput();
+  // render(getCurrentQuery());
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function generateCustomSearchInput() {
   const mainLink = document.querySelector(".site-menu > nav > a");
   const customSearchInput = document.createElement("input");
@@ -79,6 +81,89 @@ function generateCustomSearchInput() {
   mainLink.replaceWith(customSearchInput);
 }
 
+async function fetchUrlsAndMapResponses(hrefs) {
+  const fetchPromises = hrefs.map(async href => {
+    try {
+      const response = await fetch(href);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok for ${href}`);
+      }
+      const text = await response.text();
+      return { href, text };
+    } catch (error) {
+      console.error("Failed to fetch content:", error);
+      return { href, text: null }; // Handle errors gracefully
+    }
+  });
+
+  const results = await Promise.all(fetchPromises);
+  const mappedResults = results.reduce((acc, { href, text }) => {
+    acc[href] = text;
+    return acc;
+  }, {});
+
+  return mappedResults;
+}
+
+function getNavData() {
+  const svgLinks = document.querySelectorAll(`a > svg[class="tsd-kind-icon"]`);
+  return [...svgLinks].map(svg => ({
+    href: svg.parentElement.href,
+    a: svg.parentElement,
+  }));
+}
+
+async function overrideCustomTags() {
+  const navData = getNavData();
+  const result = await fetchUrlsAndMapResponses(navData.map(({ href }) => href));
+  CUSTOM_TAGS.forEach(tag => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const template =
+      /*html*/
+      `<div 
+        class="tsd-kind-icon" 
+        style="
+          aspect-ratio: 1;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.8em;
+          color: ${tag.color};
+          background-color: ${tag.backgroundColor};
+          ${tag.outline ? `outline: ${tag.outline}` : ""};
+        "
+      >
+        ${tag.letter}
+      </div>`;
+
+    navData.forEach(({ href, a }) => {
+      const doReplace = result[href].includes(`[@${tag.name}]`);
+      if (doReplace) {
+        const div = document.createElement("div");
+        div.innerHTML = template;
+        a.replaceChild(div, a.childNodes[0]);
+      }
+    });
+  });
+}
+
+const CUSTOM_TAGS = [
+  {
+    name: "Validator",
+    color: "#414040",
+    backgroundColor: "#ffcb3d",
+    letter: "@",
+  },
+  {
+    name: "Decorator",
+    color: "#414040",
+    backgroundColor: "#7fffc9",
+    letter: "@",
+  },
+];
+
 window.onload = function () {
-  onDocumentLoad();
+  overrideTitle();
+  overrideCustomTags();
 };

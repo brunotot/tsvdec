@@ -18,6 +18,8 @@ function isFutureDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 /**
  * Checks if a {@link Date} is in the future.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.FUTURE_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

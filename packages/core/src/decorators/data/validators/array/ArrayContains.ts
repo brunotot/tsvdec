@@ -18,6 +18,8 @@ function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean 
 /**
  * Checks if the decorated array contains a specific value.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_CONTAINS}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

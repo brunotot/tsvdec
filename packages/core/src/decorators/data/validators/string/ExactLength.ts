@@ -18,6 +18,8 @@ function isExactLengthValid(value: Objects.Optional<string>, exact: number): boo
 /**
  * Checks if decorated string contains a specific number of characters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.EXACT_LENGTH}
  * @typeParam T - The type of the string property.
  * @param exact - Exact length value.

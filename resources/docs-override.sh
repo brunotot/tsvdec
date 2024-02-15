@@ -7,7 +7,7 @@ base_dir="docs/"
 echo '' >> "$base_dir/assets/style.css" && cat resources/docs.css >> "$base_dir/assets/style.css"
 
 # Uncomment to disable JS override script
-exit 0
+#exit 0
 
 # Copy JS override file to docs/assets/docs.js
 cp resources/docs.js "$base_dir/assets/docs.js"

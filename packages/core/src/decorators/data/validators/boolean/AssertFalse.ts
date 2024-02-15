@@ -18,6 +18,8 @@ function isAssertFalseValid(value: boolean): boolean {
 /**
  * Checks if a boolean value is `false`.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ASSERT_FALSE}
  * @typeParam T - The type of the decorated property (boolean).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

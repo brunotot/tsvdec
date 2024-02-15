@@ -46,6 +46,7 @@ export type FieldDecoratorCtx<This, Value> = Readonly<{
 
 /**
  * Creates a new field decorator function using the provided supplier.
+ * [@Decorator]
  * @typeParam T - The type of the field being decorated.
  * @param supplier - A callback that defines the basic field decorator behavior.
  * @returns A basic field decorator factory.

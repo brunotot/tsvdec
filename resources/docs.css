@@ -106,3 +106,7 @@ g[id="icon-64"] > path {
   margin-inline: 0.5rem;
   min-height: 1.5rem;
 }
+
+.site-menu {
+  scrollbar-gutter: stable;
+}

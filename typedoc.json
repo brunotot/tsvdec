@@ -1,7 +1,7 @@
 {
   "extends": ["./typedoc.base.json"],
   "entryPoints": ["packages/*"],
-  "name": "🚀 Typescript form validation using Decorators 🚀",
+  "name": "🚀 Declarative model validation streamlined with TypeScript v5 decorators (final proposal)",
   "entryPointStrategy": "packages",
   "includeVersion": false,
   "excludeInternal": true,

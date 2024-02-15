@@ -9,6 +9,8 @@ import { type Objects, type Types } from "../../../utilities";
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
  *
+ * [@Decorator]
+ *
  * If a field which is being decorated is not a {@link Types.PrimitiveType primitive}
  * (`string`, `number`, `boolean`, `bigint`, `Date`) and isn't marked as a primitive in {@link PrimitiveTypeOverride overrides} interface
  * then the framework treats it as a custom, client-defined validable class. That having in mind, you will always want to apply `@attribute`

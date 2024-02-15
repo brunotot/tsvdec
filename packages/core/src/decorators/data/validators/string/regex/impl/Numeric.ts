@@ -23,6 +23,8 @@ function isNumericValid<T extends Objects.Optional<string>>(value: T): boolean {
 /**
  * Checks if decorated string contains only numeric characters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.NUMERIC}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

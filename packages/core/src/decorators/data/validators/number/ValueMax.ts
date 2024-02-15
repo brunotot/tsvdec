@@ -18,6 +18,8 @@ function isValueMaxValid(num: Objects.Optional<number>, max: number): boolean {
 /**
  * Checks if decorated number is not greater than given `max` parameter.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.VALUE_MAX}
  * @typeParam T - The type of the number property.
  * @param max - Maximum allowed value.

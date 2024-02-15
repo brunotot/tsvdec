@@ -10,6 +10,8 @@ import {
 } from "../../../../../decorators/helper";
 import { translate } from "../../../../../localization/service/TranslationService";
 import { type Objects } from "../../../../../utilities";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { DecoratorKeys } from "../../DecoratorKeys";
 
 /**
  * Tests if a value matches a regular expression pattern.
@@ -25,6 +27,10 @@ export function testRegex<T extends Objects.Optional<string>>(regex: RegExp, val
 
 /**
  * Creates a validator decorator that checks if a string value matches a regular expression pattern.
+ *
+ * [@Validator]
+ *
+ * @key {@link DecoratorKeys.PATTERN}
  * @typeparam T - The type of the decorated property (optional string).
  * @param regex The regular expression pattern to match against the value.
  * @param options - The decorator options.

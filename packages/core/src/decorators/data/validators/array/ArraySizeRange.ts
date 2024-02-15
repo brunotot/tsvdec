@@ -18,6 +18,8 @@ function isArraySizeRangeValid(array: any[], min: number, max: number): boolean 
 /**
  * Checks if the decorated array contains at least `min` number of elements.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_SIZE_RANGE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

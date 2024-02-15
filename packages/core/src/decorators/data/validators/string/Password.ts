@@ -86,6 +86,8 @@ function isPasswordValid(
 /**
  * Checks if decorated string contains a specific number of characters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.PASSWORD}
  * @typeParam T - The type of the string property.
  * @param rules - Customizable rules for specific password validations.

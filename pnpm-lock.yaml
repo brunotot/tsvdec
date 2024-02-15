@@ -44,6 +44,9 @@ importers:
       typedoc-material-theme:
         specifier: ^1.0.2
         version: 1.0.2(typedoc@0.25.8)
+      typedoc-plugin-custom-tags:
+        specifier: ^1.0.2
+        version: 1.0.2(typedoc@0.25.8)
       typedoc-plugin-remove-references:
         specifier: ^0.0.6
         version: 0.0.6
@@ -7025,6 +7028,14 @@ packages:
       typedoc: ^0.25.3
     dependencies:
       '@material/material-color-utilities': 0.2.7
+      typedoc: 0.25.8(typescript@5.3.3)
+    dev: true
+
+  /typedoc-plugin-custom-tags@1.0.2(typedoc@0.25.8):
+    resolution: {integrity: sha512-/1uYW7lS7VkBPKlSlYG0C94zhX01UuIgV0Th/k0W48vV34Qh/eLlKyS2B5dIRkRtQYJy/oNKuL+6wErRUDgY1w==}
+    peerDependencies:
+      typedoc: '>=0.15.0 <1.0'
+    dependencies:
       typedoc: 0.25.8(typescript@5.3.3)
     dev: true
 

@@ -2,9 +2,7 @@
  * @packageDocumentation tsvdec - Core module
  */
 
-import * as LocalizationResolver from "./localization/resolver";
-import * as TypeChecker from "./utilities/misc/TypeChecker";
-
+export * from "./config";
 export * from "./decorators";
 export * from "./events";
 export * from "./localization";
@@ -14,18 +12,7 @@ export * from "./strategy";
 export * from "./utilities";
 export * from "./validation";
 
-export namespace Configuration {
-  export import Locale = LocalizationResolver.Locale;
-  export import MessageParser = LocalizationResolver.MessageParser;
-  export import TypePredicate = TypeChecker.TypePredicate;
-  export import getGlobalLocale = LocalizationResolver.getGlobalLocale;
-  export import setGlobalLocale = LocalizationResolver.setGlobalLocale;
-  export import getMessageParser = LocalizationResolver.getMessageParser;
-  export import setMessageParser = LocalizationResolver.setMessageParser;
-  export import getTypePredicates = TypeChecker.getTypePredicates;
-  export import setTypePredicate = TypeChecker.setTypePredicate;
-}
-
+export * as Config from "./config";
 export * as Decorators from "./decorators";
 export * as Events from "./events";
 export * as Localization from "./localization";

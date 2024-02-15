@@ -18,6 +18,8 @@ function isDecimalValid<T extends Objects.Optional<number>>(value: T): boolean {
 /**
  * Checks if decorated number is a decimal number.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.DECIMAL}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

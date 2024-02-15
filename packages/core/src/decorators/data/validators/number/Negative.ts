@@ -18,6 +18,8 @@ function isNegativeValid(num: Objects.Optional<number>): boolean {
 /**
  * Checks if decorated number is a negative number (number less than 0).
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.NEGATIVE}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

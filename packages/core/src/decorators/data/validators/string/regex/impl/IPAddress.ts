@@ -23,6 +23,8 @@ function isIPAddressValid<T extends Objects.Optional<string>>(value: T): boolean
 /**
  * Checks if decorated string is a valid IP address.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.IP_ADDRESS}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

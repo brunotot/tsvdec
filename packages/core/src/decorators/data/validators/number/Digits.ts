@@ -29,6 +29,8 @@ function isDigitsValid(number: Objects.Optional<number>, ints: number, decs: num
 /**
  * Checks if decorated number is a decimal number.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.DIGITS}
  * @typeParam T - The type of the number property.
  * @param intsLimit - The maximum number of allowed integer digits.

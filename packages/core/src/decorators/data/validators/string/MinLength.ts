@@ -18,6 +18,8 @@ function isMinLengthValid(value: Objects.Optional<string>, min: number): boolean
 /**
  * Checks if decorated string contains a specific number of characters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.MIN_LENGTH}
  * @typeParam T - The type of the string property.
  * @param min - Minimum length value.

@@ -23,6 +23,8 @@ function isAlphanumericValid<T extends Objects.Optional<string>>(value: T): bool
 /**
  * Checks if decorated string contains only alphabetical or number characters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ALPHANUMERIC}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

@@ -18,6 +18,8 @@ function isValueRangeValid(num: Objects.Optional<number>, min: number, max: numb
 /**
  * Checks if decorated number is within a given range of `min` and `max` parameters.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.VALUE_RANGE}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.

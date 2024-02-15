@@ -18,6 +18,8 @@ function isValueMinValid(num: Objects.Optional<number>, min: number): boolean {
 /**
  * Checks if decorated number is not lesser than given `min` parameter.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.VALUE_MIN}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.

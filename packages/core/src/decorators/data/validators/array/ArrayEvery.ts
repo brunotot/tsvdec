@@ -21,6 +21,8 @@ function isArrayEveryValid<K, T extends K[]>(
 /**
  * Checks if all elements of decorated array satisfy the given predicate criteria.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_EVERY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

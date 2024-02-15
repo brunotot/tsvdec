@@ -18,6 +18,8 @@ function isArrayEmptyValid(array: any[]): boolean {
 /**
  * Checks if the decorated array is empty.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.ARRAY_EMPTY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.

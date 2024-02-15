@@ -18,6 +18,8 @@ function isPositiveValid(num: Objects.Optional<number>): boolean {
 /**
  * Checks if decorated number is a positive number (number greater than 0).
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.POSITIVE}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

@@ -18,6 +18,8 @@ function isValidDateRangeValid(value: any, startDateField: string, endDateField:
 /**
  * Checks if {@link Date} `startDateField` is before {@link Date} `endDateField` of a class.
  *
+ * [@Validator]
+ *
  * @key {@link DecoratorKeys.VALID_DATE_RANGE}
  * @typeParam T - Class type on which the decorator is put.
  * @param startDateField - Field name for the start {@link Date} property.

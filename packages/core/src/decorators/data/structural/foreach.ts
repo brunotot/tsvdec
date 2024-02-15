@@ -6,6 +6,9 @@ import { type Types } from "../../../utilities";
 
 /**
  * Creates a validator decorator which applies multiple validators to each element in array field.
+ *
+ * [@Decorator]
+ *
  * @typeParam T - The type of the array property.
  * @param validators - An array of validators to apply to each element in the array.
  * @returns A decorator function to use with class array fields.
