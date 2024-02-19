@@ -1,4 +1,4 @@
-import { FormConfig, Objects, Types } from "@tsvdec/core";
+import { FormConfig, Types } from "@tsvdec/core";
 import { useState } from "react";
 import { useEngine } from "../useEngine";
 import { useEventfulErrors } from "../useEventfulErrors";
@@ -36,7 +36,7 @@ export function useValidation<TClass>(
   console.log(decoratorArgs);
   const formConfig = { groups, defaultValue, asyncDelay, locale } satisfies FormConfig<TClass>;
   const engine = useEngine<TClass>(Class, formConfig);
-  const [form, setForm] = useState<Objects.Payload<TClass>>(engine.defaultValue);
+  const [form, setForm] = useState<Types.Payload<TClass>>(engine.defaultValue);
   const { errors: fieldSimpleErrors, detailedErrors: fieldDetailedErrors, globalErrors: classSimpleErrors, validate } = useEventfulErrors({
     decoratorArgs,
     engine,

@@ -1,2 +1,5 @@
-export * from "./models";
-export * as StrategyService from "./service";
+export * from "./service";
+export * from "./types";
+
+import * as StrategyTypesNamespace from "./types";
+export import StrategyModels = StrategyTypesNamespace;

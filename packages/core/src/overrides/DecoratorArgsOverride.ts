@@ -1,0 +1,69 @@
+import { Types } from "../utilities";
+
+/**
+ * An overridable interface designed for specifying custom decorator args prop.
+ *
+ * [@Override]
+ *
+ * @example
+ * Suppose your decorator fetches data from server (e.g. async validation)
+ * and you need to pass API auth token to the decorator.
+ * ```ts
+ * class UserForm {
+ *   \@UniqueUsername() // internally uses API auth token
+ *   username: string;
+ * }
+ * ```
+ * Function `createFieldValidator` exposes a callback with resolved decorator args as the last argument.
+ * ```ts
+ * import { createFieldValidator, DecoratorArgs } from "@tsvdec/core";
+ *
+ * function UniqueUsername<This, Value extends string>() {
+ *   return createFieldValidator<This, Value>((value, context, locale, args: DecoratorArgs) => ({
+ *     key: "UniqueUsername",
+ *     valid: await isUsernameUnique(value, args.token),
+ *     message: "Username already exists"
+ *   }));
+ * }
+ * ```
+ * You can override the default args type by augmenting
+ * the `DecoratorArgsOverride` interface from `@tsvdec/core`
+ * ```ts
+ * declare module "@tsvdec/core" {
+ *   interface DecoratorArgsOverride {
+ *     type: {
+ *       token: string;
+ *     };
+ *   }
+ * }
+ * ```
+ * For token to be available in the decorator, you need to invoke `setGlobalArgsResolver` function
+ * by passing it your custom args resolver function.
+ * ```ts
+ * import { setGlobalArgsResolver } from "@tsvdec/core";
+ *
+ * const token = `Bearer ${localStorage.getItem("token")}`;
+ * setGlobalArgsResolver(() => ({ token }));
+ * ```
+ * Optionally, you can also pass other arguments with `resolveDecoratorArgs` prop with `Form` class.
+ * ```ts
+ * import { Form } from "@tsvdec/core";
+ *
+ * const someOtherProp = "Other prop";
+ * const resolveDecoratorArgs = () => ({ someOtherProp });
+ * const form = new Form(UserForm, { resolveDecoratorArgs });
+ * ```
+ * @see {@link DecoratorArgsType}
+ */
+export interface DecoratorArgsOverride {}
+
+/**
+ * Represents the type of a decorator `args` prop (defaulted to `Record<string, any>`).
+ * @see {@link DecoratorArgsOverride}
+ */
+export type DecoratorArgsType = Types.Override<
+  DecoratorArgsOverride,
+  Record<string, any>,
+  "Invalid type for DecoratorArgsOverride! If you encounter this error, ensure that the DecoratorArgsOverride type is a Record<string,any>."
+> &
+  Record<string, any>;

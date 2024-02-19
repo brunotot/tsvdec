@@ -1,5 +1,5 @@
-import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "../../../decorators/helper";
 import type { ValidationEvaluator } from "../../../validation/types";
+import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "../../factory/DecoratorFactoryMeta";
 import { createFieldDecorator, type FieldDecorator } from "./createFieldDecorator";
 
 /**

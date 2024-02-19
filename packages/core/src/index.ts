@@ -3,21 +3,25 @@
  */
 
 export * from "./config";
-export * from "./decorators";
-export * from "./events";
-export * from "./localization";
-export * from "./overrides";
-export * from "./reflection";
-export * from "./strategy";
-export * from "./utilities";
-export * from "./validation";
-
 export * as Config from "./config";
-export * as Decorators from "./decorators";
-export * as Events from "./events";
-export * as Localization from "./localization";
-export * as Overrides from "./overrides";
-export * as Reflection from "./reflection";
-export * as Strategy from "./strategy";
+
+export * from "./utilities";
 export * as Utilities from "./utilities";
+
+export * from "./decorators";
+export * as Decorators from "./decorators";
+
+export * from "./events";
+export * as Events from "./events";
+
+export * from "./localization";
+export * as Localization from "./localization";
+
+export * from "./reflection";
+export * as Reflection from "./reflection";
+
+export * from "./strategy";
+export * as Strategy from "./strategy";
+
+export * from "./validation";
 export * as Validation from "./validation";

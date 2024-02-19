@@ -3,7 +3,7 @@
  */
 
 import { MetaStrategy } from "../../reflection";
-import { type Types } from "../../utilities/impl/Types";
+import * as Types from "../../utilities/impl/Types";
 
 function getGetterKeys(instance: object): string[] {
   const proto = Object.getPrototypeOf(instance);

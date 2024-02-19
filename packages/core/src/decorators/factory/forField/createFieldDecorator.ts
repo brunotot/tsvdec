@@ -1,6 +1,6 @@
-import { type DecoratorArgs } from "../../../decorators/helper";
 import { EventEmitter } from "../../../events";
 import { FieldValidatorMetaService } from "../../../reflection";
+import { type DecoratorArgs } from "../../validators/utilities/DecoratorArgs";
 
 /**
  * Represents a field decorator function that is used to decorate fields in a class.
@@ -51,9 +51,9 @@ export type FieldDecoratorCtx<This, Value> = Readonly<{
  * @param supplier - A callback that defines the basic field decorator behavior.
  * @returns A basic field decorator factory.
  */
-export function createFieldDecorator<Class, Value>(
-  supplier: FieldDecoratorSupplier<Class, Value>,
-): FieldDecorator<Class, Value> {
+export function createFieldDecorator<This, Value>(
+  supplier: FieldDecoratorSupplier<This, Value>,
+): FieldDecorator<This, Value> {
   return function (target, context) {
     const isStage2 = typeof context === "string";
     const nameEval = isStage2 ? context : context.name;

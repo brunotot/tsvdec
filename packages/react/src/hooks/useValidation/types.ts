@@ -1,10 +1,10 @@
 import {
   DecoratorArgs,
-  DetailedErrorsResponse,
   Locale,
-  Objects,
-  SimpleErrorsResponse,
+  StrategyDetailedErrorsResponse,
+  StrategySimpleErrorsResponse,
   type Form,
+  type Types,
   type ValidationResult,
 } from "@tsvdec/core";
 import type { Dispatch, SetStateAction } from "react";
@@ -15,8 +15,8 @@ import { ValidationTrigger } from "../useEventfulErrors/types";
  */
 export type UseValidationData<TClass> = {
   isValid: boolean;
-  detailedErrors: DetailedErrorsResponse<TClass>;
-  errors: SimpleErrorsResponse<TClass>;
+  detailedErrors: StrategyDetailedErrorsResponse<TClass>;
+  errors: StrategySimpleErrorsResponse<TClass>;
   engine: Form<TClass>;
   globalErrors: ValidationResult[];
   validate: (field?: string) => void;
@@ -26,8 +26,8 @@ export type UseValidationData<TClass> = {
  * A type representing the return value of `useValidation` hook and is consisted of form state getter & setter and other data defined in `UseValidationData` type
  */
 export type UseValidationReturn<TClass> = readonly [
-  Objects.Payload<TClass>,
-  Dispatch<SetStateAction<Objects.Payload<TClass>>>,
+  Types.Payload<TClass>,
+  Dispatch<SetStateAction<Types.Payload<TClass>>>,
   UseValidationData<TClass>,
 ];
 
@@ -35,7 +35,7 @@ export type UseValidationReturn<TClass> = readonly [
  * The configuration object of `useValidation` hook. Accepts a default value and groups which should be taken into consideration when validating
  */
 export type UseValidationConfig<TClass> = {
-  defaultValue?: Objects.Payload<TClass>;
+  defaultValue?: Types.Payload<TClass>;
   groups?: string[];
   resolveDecoratorArgs?: () => DecoratorArgs;
   asyncDelay?: number;

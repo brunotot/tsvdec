@@ -1,11 +1,14 @@
-import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "../../../decorators";
+import {
+  DecoratorMeta,
+  DEFAULT_DECORATOR_META,
+} from "../../../decorators/factory/DecoratorFactoryMeta";
 import { EventEmitter } from "../../../events";
 import {
   AbstractMetaService,
   type MetaStrategy,
 } from "../../../reflection/service/AbstractMetaService";
-import { type StrategyService } from "../../../strategy";
-import { StrategyData, StrategyKey } from "../../../strategy/models/StrategyMapper";
+import { StrategyData, StrategyKey } from "../../../strategy";
+import { AbstractStrategy } from "../../../strategy/service";
 import * as Strategies from "../../../strategy/service/impl";
 import { Classes, type Types } from "../../../utilities";
 import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
@@ -90,7 +93,7 @@ export class ControlDescriptor<
    * Gets the implementation of the reflection strategy.
    * @throws {Error} If the strategy is not implemented.
    */
-  public get StrategyImpl(): Types.Class<StrategyService.AbstractValidationStrategyService> {
+  public get StrategyImpl(): Types.Class<AbstractStrategy> {
     const strategy = this.strategy;
     if (!(strategy in StrategyData)) {
       const error = `Validation strategy not implemented for field type '${strategy}'`;
@@ -109,38 +112,18 @@ export class ControlDescriptor<
    * 3. Determines the strategy based on the field type and its metadata.
    */
   public get strategy(): StrategyKey {
-    if (!this.hostClass) {
-      return "unknown";
-    }
-    if (!this.thisName) {
-      return Strategies.ObjectStrategy.Name;
-    }
+    if (!this.hostClass) return "UNKNOWN";
+    if (!this.thisName) Strategies.ObjectStrategy.Name;
     const instance = new this.hostClass();
-    const fieldName = this.thisName;
-
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const getNativeStrategy = (value: any) => {
-      const meta = FieldValidatorMetaService.inject(this.hostClass!, this.eventEmitter);
-      const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(this.thisName!);
-
-      return Array.isArray(value)
-        ? descriptor.thisClass
-          ? Strategies.ObjectArrayStrategy.Name
-          : Strategies.PrimitiveArrayStrategy.Name
-        : descriptor.thisClass
-          ? Strategies.ObjectStrategy.Name
-          : Strategies.PrimitiveStrategy.Name;
-    };
-
-    const descriptor = Classes.getFieldDescriptor(this.hostClass, fieldName);
-    const isGetter = descriptor?.get && !descriptor.set;
-
-    if (isGetter) {
-      const value = descriptor.get!.call(instance);
-      return `get (): ${getNativeStrategy(value)}` as any;
-    }
-
-    return getNativeStrategy(instance[fieldName]);
+    const fieldName = this.thisName as keyof typeof instance;
+    const value = instance[fieldName];
+    const meta = FieldValidatorMetaService.inject(this.hostClass!, this.eventEmitter);
+    const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(this.thisName!);
+    const isArray = Array.isArray(value);
+    if (isArray && descriptor.thisClass) return Strategies.ObjectArrayStrategy.Name;
+    if (isArray && !descriptor.thisClass) return Strategies.PrimitiveArrayStrategy.Name;
+    if (!isArray && descriptor.thisClass) return Strategies.ObjectStrategy.Name;
+    return Strategies.PrimitiveStrategy.Name;
   }
 }
 

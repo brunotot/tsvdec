@@ -1,4 +1,4 @@
-import { Objects } from "../../utilities";
+import { Types } from "../../utilities";
 
 /**
  * A map of event names to their string representations.
@@ -10,4 +10,4 @@ export const EventMap = {
 /**
  * The names of the events that can be emitted.
  */
-export type EventName = Objects.Values<typeof EventMap>;
+export type EventName = Types.Values<typeof EventMap>;

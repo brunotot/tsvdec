@@ -1,15 +1,15 @@
+import { type DecoratorMessage } from "../../decorators";
 import { type Locale } from "../../localization/resolver/LocaleResolver";
-import { type MessageProp } from "../../overrides";
 
 /**
  * Message parser definition.
  * @param {Locale} locale - Current locale
- * @param {MessageProp} message - Message to parse
+ * @param {DecoratorMessage} message - Message to parse
  * @param {Record<string,string>} args - Arguments to parse message with
  */
 export type MessageParser = ((
   locale: Locale,
-  message: MessageProp,
+  message: DecoratorMessage,
   args: Record<string, string>,
 ) => string) & {};
 

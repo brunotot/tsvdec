@@ -3,6 +3,9 @@
 # Define root directory for generated documentation
 base_dir="docs/"
 
+# Removes backslashes from all occurrences of "\@"
+find "$base_dir" -type f -exec sed -i 's/\\@/@/g' {} +
+
 # Copy CSS override to docs/assets/style.css
 echo '' >> "$base_dir/assets/style.css" && cat resources/docs.css >> "$base_dir/assets/style.css"
 

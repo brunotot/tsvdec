@@ -3,6 +3,7 @@ import AsyncFieldValidationDemo from "./components/demo/AsyncFieldValidationDemo
 import ClassLevelFormValidationDemo from "./components/demo/ClassLevelFormValidationDemo";
 import CompoundFieldsValidationDemo from "./components/demo/CompoundFieldsValidationDemo";
 import ConditionalValidationDemo from "./components/demo/ConditionalValidationDemo";
+import DecoratorArgsOverrideDemo from "./components/demo/DecoratorArgsOverrideDemo";
 import DecoratorExternalArgsDemo from "./components/demo/DecoratorExternalArgsDemo";
 import DemoList from "./components/demo/DemoList";
 import ErrorMessagesPreprocessorDemo from "./components/demo/ErrorMessagesPreprocessorDemo";
@@ -18,6 +19,7 @@ function App() {
     <Container maxWidth="md">
       <DemoList
         data={[
+          DecoratorArgsOverrideDemo,
           InnerFormOnChangeDemo,
           ModifyingErrorMessagesLocaleDemo,
           TriggerDemoList,

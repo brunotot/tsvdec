@@ -161,9 +161,67 @@ const CUSTOM_TAGS = [
     backgroundColor: "#7fffc9",
     letter: "@",
   },
+  {
+    name: "Enhancer",
+    color: "#ededed",
+    backgroundColor: "#7354e3",
+    letter: "@",
+  },
+  {
+    name: "Override",
+    color: "#ededed",
+    backgroundColor: "transparent",
+    letter: "⚙️",
+  },
+  {
+    name: "Translation",
+    color: "#ededed",
+    backgroundColor: "transparent",
+    letter: "🌐",
+  },
+  /*{
+    name: "Event",
+    color: "#ededed",
+    backgroundColor: "transparent",
+    letter: "🗓",
+  },
+  {
+    name: "Validation",
+    color: "#ededed",
+    backgroundColor: "transparent",
+    letter: "✅",
+  },
+  {
+    name: "Utility",
+    color: "#ededed",
+    backgroundColor: "transparent",
+    letter: "🔧",
+  },
+  {
+    name: "Strategy",
+    color: "#ededed",
+    backgroundColor: "transparent",
+    letter: "♟️",
+  },
+  {
+    name: "Reflection",
+    color: "#ededed",
+    backgroundColor: "transparent",
+    letter: "📁",
+  },*/
 ];
 
-window.onload = function () {
+window.onload = async function () {
   overrideTitle();
-  overrideCustomTags();
+  overrideTooltips();
+  await overrideCustomTags();
+  document.body.classList.add("show");
 };
+
+function overrideTooltips() {
+  [...document.querySelectorAll("a[href] > svg + span")].forEach(elem => {
+    const text = elem.textContent;
+    const anchor = elem.parentElement;
+    anchor.title = text;
+  });
+}

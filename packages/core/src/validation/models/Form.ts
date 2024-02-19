@@ -1,15 +1,15 @@
-import { type DecoratorArgs } from "../../decorators";
+import { getGlobalArgs, type DecoratorArgs } from "../../decorators";
 import { EventEmitter } from "../../events";
 import { EventHandlers, getRegisteredEventHandlers } from "../../events/handlers/impl/register";
 import { getGlobalLocale, type Locale } from "../../localization";
 import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
 import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
 import {
-  type DetailedErrorsResponse,
-  type SimpleErrorsResponse,
-  type getStrategyResult,
+  type StrategyDetailedErrorsResponse,
+  type StrategyErrors,
+  type StrategySimpleErrorsResponse,
 } from "../../strategy";
-import { Objects, type Types } from "../../utilities";
+import { type Types } from "../../utilities";
 import { Cache } from "../../validation/models/Cache";
 import { ValidationMetadata } from "../../validation/models/ValidationMetadata";
 import type {
@@ -24,7 +24,7 @@ import type {
  * @typeParam T - The type of the errors.
  * @hidden
  */
-export function hasErrors<T>(data: SimpleErrorsResponse<T>): boolean {
+export function hasErrors<T>(data: StrategySimpleErrorsResponse<T>): boolean {
   const data0: any = data;
   if (Array.isArray(data0)) {
     return data0.some(item => hasErrors(item));
@@ -46,11 +46,11 @@ export function hasErrors<T>(data: SimpleErrorsResponse<T>): boolean {
  */
 export function toClass<const TClass extends Types.Class<any>>(
   clazz: TClass,
-  object?: Objects.Payload<Types.UnwrapClass<TClass>>,
+  object?: Types.Payload<Types.UnwrapClass<TClass>>,
 ): Types.UnwrapClass<TClass> {
   function _toClass<const TConstructor extends Types.Class<any>>(
     clazz: TConstructor,
-    object?: Objects.Payload<Types.UnwrapClass<TConstructor>> | Types.ArrayType,
+    object?: Types.Payload<Types.UnwrapClass<TConstructor>> | Types.ArrayType,
   ): Types.UnwrapClass<TConstructor> {
     if (Array.isArray(object)) {
       return object.map(item => _toClass(clazz, item)) as Types.UnwrapClass<TConstructor>;
@@ -91,8 +91,8 @@ export class Form<TClass> {
   readonly #classValidatorMetaService: ClassValidatorMetaService<TClass>;
   readonly #fieldValidatorMetaService: FieldValidatorMetaService;
   readonly #groups: string[];
-  readonly #defaultValue: Objects.Payload<TClass>;
-  readonly #cache: Cache<FormValidateResponse<TClass>, Objects.Payload<TClass>>;
+  readonly #defaultValue: Types.Payload<TClass>;
+  readonly #cache: Cache<FormValidateResponse<TClass>, Types.Payload<TClass>>;
   readonly #hostClass: Types.Class<TClass>;
   /** @hidden */
   readonly #eventHandlers: EventHandlers<TClass>;
@@ -123,12 +123,16 @@ export class Form<TClass> {
     this.#hostClass = clazz;
     this.locale = config?.locale ?? getGlobalLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
-    this.#defaultValue = config?.defaultValue ?? (toClass(clazz) as Objects.Payload<TClass>);
+    this.#defaultValue = config?.defaultValue ?? (toClass(clazz) as Types.Payload<TClass>);
     this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz, this.#eventEmitter);
     this.#classValidatorMetaService = ClassValidatorMetaService.inject(clazz, this.#eventEmitter);
-    this.#cache = new Cache((state: Objects.Payload<TClass>, args: DecoratorArgs) =>
+    this.#cache = new Cache((state: Types.Payload<TClass>, args: DecoratorArgs) =>
       this.validate.bind(this)(state, args),
     );
+  }
+
+  get #globalDecoratorArgs() {
+    return getGlobalArgs();
   }
 
   /**
@@ -136,7 +140,7 @@ export class Form<TClass> {
    * @param payload - The payload to validate.
    * @returns `true` if valid, `false` otherwise.
    */
-  public isValid(payload: Objects.Payload<TClass>, args: DecoratorArgs = {}): boolean {
+  public isValid(payload: Types.Payload<TClass>, args: DecoratorArgs = {}): boolean {
     return this.#cache.get("valid", payload, args);
   }
 
@@ -146,9 +150,9 @@ export class Form<TClass> {
    * @returns An object containing detailed error messages.
    */
   public getDetailedErrors(
-    payload?: Objects.Payload<TClass>,
+    payload?: Types.Payload<TClass>,
     args: DecoratorArgs = {},
-  ): DetailedErrorsResponse<TClass> {
+  ): StrategyDetailedErrorsResponse<TClass> {
     return this.#cache.get("detailedErrors", payload, args);
   }
 
@@ -158,9 +162,9 @@ export class Form<TClass> {
    * @returns An object containing error messages.
    */
   public getErrors(
-    payload?: Objects.Payload<TClass>,
+    payload?: Types.Payload<TClass>,
     args: DecoratorArgs = {},
-  ): SimpleErrorsResponse<TClass> {
+  ): StrategySimpleErrorsResponse<TClass> {
     return this.#cache.get("errors", payload, args);
   }
 
@@ -171,7 +175,7 @@ export class Form<TClass> {
    * @returns An array of ValidationResult objects representing the global errors.
    */
   public getGlobalErrors(
-    payload?: Objects.Payload<TClass>,
+    payload?: Types.Payload<TClass>,
     args: DecoratorArgs = {},
   ): ValidationResult[] {
     return this.#cache.get("globalErrors", payload, args);
@@ -206,12 +210,13 @@ export class Form<TClass> {
    * ```
    */
   public validate(
-    payload?: Objects.Payload<TClass>,
-    args: Record<string, any> = {},
+    payload?: Types.Payload<TClass>,
+    decoratorArgs: Record<string, any> = {},
   ): FormValidateResponse<TClass> {
+    const args = { ...this.#globalDecoratorArgs, ...decoratorArgs };
     // if (Objects.deepEquals(payload, this.#cache.payload)) return this.#cache.cache;
 
-    const state: Objects.Payload<TClass> = toClass(this.#hostClass, payload) as any;
+    const state: Types.Payload<TClass> = toClass(this.#hostClass, payload) as any;
 
     const errors: any = {};
     const detailedErrors: any = {};
@@ -255,9 +260,10 @@ export class Form<TClass> {
    */
   validateField<K extends keyof TClass>(
     fieldName: K,
-    payload: Objects.Payload<TClass>,
-    args: Record<string, any> = {},
-  ): getStrategyResult<TClass, K> {
+    payload: Types.Payload<TClass>,
+    decoratorArgs: Record<string, any> = {},
+  ): StrategyErrors<TClass, K> {
+    const args = { ...this.#globalDecoratorArgs, ...decoratorArgs };
     const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(
       fieldName,
       this.#eventEmitter,

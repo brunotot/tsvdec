@@ -1,22 +1,22 @@
-import { Booleans, Objects, type Form } from "@tsvdec/core";
+import { Booleans, type Form, type Types } from "@tsvdec/core";
 
 export type UseResetConfig<TClass> = {
   engine: Form<TClass>;
-  form: Objects.Payload<TClass>;
-  setForm: (v: Objects.Payload<TClass>) => void;
+  form: Types.Payload<TClass>;
+  setForm: (v: Types.Payload<TClass>) => void;
   submitted: boolean;
   handleSetSubmitted: (v: boolean) => void;
 };
 
 export type UseResetReturn<TClass> = ((
-  ...fieldPaths: Array<PayloadFieldPath<Objects.Payload<TClass>>>
+  ...fieldPaths: Array<PayloadFieldPath<Types.Payload<TClass>>>
 ) => void) & {};
 
 /**
  * A wrapper type for evaluation object paths as strings
  */
 export type ObjectPathEvaluator<T, K extends string> = K extends keyof T
-  ? K extends Objects.Inputs<T>
+  ? K extends Types.Inputs<T>
     ? K | `${K}.${PayloadFieldPath<T[K]>}`
     : ""
   : never;
@@ -32,7 +32,7 @@ export type PayloadFieldPathEvaluator<T> = {
         ? K
         : Booleans.isObject<T[K]> extends true
           ? ObjectPathEvaluator<T, K>
-          : K extends Objects.Inputs<T>
+          : K extends Types.Inputs<T>
             ? K
             : never
     : never;

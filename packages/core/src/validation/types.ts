@@ -1,7 +1,14 @@
-import { type DecoratorMeta } from "../decorators";
+import { DecoratorArgs } from "../decorators";
+import { DecoratorMeta } from "../decorators/factory/DecoratorFactoryMeta";
 import { type Locale } from "../localization";
-import type { DetailedErrorsResponse, SimpleErrorsResponse } from "../strategy";
-import { type Objects } from "../utilities";
+import type { StrategyDetailedErrorsResponse, StrategySimpleErrorsResponse } from "../strategy";
+import { type Types } from "../utilities";
+
+export type ValidationEvaluatorMeta = {
+  context: any;
+  locale: Locale;
+  args: DecoratorArgs;
+};
 
 /**
  * Represents a function that evaluates a value and returns a validation result.
@@ -10,9 +17,7 @@ import { type Objects } from "../utilities";
  */
 export type ValidationEvaluator<T> = ((
   value: T,
-  context: any,
-  locale: Locale,
-  args: Record<string, any>,
+  meta: ValidationEvaluatorMeta,
 ) => ValidationResult | Promise<ValidationResult>) & {};
 
 /**
@@ -35,8 +40,8 @@ export type ValidationResult = {
 };
 
 export type FormErrors<TClass> = {
-  errors: SimpleErrorsResponse<TClass>;
-  detailedErrors: DetailedErrorsResponse<TClass>;
+  errors: StrategySimpleErrorsResponse<TClass>;
+  detailedErrors: StrategyDetailedErrorsResponse<TClass>;
   globalErrors: ValidationResult[];
 };
 
@@ -67,7 +72,7 @@ export type AsyncEventHandler<TClass> = ((data: AsyncEventHandlerProps<TClass>) 
  * @typeParam TClass - The type of the default value.
  */
 export type FormConfig<TClass> = {
-  defaultValue?: Objects.Payload<TClass>;
+  defaultValue?: Types.Payload<TClass>;
   groups?: string[];
   locale?: Locale;
   asyncDelay?: number;
@@ -80,7 +85,7 @@ export type FormConfig<TClass> = {
  */
 export type FormValidateResponse<T> = {
   valid: boolean;
-  detailedErrors: DetailedErrorsResponse<T>;
-  errors: SimpleErrorsResponse<T>;
+  detailedErrors: StrategyDetailedErrorsResponse<T>;
+  errors: StrategySimpleErrorsResponse<T>;
   globalErrors: ValidationResult[];
 };

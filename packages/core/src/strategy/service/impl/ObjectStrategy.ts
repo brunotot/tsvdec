@@ -1,18 +1,18 @@
 import { type DecoratorArgs } from "../../../decorators";
-import {
-  type DetailedErrorsResponse,
-  type SimpleErrorsResponse,
-  type evaluate,
-} from "../../../strategy/models/StrategyFactory";
 import { type Booleans } from "../../../utilities";
 import type { ValidationResult } from "../../../validation/types";
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
+import {
+  type StrategyDetailedErrorsResponse,
+  type StrategyEvaluator,
+  type StrategySimpleErrorsResponse,
+} from "../../types";
+import { AbstractStrategy } from "../AbstractStrategy";
 
 export namespace ObjectStrategy {
   /**
    * Constant name identifier for this strategy.
    */
-  export const Name = "composite" as const;
+  export const Name = "OBJECT" as const;
 
   /**
    * Represents the simplified error structure for validating object types.
@@ -22,7 +22,7 @@ export namespace ObjectStrategy {
     /** An array of string messages that represent validation errors at the decorated field level. */
     root: string[];
     /** An object that represents simplified validation errors for each property in the object. */
-    data: SimpleErrorsResponse<F>;
+    data: StrategySimpleErrorsResponse<F>;
   };
 
   /**
@@ -33,7 +33,7 @@ export namespace ObjectStrategy {
     /** An array of validation result objects that represent detailed validation errors at the decorated field level. */
     root: ValidationResult[];
     /** An object that represents detailed validation errors for each property in the object. */
-    data: DetailedErrorsResponse<F>;
+    data: StrategyDetailedErrorsResponse<F>;
   };
 
   /**
@@ -57,20 +57,16 @@ export namespace ObjectStrategy {
   export type handler<T, K extends keyof T, R> =
       true extends Booleans.isUndefined<R>
         ? T[K]
-    : { root: R; data: evaluate<T[K], R> };
+    : { root: R; data: StrategyEvaluator<T[K], R> };
 
   /**
    * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating object types.
    *
    * @typeParam F - The type of the field being validated, which is expected to be an object.
    *
-   * @extends AbstractValidationStrategyService<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
+   * @extends AbstractStrategy<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
    */
-  export class StrategyResolver<F> extends AbstractValidationStrategyService<
-    F,
-    DetailedErrors<F>,
-    SimpleErrors<F>
-  > {
+  export class StrategyResolver<F> extends AbstractStrategy<F, DetailedErrors<F>, SimpleErrors<F>> {
     /**
      * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for object types.
      *

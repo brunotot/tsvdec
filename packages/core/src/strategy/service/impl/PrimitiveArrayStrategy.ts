@@ -1,13 +1,13 @@
 import { type DecoratorArgs } from "../../../decorators";
 import { type Booleans, type Types } from "../../../utilities";
 import type { ValidationResult } from "../../../validation/types";
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
+import { AbstractStrategy } from "../AbstractStrategy";
 
 export namespace PrimitiveArrayStrategy {
   /**
    * Constant name identifier for this strategy.
    */
-  export const Name = "primitive[]" as const;
+  export const Name = "PRIMITIVE_ARRAY" as const;
 
   /**
    * Represents the simplified error structure for validating arrays of primitive types.
@@ -40,7 +40,7 @@ export namespace PrimitiveArrayStrategy {
   export type matches<T, K extends keyof T> =
   Types.UnpackArray<T[K]> extends never
       ? false
-  : Booleans.isAnyOf<Types.UnpackArray<T[K]>, Types.PrimitiveType>
+  : Booleans.isPrimitive<Types.UnpackArray<T[K]>>
 
   /**
    * Type for the handler function based on the field and result types.
@@ -59,13 +59,9 @@ export namespace PrimitiveArrayStrategy {
    *
    * @typeParam F - The type of the field being validated, which is expected to be an array of primitives.
    *
-   * @extends AbstractValidationStrategyService<F,DetailedErrors,SimpleErrors>
+   * @extends AbstractStrategy<F,DetailedErrors,SimpleErrors>
    */
-  export class StrategyResolver<F> extends AbstractValidationStrategyService<
-    F,
-    DetailedErrors,
-    SimpleErrors
-  > {
+  export class StrategyResolver<F> extends AbstractStrategy<F, DetailedErrors, SimpleErrors> {
     /**
      * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of primitive types.
      *

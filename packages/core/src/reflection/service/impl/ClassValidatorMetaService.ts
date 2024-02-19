@@ -1,8 +1,8 @@
+import { type DecoratorValidateIf } from "../../../decorators";
 import {
+  DecoratorMeta,
   DEFAULT_DECORATOR_META,
-  type DecoratorMeta,
-  type DecoratorValidateIf,
-} from "../../../decorators";
+} from "../../../decorators/factory/DecoratorFactoryMeta";
 import { EventEmitter } from "../../../events";
 import {
   AbstractMetaService,

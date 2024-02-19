@@ -1,32 +1,28 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as Decorators from "../../decorators";
 import { getGlobalLocale, type Locale } from "../../localization/resolver/LocaleResolver";
-
-import de from "../translations/de.json";
-import en from "../translations/en.json";
-import es from "../translations/es.json";
-import fr from "../translations/fr.json";
-import hr from "../translations/hr.json";
-import it from "../translations/it.json";
-import nl from "../translations/nl.json";
-
-/** All translation json files content in map, grouped by {@link Locale `Locale`}. */
-export const MessageCollection = { hr, de, en, es, fr, it, nl } as const;
+import { TranslationKey, Translations } from "../translations";
 
 /**
- * Represents the union of all predefined validator decorator keys (and extras) which `@tsvdec/core` provides.
- * For example, {@link Decorators.Alpha @Alpha\(\)} decorator has a key defined as {@link Decorators.DecoratorKeys.ALPHA ALPHA}.
+ * All translation json files content in map, grouped by {@link Locale `Locale`}.
  */
-export type MessageKey = keyof typeof MessageCollection.en;
+const MessageCollection = {
+  hr: Translations.Croatian,
+  de: Translations.German,
+  en: Translations.English,
+  es: Translations.Spanish,
+  fr: Translations.French,
+  it: Translations.Italian,
+  nl: Translations.Dutch,
+} as const;
 
 /**
  * Returns localized message by key, allowing `locale` to be optional (defaults to global `locale`).
  * @param messageKey A key of any predefined decorator validator (or extras) from `@tsvdec/core`
  * @param locale Locale to translate by (`en`, `hr`, `de`, ...)
  * @returns Default translated message by message key
- * @see {@link MessageKey}
+ * @see {@link TranslationKey}
+ * @hidden
  */
-export function readMessage(messageKey: MessageKey, locale?: Locale | null): string {
+export function readMessage(messageKey: TranslationKey, locale?: Locale | null): string {
   const computedLocale = locale ?? getGlobalLocale();
   const computedLocaleMessages = MessageCollection[computedLocale];
   const decoratorMessage = computedLocaleMessages[messageKey];

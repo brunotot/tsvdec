@@ -1,6 +1,6 @@
 import { EventEmitter, EventMap } from "../../events";
 import { type Locale } from "../../localization";
-import { type Objects } from "../../utilities";
+import { type Types } from "../../utilities";
 import type { ValidationMetadataEntry, ValidationResult } from "../../validation/types";
 
 /**
@@ -44,7 +44,7 @@ export class ValidationMetadata<TFieldType> {
    */
   validate<TBody>(
     value: TFieldType,
-    payload: Objects.Payload<TBody>,
+    payload: Types.Payload<TBody>,
     groups: string[],
     locale: Locale,
     args?: Record<string, any>,
@@ -59,7 +59,7 @@ export class ValidationMetadata<TFieldType> {
     // eslint-disable-next-line @typescript-eslint/promise-function-async
     const results = groupedValidators
       .filter(({ meta }) => !meta.validateIf || meta.validateIf(payload))
-      .map(({ validate }) => validate(value, payload, locale, args ?? {}));
+      .map(({ validate }) => validate(value, { context: payload, locale, args: args ?? {} }));
     // eslint-disable-next-line @typescript-eslint/array-type
     const asyncResults = results.filter(v => isPromise(v)) as Promise<ValidationResult>[];
     this.#handleAsyncResults(asyncResults, emitter, field);

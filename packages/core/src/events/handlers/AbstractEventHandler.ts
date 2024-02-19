@@ -1,10 +1,6 @@
 import { EventEmitter } from "../models/EventEmitter";
 import { EventName } from "../models/EventName";
-
-/**
- * A function that resolves an event.
- */
-export type EventResolver<TData> = (data: TData) => void | Promise<void>;
+import { EventResolver } from "../models/EventResolver";
 
 /**
  * A base class for event handlers.

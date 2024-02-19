@@ -1,40 +1,37 @@
 import { type DecoratorArgs } from "../../../decorators";
-import { type DetailedErrorsResponse, type SimpleErrorsResponse } from "../../../strategy/models";
+import {
+  type StrategyDetailedErrorsResponse,
+  type StrategySimpleErrorsResponse,
+} from "../../../strategy/types";
 import { type Booleans, type Types } from "../../../utilities";
 import type { ValidationResult } from "../../../validation/types";
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
+import { AbstractStrategy } from "../AbstractStrategy";
 import { ObjectStrategy } from "./ObjectStrategy";
 
 export namespace ObjectArrayStrategy {
-  /**
-   * Constant name identifier for this strategy.
-   */
-  export const Name = "composite[]" as const;
+  /** Constant name identifier for this strategy. */
+  export const Name = "OBJECT_ARRAY" as const;
 
   /**
    * Represents the simplified error structure for validating arrays of object types.
-   *
    * @typeParam F - The type of the field being validated.
-   *
    * - `field`: An array of string messages that represent validation errors at the array level.
    * - `data`: An array of `Errors<F>` objects that represent validation errors for each object in the array.
    */
   export type SimpleErrors<F> = {
     root: string[];
-    data: Array<SimpleErrorsResponse<F>>;
+    data: Array<StrategySimpleErrorsResponse<F>>;
   };
 
   /**
    * Represents the detailed error structure for validating arrays of object types.
-   *
    * @typeParam F - The type of the field being validated.
-   *
    * - `field`: An array of `ValidationResult` objects that represent detailed validation errors at the array level.
    * - `data`: An array of `DetailedErrors<F>` objects that represent detailed validation errors for each object in the array.
    */
   export type DetailedErrors<F> = {
     root: ValidationResult[];
-    data: Array<DetailedErrorsResponse<F>>;
+    data: Array<StrategyDetailedErrorsResponse<F>>;
   };
 
   /**
@@ -61,25 +58,16 @@ export namespace ObjectArrayStrategy {
 
   /**
    * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating arrays of object types.
-   *
    * @typeParam F - The type of the field being validated, which is expected to be an array of objects.
-   *
-   * @extends AbstractValidationStrategyService<F, ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>>
+   * @extends AbstractStrategy<F,ObjectArrayDetailedErrors<F>,ObjectArraySimpleErrors<F>>
    */
-  export class StrategyResolver<F> extends AbstractValidationStrategyService<
-    F,
-    DetailedErrors<F>,
-    SimpleErrors<F>
-  > {
+  export class StrategyResolver<F> extends AbstractStrategy<F, DetailedErrors<F>, SimpleErrors<F>> {
     /**
      * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of object types.
-     *
      * @param value - The array of object values to be validated.
      * @param context - The context in which the validation is taking place.
      * @param args - Decorator arguments.
-     *
      * @returns A tuple containing `ObjectArrayDetailedErrors<F>` and `ObjectArraySimpleErrors<F>`.
-     *
      * @remarks
      * The method validates both the array as a whole (`field`) and each individual object (`data`)
      * using the appropriate validation rules.

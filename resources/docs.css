@@ -110,3 +110,28 @@ g[id="icon-64"] > path {
 .site-menu {
   scrollbar-gutter: stable;
 }
+
+.tsd-accordion-summary > svg {
+  --dropdown-width: 8px;
+  border-radius: 7px !important;
+  padding: var(--dropdown-width) !important;
+  margin-right: calc(-1 * var(--dropdown-width)) !important;
+}
+
+.tsd-accordion-summary > svg:hover {
+  outline: 1px solid grey !important;
+}
+
+.tsd-accordion-summary > svg:hover + a {
+  text-decoration: none;
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+body:not(.show) {
+  opacity: 0;
+}
+
+body.show {
+  transition: opacity 0.4s;
+  opacity: 1;
+}

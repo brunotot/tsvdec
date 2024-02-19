@@ -1,4 +1,4 @@
-import { DetailedErrorsResponse, SimpleErrorsResponse } from "../../../strategy";
+import { StrategyDetailedErrorsResponse, StrategySimpleErrorsResponse } from "../../../strategy";
 import { Form, FormErrors, ValidationResult } from "../../../validation";
 import { EventMap } from "../../models/EventName";
 import { AbstractEventHandler } from "../AbstractEventHandler";
@@ -15,8 +15,8 @@ export type AsyncValidationCompleteRequest<TClass> = {
  * The response payload for the `ASYNC_VALIDATION_COMPLETE` event.
  */
 export type AsyncValidationCompleteResponse<TClass> = {
-  errors: SimpleErrorsResponse<TClass>;
-  detailedErrors: DetailedErrorsResponse<TClass>;
+  errors: StrategySimpleErrorsResponse<TClass>;
+  detailedErrors: StrategyDetailedErrorsResponse<TClass>;
   globalErrors: ValidationResult[];
 };
 

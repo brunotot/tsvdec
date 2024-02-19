@@ -41,7 +41,7 @@ const Translations: Record<Locale, Messages> = {
 // strategy, developers can specify custom message types for use within their
 // decorators, ensuring type safety.
 declare module "@tsvdec/core" {
-  interface MessagePropOverride {
+  interface DecoratorMessageOverride {
     type: keyof Messages;
   }
 }
@@ -101,7 +101,7 @@ const Translations: Record<Locale, Messages> = {
 // strategy, developers can specify custom message types for use within their
 // decorators, ensuring type safety.
 declare module "@tsvdec/core" {
-  interface MessagePropOverride {
+  interface DecoratorMessageOverride {
     type: keyof Messages;
   }
 }

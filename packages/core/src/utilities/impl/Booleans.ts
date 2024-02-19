@@ -3,11 +3,8 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { type StrategyService } from "../../strategy";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { type PrimitiveTypeOverride } from "../../overrides";
-import { type Objects } from "../../utilities/impl/Objects";
-import { type Types } from "../../utilities/impl/Types";
+import { type PrimitiveUnionOverride } from "../../overrides";
+import * as Types from "../../utilities/impl/Types";
 
 /**
  * Checks if the type `TValue` exists in `TData` type array.
@@ -18,7 +15,7 @@ import { type Types } from "../../utilities/impl/Types";
  * type T1 = Booleans.isAnyOf<1, [1, 2, 3]>; // true
  * type T2 = Booleans.isAnyOf<4, [1, 2, 3]>; // false
  * ```
- * @see {@link Objects.Payload Payload} - Notice how getters and functions are filtered out.
+ * @see {@link Types.Payload Payload} - Notice how getters and functions are filtered out.
  */
 export type isAnyOf<TValue, TData extends Types.ArrayType> =
   NonNullable<TValue> extends TData[number] ? true : false;
@@ -66,10 +63,9 @@ export type isFunction<TValue> = NonNullable<TValue> extends Types.FunctionType 
  * type T1 = Booleans.isGetter<{ get a(): 1 }, "a">; // true
  * type T2 = Booleans.isGetter<{ a: 1 }, "a">; // false
  * ```
- * @see {@link StrategyService.PrimitiveGetterStrategy.matches} - When checking if a field is a primitive getter, notice how the `isGetter` utility is used.
  */
 export type isGetter<TObj, TKey extends keyof TObj> =
-  TKey extends Objects.Inputs<TObj> ? false : true;
+  TKey extends Types.Inputs<TObj> ? false : true;
 
 /**
  * Checks if the type `TValue` is an array type.
@@ -87,7 +83,7 @@ export type isArray<TValue> = NonNullable<TValue> extends Types.ArrayType ? true
 /**
  * Checks if the type `TValue` is a primitive type.
  * @typeParam TValue - The type to check.
- * @remarks `string`, `number`, `boolean`, `bigint` and `Date` are considered primitive types. Custom primitives can be defined in {@link PrimitiveTypeOverride}.
+ * @remarks `string`, `number`, `boolean`, `bigint` and `Date` are considered primitive types. Custom primitives can be defined in {@link PrimitiveUnionOverride}.
  * @example
  * ```ts
  * type T1 = Booleans.isPrimitive<"a">; // true
@@ -98,7 +94,7 @@ export type isArray<TValue> = NonNullable<TValue> extends Types.ArrayType ? true
  * type T6 = Booleans.isPrimitive<{ a: 1 }>; // false
  * ```
  */
-export type isPrimitive<TValue> = isAnyOf<TValue, Types.PrimitiveType>;
+export type isPrimitive<TValue> = TValue extends Types.PrimitiveUnion ? true : false;
 
 /**
  * Checks if the type `TValue` is an array of primitive types.

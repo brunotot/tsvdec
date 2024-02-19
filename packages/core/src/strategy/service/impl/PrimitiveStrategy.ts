@@ -1,13 +1,13 @@
 import { type DecoratorArgs } from "../../../decorators";
-import { type Booleans, type Types } from "../../../utilities";
+import { type Booleans } from "../../../utilities";
 import type { ValidationResult } from "../../../validation/types";
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
+import { AbstractStrategy } from "../AbstractStrategy";
 
 export namespace PrimitiveStrategy {
   /**
    * Constant name identifier for this strategy.
    */
-  export const Name = "primitive" as const;
+  export const Name = "PRIMITIVE" as const;
 
   /**
    * Represents the simplified error structure for validating primitive types.
@@ -25,7 +25,7 @@ export namespace PrimitiveStrategy {
    * @typeParam K - The key of the field.
    */
   // prettier-ignore
-  export type matches<T, K extends keyof T> = Booleans.isAnyOf<T[K], Types.PrimitiveType>;
+  export type matches<T, K extends keyof T> = Booleans.isPrimitive<T[K]>;
 
   /**
    * Type for the handler function based on the field and result types.
@@ -44,13 +44,9 @@ export namespace PrimitiveStrategy {
    *
    * @typeParam F - The type of the field being validated.
    *
-   * @extends AbstractValidationStrategyService<F,ValidationResult[],string[]>
+   * @extends AbstractStrategy<F,ValidationResult[],string[]>
    */
-  export class StrategyResolver<F> extends AbstractValidationStrategyService<
-    F,
-    DetailedErrors,
-    SimpleErrors
-  > {
+  export class StrategyResolver<F> extends AbstractStrategy<F, DetailedErrors, SimpleErrors> {
     /**
      * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
      *

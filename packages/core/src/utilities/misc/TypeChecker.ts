@@ -1,4 +1,58 @@
-import { TypePredicateData, TypePredicateKey } from "../../overrides/TypePredicateOverride";
+/**
+ * @packageDocumentation @hidden
+ */
+
+/**
+ * Common type predicates for various data types.
+ */
+export type TypePredicateCommons = {
+  /**
+   * Checks if the value is a Date object.
+   * @param value The value to be checked.
+   * @returns True if the value is a Date object, false otherwise.
+   */
+  date: (value: any) => value is Date;
+  /**
+   * Checks if the value is an array.
+   * @param value The value to be checked.
+   * @returns True if the value is an array, false otherwise.
+   */
+  array: (value: any) => boolean;
+  /**
+   * Checks if the value is a string.
+   * @param value The value to be checked.
+   * @returns True if the value is a string, false otherwise.
+   */
+  string: (value: any) => value is string;
+  /**
+   * Checks if the value is a number.
+   * @param value The value to be checked.
+   * @returns True if the value is a number, false otherwise.
+   */
+  number: (value: any) => value is number;
+  /**
+   * Checks if the value is a boolean.
+   * @param value The value to be checked.
+   * @returns True if the value is a boolean, false otherwise.
+   */
+  boolean: (value: any) => value is boolean;
+  /**
+   * Checks if the value is an object.
+   * @param value The value to be checked.
+   * @returns True if the value is an object, false otherwise.
+   */
+  object: (value: any) => value is object;
+};
+
+/**
+ * Represents the data for a type predicate.
+ */
+export type TypePredicateData = TypePredicateCommons;
+
+/**
+ * Represents a key of the TypePredicateData object.
+ */
+export type TypePredicateKey = keyof TypePredicateData;
 
 /**
  * Represents a type predicate function.
@@ -32,6 +86,7 @@ const TYPE_PREDICATE_DATA: TypePredicateData = {
 /**
  * Retrieves the type predicate map.
  * @returns The type predicate map.
+ * @hidden
  */
 export function getTypePredicates(): TypePredicateData {
   return TYPE_PREDICATE_DATA;
@@ -42,6 +97,7 @@ export function getTypePredicates(): TypePredicateData {
  * @typeParam TName - type predicate key (includes commons and overrides)
  * @param type - The name of the type.
  * @param predicate - The type predicate function.
+ * @hidden
  */
 export function setTypePredicate<TName extends TypePredicateKey>(
   type: TName,
@@ -55,6 +111,7 @@ export function setTypePredicate<TName extends TypePredicateKey>(
  * @param type - The type to check against.
  * @param value - The value to check.
  * @returns void if the value matches the type, otherwise throws an error.
+ * @hidden
  */
 export function checkType(type: TypePredicateKey, value: any): void | never {
   if (value == null) return;
@@ -67,6 +124,7 @@ export function checkType(type: TypePredicateKey, value: any): void | never {
  * @param type - The type that is not assignable.
  * @param value - The value that the type is not assignable to.
  * @returns This function never returns a value.
+ * @hidden
  */
 export function handleMismatch(type: TypePredicateKey, value: any): never {
   throw new Error(`Type '${type}' is not assignable to type ${JSON.stringify(value)}`);
