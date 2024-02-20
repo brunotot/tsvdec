@@ -1,4 +1,5 @@
-import { Types } from "../utilities";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { type DecoratorArgs } from "./../decorators";
 
 /**
  * An overridable interface designed for specifying custom decorator args prop.
@@ -53,17 +54,6 @@ import { Types } from "../utilities";
  * const resolveDecoratorArgs = () => ({ someOtherProp });
  * const form = new Form(UserForm, { resolveDecoratorArgs });
  * ```
- * @see {@link DecoratorArgsType}
+ * @see {@link DecoratorArgs}
  */
 export interface DecoratorArgsOverride {}
-
-/**
- * Represents the type of a decorator `args` prop (defaulted to `Record<string, any>`).
- * @see {@link DecoratorArgsOverride}
- */
-export type DecoratorArgsType = Types.Override<
-  DecoratorArgsOverride,
-  Record<string, any>,
-  "Invalid type for DecoratorArgsOverride! If you encounter this error, ensure that the DecoratorArgsOverride type is a Record<string,any>."
-> &
-  Record<string, any>;

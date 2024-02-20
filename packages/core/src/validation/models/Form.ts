@@ -1,7 +1,8 @@
-import { getGlobalArgs, type DecoratorArgs } from "../../decorators";
+import { Configuration } from "../../config";
+import { type DecoratorArgs } from "../../decorators";
 import { EventEmitter } from "../../events";
 import { EventHandlers, getRegisteredEventHandlers } from "../../events/handlers/impl/register";
-import { getGlobalLocale, type Locale } from "../../localization";
+import { type Locale } from "../../localization";
 import { ClassReflectionService, FieldReflectionService } from "../../reflection";
 import {
   type StrategyDetailedErrorsResponse,
@@ -119,7 +120,7 @@ export class Form<TClass> {
     this.#eventHandlers = getRegisteredEventHandlers<TClass>(this, config?.asyncDelay ?? 500);
     this.#eventEmitter = this.#eventHandlers.asyncValidationComplete.emitter;
     this.#hostClass = clazz;
-    this.locale = config?.locale ?? getGlobalLocale();
+    this.locale = config?.locale ?? Configuration.globalLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#defaultValue = config?.defaultValue ?? (toClass(clazz) as Types.Payload<TClass>);
     this.#fieldValidatorMetaService = FieldReflectionService.inject(clazz, this.#eventEmitter);
@@ -130,7 +131,7 @@ export class Form<TClass> {
   }
 
   get #globalDecoratorArgs() {
-    return getGlobalArgs();
+    return Configuration.decoratorArgsResolver()();
   }
 
   /**

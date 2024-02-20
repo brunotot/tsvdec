@@ -45,5 +45,6 @@ export namespace Translations {
 /**
  * Represents the union of all predefined validator decorator keys (and extras) which `@tsvdec/core` provides.
  * For example, {@link Alpha @Alpha\(\)} decorator has a key defined as {@link DecoratorKeys.ALPHA ALPHA}.
+ * @hidden
  */
 export type TranslationKey = keyof typeof Translations.English;

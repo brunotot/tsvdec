@@ -1,4 +1,5 @@
-import { Types } from "../utilities";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { type DecoratorGroup } from "./../decorators";
 
 /**
  * An overridable interface designed for specifying custom decorator group prop.
@@ -23,21 +24,6 @@ import { Types } from "../utilities";
  *   field!: string;
  * }
  * ```
- * @see {@link DecoratorGroupType}
+ * @see {@link DecoratorGroup}
  */
 export interface DecoratorGroupOverride {}
-
-/**
- * Represents the type of a decorator `group` prop (defaulted to `string`).
- * @remarks
- * In your application, you'll likely encounter numerous instances where your form class model
- * is utilized for both creation and update actions. By employing the `DecoratorGroupOverride`,
- * you can clearly define the group type for all existing and subsequent decorators as either `"CREATE"`
- * or `"UPDATE"`. This approach ensures accuracy and prevents any potential errors.
- * @see {@link DecoratorGroupOverride}
- */
-export type DecoratorGroupType = Types.Override<
-  DecoratorGroupOverride,
-  string,
-  "Invalid type for DecoratorGroupOverride! If you encounter this error, ensure that the DecoratorGroupOverride type is a string."
->;

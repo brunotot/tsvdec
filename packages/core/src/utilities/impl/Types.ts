@@ -80,25 +80,34 @@ export type Purify<T> = Exclude<T, never>;
 
 /**
  * Represents a type override.
- * @typeParam Placeholder - The placeholder type.
- * @typeParam Constraint - The constraint type.
- * @typeParam Error - The error message type.
+ * @typeParam OverridableInterface - The overridable interface type.
+ * @typeParam ConstraintType - The constraint type.
+ * @typeParam CompileError - The error message type.
  * @typeParam Default - The default type.
  */
 export type Override<
-  Placeholder,
-  Constraint = any,
-  Error extends string = "",
-  Default = Constraint,
-> = Placeholder extends {
+  OverridableInterface,
+  ConstraintType = any,
+  CompileError extends string = "",
+  DefaultType = ConstraintType,
+> = OverridableInterface extends {
   type: infer T;
 }
-  ? T extends Constraint
+  ? T extends ConstraintType
     ? T
-    : `${Error}`
-  : Default;
+    : `${CompileError}`
+  : DefaultType;
 
-export import PrimitiveUnion = Overrides.PrimitiveUnionType;
+/**
+ * Represents primitive data types including `string`, `number`, `boolean`, `bigint`, `Date`, and custom primitives defined in `PrimitiveUnionOverride`.
+ * @see {@link Overrides.PrimitiveUnionOverride}
+ */
+export type PrimitiveUnion = Override<
+  Overrides.PrimitiveUnionOverride,
+  Class<any>,
+  "Invalid type for PrimitiveUnionOverride! If you encounter this error, ensure that the PrimitiveUnionOverride type is Class<any>.",
+  string | number | boolean | bigint | Date
+>;
 
 export type Object = Record<string | number | symbol, any>;
 

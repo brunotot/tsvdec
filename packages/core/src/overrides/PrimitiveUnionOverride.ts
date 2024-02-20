@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { type StrategyEvaluator } from "../strategy";
-import { Types } from "../utilities";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { type Types } from "./../utilities";
 
 /**
  * An overridable interface designed for disabling nested validation on custom object types.
@@ -90,17 +91,6 @@ import { Types } from "../utilities";
  * const coordinateErrors = errors.coordinate;
  * console.log(coordinateErrors); // { root: [], data: { x: ["Minimum X is 10"], y: [] } }
  * ```
- * @see {@link PrimitiveUnionType}
+ * @see {@link Types.PrimitiveUnion}
  */
 export interface PrimitiveUnionOverride {}
-
-/**
- * Represents primitive data types including `string`, `number`, `boolean`, `bigint`, `Date`, and custom primitives defined in `PrimitiveUnionOverride`.
- * @see {@link PrimitiveUnionOverride}
- */
-export type PrimitiveUnionType = Types.Override<
-  PrimitiveUnionOverride,
-  Types.Class<any>,
-  "Invalid type for PrimitiveUnionOverride! If you encounter this error, ensure that the PrimitiveUnionOverride type is Class<any>.",
-  string | number | boolean | bigint | Date
->;

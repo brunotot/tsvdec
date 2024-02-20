@@ -1,4 +1,5 @@
-import { getGlobalLocale, type Locale } from "../../localization/resolver/LocaleResolver";
+import { Configuration } from "../../config";
+import { type Locale } from "../../localization/resolver/LocaleResolver";
 import { TranslationKey, Translations } from "../translations";
 
 /**
@@ -23,7 +24,7 @@ const MessageCollection = {
  * @hidden
  */
 export function readMessage(messageKey: TranslationKey, locale?: Locale | null): string {
-  const computedLocale = locale ?? getGlobalLocale();
+  const computedLocale = locale ?? Configuration.globalLocale();
   const computedLocaleMessages = MessageCollection[computedLocale];
   const decoratorMessage = computedLocaleMessages[messageKey];
   return decoratorMessage;

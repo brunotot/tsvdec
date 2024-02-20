@@ -28,7 +28,7 @@ export function makeValidator<This, Value, Identifier extends string>(
     return {
       key: buildKeyProp(options, key),
       valid: data.valid,
-      message: buildMessageProp(options, meta.locale, data.message),
+      message: buildMessageProp(options, meta.locale, data.message, meta.args),
     };
   }, buildDecoratorMeta(options));
 }

@@ -1,12 +1,23 @@
-import { Locale, getMessageParser } from "../../../localization";
+import { Configuration } from "../../../config";
+import { DecoratorArgs } from "../../../decorators";
+import { Locale } from "../../../localization";
 import * as Overrides from "../../../overrides";
+import { Types } from "../../../utilities";
 import { DecoratorOptions } from "../DecoratorOptions";
 
-export import DecoratorMessage = Overrides.DecoratorMessageType;
+/**
+ * Represents the type of the message prop used by decorators and localization service.
+ * @see {@link Overrides.DecoratorMessageOverride}
+ */
+export type DecoratorMessage = Types.Override<
+  Overrides.DecoratorMessageOverride,
+  string,
+  "Invalid type for DecoratorMessageOverride! If you encounter this error, ensure that the DecoratorMessageOverride type is a string."
+>;
 
-function parseMessage(locale: Locale, message: string, args: Record<string, string> = {}): string {
+function parseMessage(locale: Locale, message: string, args: DecoratorArgs = {}): string {
   try {
-    return getMessageParser()(locale, message, args);
+    return Configuration.messageParser()(locale, message, args);
   } catch (error) {
     const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
     const descr =
@@ -31,7 +42,7 @@ export function buildMessageProp(
   options: DecoratorOptions | undefined,
   locale: Locale,
   defaultMessage: string = "",
-  args: Record<string, string> = {},
+  args: DecoratorArgs = {},
 ): string {
   if (!options?.message) return defaultMessage ?? "";
   return parseMessage(locale, options.message, args);

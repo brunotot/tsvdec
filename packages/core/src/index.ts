@@ -2,8 +2,10 @@
  * @packageDocumentation tsvdec - Core module
  */
 
+export * from "./overrides";
+export * as Overrides from "./overrides";
+
 export * from "./config";
-export * as Config from "./config";
 
 export * from "./utilities";
 export * as Utilities from "./utilities";

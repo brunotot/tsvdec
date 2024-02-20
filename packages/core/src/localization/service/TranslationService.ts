@@ -45,6 +45,7 @@ function sprintf(str: string, ...args: any[]): string {
  * ```typescript
  * const greeting = translate("en", "Hello", "John Doe");  // "Hello John Doe! How are you?"
  * ```
+ * @hidden
  */
 export function translate(
   locale: Locale | null | undefined,

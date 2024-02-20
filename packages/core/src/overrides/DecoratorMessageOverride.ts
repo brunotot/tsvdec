@@ -1,4 +1,5 @@
-import { Types } from "../utilities";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { type DecoratorMessage } from "./../decorators";
 
 /**
  * An overridable interface designed for specifying custom decorator message prop.
@@ -39,16 +40,6 @@ import { Types } from "../utilities";
  *   // message: keyof typeof Messages
  * }
  * ```
- * @see {@link DecoratorMessageType}
+ * @see {@link DecoratorMessage}
  */
 export interface DecoratorMessageOverride {}
-
-/**
- * Represents the type of the message prop used by decorators and localization service.
- * @see {@link DecoratorMessageOverride}
- */
-export type DecoratorMessageType = Types.Override<
-  DecoratorMessageOverride,
-  string,
-  "Invalid type for DecoratorMessageOverride! If you encounter this error, ensure that the DecoratorMessageOverride type is a string."
->;
