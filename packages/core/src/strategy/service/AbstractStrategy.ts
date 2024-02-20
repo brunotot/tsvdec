@@ -1,11 +1,11 @@
 import { type DecoratorArgs } from "../../decorators";
 import { type EventEmitter } from "../../events";
 import { type Locale } from "../../localization";
-import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
 import {
-  FieldValidatorMetaService,
-  type ControlDescriptor,
-} from "../../reflection/service/impl/FieldValidatorMetaService";
+  ClassReflectionService,
+  FieldReflectionService,
+  type ReflectionDescriptor,
+} from "../../reflection";
 import { Form } from "../../validation/models/Form";
 import { type ValidationMetadata } from "../../validation/models/ValidationMetadata";
 import type { FormConfig, ValidationResult } from "../../validation/types";
@@ -21,9 +21,9 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
   readonly #groups: string[];
   readonly #engineCfg: FormConfig<any>;
   readonly #classRules: ValidationMetadata<TClass>;
-  readonly #classDescriptor: ControlDescriptor<any, any>;
+  readonly #classDescriptor: ReflectionDescriptor<any, any>;
   readonly #defaultParent: TClass;
-  #fieldDescriptor?: ControlDescriptor<TClass, any>;
+  #fieldDescriptor?: ReflectionDescriptor<TClass, any>;
   #eventEmitter: EventEmitter;
 
   /**
@@ -33,7 +33,7 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
    * @param defaultValue The default value for the parent object.
    */
   constructor(
-    classDescriptor: ControlDescriptor<TClass, any>,
+    classDescriptor: ReflectionDescriptor<TClass, any>,
     defaultValue: TClass,
     groups: string[],
     locale: Locale,
@@ -50,10 +50,10 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
       groups: this.groups,
       asyncDelay,
     };
-    this.#classRules = ClassValidatorMetaService.inject(
+    this.#classRules = ClassReflectionService.inject(
       this.#classDescriptor.hostClass!,
       this.eventEmitter,
-    ).data;
+    ).value;
   }
 
   public set eventEmitter(v: EventEmitter) {
@@ -84,9 +84,9 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
     return this.#locale;
   }
 
-  protected get fieldDescriptor(): ControlDescriptor<TClass, any, undefined> {
+  protected get fieldDescriptor(): ReflectionDescriptor<TClass, any, undefined> {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
-    this.#fieldDescriptor = FieldValidatorMetaService.inject(
+    this.#fieldDescriptor = FieldReflectionService.inject(
       this.#classDescriptor.hostClass!,
       this.#eventEmitter,
     ).getUntypedDescriptor(this.fieldName, this.eventEmitter);

@@ -1,2 +1,2 @@
-export * from "./AbstractMetaService";
+export * from "./AbstractReflectionService";
 export * from "./impl";

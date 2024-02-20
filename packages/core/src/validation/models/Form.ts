@@ -2,8 +2,7 @@ import { getGlobalArgs, type DecoratorArgs } from "../../decorators";
 import { EventEmitter } from "../../events";
 import { EventHandlers, getRegisteredEventHandlers } from "../../events/handlers/impl/register";
 import { getGlobalLocale, type Locale } from "../../localization";
-import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
-import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
+import { ClassReflectionService, FieldReflectionService } from "../../reflection";
 import {
   type StrategyDetailedErrorsResponse,
   type StrategyErrors,
@@ -57,7 +56,7 @@ export function toClass<const TClass extends Types.Class<any>>(
     }
 
     const entries = Object.entries<any>(object ?? {});
-    const meta = FieldValidatorMetaService.inject(clazz, EventEmitter.EMPTY);
+    const meta = FieldReflectionService.inject(clazz, EventEmitter.EMPTY);
     const data: any = {};
     for (const [key, value] of entries) {
       const descriptor = meta.getUntypedDescriptor(key);
@@ -87,9 +86,8 @@ export function toClass<const TClass extends Types.Class<any>>(
  * @remarks This class uses `Cache` class to store validation results for better performance. It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
 export class Form<TClass> {
-  // @ts-expect-error Error!
-  readonly #classValidatorMetaService: ClassValidatorMetaService<TClass>;
-  readonly #fieldValidatorMetaService: FieldValidatorMetaService;
+  readonly #classValidatorMetaService: ClassReflectionService<Types.Class<TClass>>;
+  readonly #fieldValidatorMetaService: FieldReflectionService;
   readonly #groups: string[];
   readonly #defaultValue: Types.Payload<TClass>;
   readonly #cache: Cache<FormValidateResponse<TClass>, Types.Payload<TClass>>;
@@ -124,8 +122,8 @@ export class Form<TClass> {
     this.locale = config?.locale ?? getGlobalLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#defaultValue = config?.defaultValue ?? (toClass(clazz) as Types.Payload<TClass>);
-    this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz, this.#eventEmitter);
-    this.#classValidatorMetaService = ClassValidatorMetaService.inject(clazz, this.#eventEmitter);
+    this.#fieldValidatorMetaService = FieldReflectionService.inject(clazz, this.#eventEmitter);
+    this.#classValidatorMetaService = ClassReflectionService.inject(clazz, this.#eventEmitter);
     this.#cache = new Cache((state: Types.Payload<TClass>, args: DecoratorArgs) =>
       this.validate.bind(this)(state, args),
     );
@@ -222,7 +220,7 @@ export class Form<TClass> {
     const detailedErrors: any = {};
 
     const classValidators = this.#classValidatorMetaService.validateIf(state)
-      ? this.#classValidatorMetaService.data.contents
+      ? this.#classValidatorMetaService.value.contents
       : [];
     const classReflectionRule = new ValidationMetadata(classValidators);
     const classValidationErrors = classReflectionRule.validate(

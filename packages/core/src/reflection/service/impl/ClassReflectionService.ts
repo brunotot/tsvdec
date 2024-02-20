@@ -4,28 +4,19 @@ import {
   DEFAULT_DECORATOR_META,
 } from "../../../decorators/factory/DecoratorFactoryMeta";
 import { EventEmitter } from "../../../events";
-import {
-  AbstractMetaService,
-  type MetaStrategy,
-} from "../../../reflection/service/AbstractMetaService";
 import { type Types } from "../../../utilities";
 import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
 import type { ValidationEvaluator } from "../../../validation/types";
-
-/**
- * Unwraps a MetaStrategy type to its inferred class.
- * @typeParam TStrategy - The MetaStrategy type to unwrap.
- */
-export type UnwrapMetaStrategy<TStrategy extends MetaStrategy> =
-  TStrategy extends Types.Class<infer TInferredClass> ? TInferredClass : any;
+import type { ReflectionInjectStrategy } from "../../types";
+import { AbstractReflectionService } from "../AbstractReflectionService";
 
 /**
  * A configurer class which allows for easier manipulation of decorated class validators and corresponding metadata
  * @remarks This class is responsible for managing metadata related to validation (at class level). It provides methods to add validators and read them.
  */
-export class ClassValidatorMetaService<TStrategy extends MetaStrategy> extends AbstractMetaService<
-  ValidationMetadata<any>
-> {
+export class ClassReflectionService<
+  TStrategy extends ReflectionInjectStrategy,
+> extends AbstractReflectionService<ValidationMetadata> {
   eventEmitter!: EventEmitter;
   validateIf: DecoratorValidateIf<Types.UnwrapClass<Types.Class<any>>>;
 
@@ -34,15 +25,15 @@ export class ClassValidatorMetaService<TStrategy extends MetaStrategy> extends A
    * @param strategy - The strategy to inject.
    * @returns A new instance of ClassValidatorMetaService.
    */
-  public static inject<T extends MetaStrategy>(
-    strategy: T,
+  public static inject<TStrategy extends ReflectionInjectStrategy>(
+    strategy: TStrategy,
     eventEmitter: EventEmitter,
-  ): ClassValidatorMetaService<UnwrapMetaStrategy<T>> {
-    return new ClassValidatorMetaService<UnwrapMetaStrategy<T>>(strategy, eventEmitter);
+  ): ClassReflectionService<TStrategy> {
+    return new ClassReflectionService<TStrategy>(strategy, eventEmitter);
   }
 
-  private constructor(strategy: MetaStrategy, eventEmitter: EventEmitter) {
-    super(ClassValidatorMetaService.name, strategy, () => new ValidationMetadata());
+  private constructor(strategy: ReflectionInjectStrategy, eventEmitter: EventEmitter) {
+    super(ClassReflectionService.name, strategy, () => new ValidationMetadata());
     this.eventEmitter = eventEmitter;
     this.validateIf = () => true;
   }
@@ -56,6 +47,6 @@ export class ClassValidatorMetaService<TStrategy extends MetaStrategy> extends A
     validate: ValidationEvaluator<Types.UnwrapClass<TStrategy>>,
     meta: DecoratorMeta<any> = DEFAULT_DECORATOR_META,
   ): void {
-    this.data.add({ validate, meta });
+    this.value.add({ validate, meta });
   }
 }

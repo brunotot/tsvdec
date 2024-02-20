@@ -1,5 +1,5 @@
 import { EventEmitter } from "../../../events";
-import { FieldValidatorMetaService } from "../../../reflection";
+import { FieldReflectionService } from "../../../reflection";
 import { type DecoratorArgs } from "../../validators/utilities/DecoratorArgs";
 
 /**
@@ -24,7 +24,7 @@ export type FieldDecorator<This, Value> = ((
  * @param args The decorator arguments.
  */
 export type FieldDecoratorSupplier<This, Value> = ((
-  meta: FieldValidatorMetaService,
+  meta: FieldReflectionService,
   name: string,
   context: FieldDecoratorCtx<This, Value>,
   args: DecoratorArgs,
@@ -59,7 +59,7 @@ export function createFieldDecorator<This, Value>(
     const nameEval = isStage2 ? context : context.name;
     const strategyEval = isStage2 ? target.constructor : context;
     const contextEval = isStage2 ? { name: context, metadata: {} } : context;
-    const metaService = FieldValidatorMetaService.inject(strategyEval, EventEmitter.EMPTY);
+    const metaService = FieldReflectionService.inject(strategyEval, EventEmitter.EMPTY);
     supplier(metaService, String(nameEval), contextEval as any, {});
   };
 }

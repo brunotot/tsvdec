@@ -12,7 +12,7 @@ import type { ValidationMetadataEntry, ValidationResult } from "../../validation
  * This class is responsible for storing and applying validation rules to a specific field.
  * It allows you to validate the field against a payload and a set of validation groups.
  */
-export class ValidationMetadata<TFieldType> {
+export class ValidationMetadata<TFieldType = any> {
   readonly #contents: Array<ValidationMetadataEntry<TFieldType, any>>;
 
   /**

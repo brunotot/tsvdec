@@ -2,7 +2,7 @@
  * @packageDocumentation Runtime utilities for working with **Class** evaluations.
  */
 
-import { MetaStrategy } from "../../reflection";
+import { ReflectionInjectStrategy } from "../../reflection";
 import * as Types from "../../utilities/impl/Types";
 
 function getGetterKeys(instance: object): string[] {
@@ -47,7 +47,7 @@ export function getFieldDescriptor<TClass>(
  * @param classOrContext - The strategy to get metadata for.
  * @returns The metadata object.
  */
-export function getMetadata(classOrContext: MetaStrategy): DecoratorMetadataObject {
+export function getMetadata(classOrContext: ReflectionInjectStrategy): DecoratorMetadataObject {
   if (isClass(classOrContext)) {
     (Symbol as any).metadata ??= Symbol("Symbol.metadata");
     classOrContext[Symbol.metadata] ??= {};

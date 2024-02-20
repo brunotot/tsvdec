@@ -1,5 +1,5 @@
 import { EventEmitter } from "../../../events";
-import { ClassValidatorMetaService } from "../../../reflection";
+import { ClassReflectionService } from "../../../reflection";
 import { type Types } from "../../../utilities";
 
 /**
@@ -26,7 +26,7 @@ export type ClassDecorator<TClass extends Types.Class> = ((
  * @returns The modified class or undefined/void.
  */
 export type ClassDecoratorSupplier<TClass extends Types.Class> = ((
-  meta: ClassValidatorMetaService<TClass>,
+  meta: ClassReflectionService<TClass>,
   baseClass: TClass,
   context: ClassDecoratorCtx<TClass>,
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
@@ -50,7 +50,7 @@ export function createClassDecorator<TClass extends Types.Class>(
 ): ClassDecorator<any> {
   return function (baseClass, context) {
     return supplier(
-      ClassValidatorMetaService.inject(context, EventEmitter.EMPTY),
+      ClassReflectionService.inject<TClass>(context as any, EventEmitter.EMPTY),
       baseClass,
       context,
     );
