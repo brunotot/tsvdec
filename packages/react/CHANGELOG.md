@@ -1,5 +1,16 @@
 # @tsvdec/react
 
+## 1.0.0
+
+### Minor Changes
+
+- dce7b3b: Rework exporting
+
+### Patch Changes
+
+- Updated dependencies [dce7b3b]
+  - @tsvdec/core@0.1.0
+
 ## 0.0.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @tsvdec/core
 
+## 0.1.0
+
+### Minor Changes
+
+- dce7b3b: Rework exporting
+
 ## 0.0.7
 
 ### Patch Changes
