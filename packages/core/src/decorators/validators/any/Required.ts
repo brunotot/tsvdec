@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
@@ -25,7 +25,7 @@ function isRequiredValid<T>(value: T | undefined): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.REQUIRED}
+ * @key {@link DecoratorValidationKeys.REQUIRED}
  * @typeParam T - The type of the decorated property (any class field).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use with class fields.
@@ -63,8 +63,8 @@ function isRequiredValid<T>(value: T | undefined): boolean {
 export function Required<This, Value extends Types.Optional>(
   options?: DecoratorOptions<This, Value>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.REQUIRED, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.REQUIRED, (value, { locale }) => ({
     valid: isRequiredValid(value),
-    message: translate(locale, DecoratorKeys.REQUIRED),
+    message: translate(locale, DecoratorValidationKeys.REQUIRED),
   }));
 }

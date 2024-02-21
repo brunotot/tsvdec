@@ -12,7 +12,7 @@ import { PrimitiveStrategy } from "./PrimitiveStrategy";
  * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.
  * @remarks This object provides a way to look up the `ValidationStrategy` class that should be used for a given reflection strategy type.
  */
-export const StrategyData = {
+export const StrategyResolverData = {
   UNKNOWN: (() => {}) as any,
   [PrimitiveStrategy.Name]: PrimitiveStrategy.StrategyResolver,
   [ObjectStrategy.Name]: ObjectStrategy.StrategyResolver,

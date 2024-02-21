@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArrayEmpty} validator. */
 function isArrayEmptyValid(array: any[]): boolean {
@@ -15,7 +15,7 @@ function isArrayEmptyValid(array: any[]): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_EMPTY}
+ * @key {@link DecoratorValidationKeys.ARRAY_EMPTY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -63,8 +63,8 @@ function isArrayEmptyValid(array: any[]): boolean {
 export function ArrayEmpty<This, Item, Value extends Item[]>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_EMPTY, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_EMPTY, (value, { locale }) => ({
     valid: isArrayEmptyValid(value),
-    message: translate(locale, DecoratorKeys.ARRAY_EMPTY),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_EMPTY),
   }));
 }

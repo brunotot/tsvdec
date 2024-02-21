@@ -1,7 +1,5 @@
 import { DecoratorOptions } from "../DecoratorOptions";
 
-export type DecoratorKey = string;
-
 /**
  * Returns the key based on the provided options or the default key.
  * @param options - The options object.

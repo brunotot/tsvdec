@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArrayOne} validator. */
 function isArrayOneValid<K, T extends K[]>(array: T, predicate: Types.ArrayPredicate<K>): boolean {
@@ -15,7 +15,7 @@ function isArrayOneValid<K, T extends K[]>(array: T, predicate: Types.ArrayPredi
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_ONE}
+ * @key {@link DecoratorValidationKeys.ARRAY_ONE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.filter()` call.
@@ -65,8 +65,8 @@ export function ArrayOne<This, Item, Value extends Item[]>(
   predicate: Types.ArrayPredicate<Item>,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_ONE, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_ONE, (value, { locale }) => ({
     valid: isArrayOneValid(value, predicate),
-    message: translate(locale, DecoratorKeys.ARRAY_ONE),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_ONE),
   }));
 }

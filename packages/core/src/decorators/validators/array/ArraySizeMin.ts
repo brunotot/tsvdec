@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArraySizeMin} validator. */
 function isArraySizeMinValid(array: any[], min: number): boolean {
@@ -15,7 +15,7 @@ function isArraySizeMinValid(array: any[], min: number): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_SIZE_MIN}
+ * @key {@link DecoratorValidationKeys.ARRAY_SIZE_MIN}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.
@@ -65,8 +65,8 @@ export function ArraySizeMin<This, Item, Value extends Item[]>(
   min: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_SIZE_MIN, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_SIZE_MIN, (value, { locale }) => ({
     valid: isArraySizeMinValid(value, min),
-    message: translate(locale, DecoratorKeys.ARRAY_SIZE_MIN, min),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_SIZE_MIN, min),
   }));
 }

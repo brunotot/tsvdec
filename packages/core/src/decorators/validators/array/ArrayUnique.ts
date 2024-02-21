@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { Objects, TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArrayUnique} validator. */
 function isArrayUniqueValid(array: any[]): boolean {
@@ -28,7 +28,7 @@ function isArrayUniqueValid(array: any[]): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_UNIQUE}
+ * @key {@link DecoratorValidationKeys.ARRAY_UNIQUE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -76,8 +76,8 @@ function isArrayUniqueValid(array: any[]): boolean {
 export function ArrayUnique<This, Item, Value extends Item[]>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_UNIQUE, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_UNIQUE, (value, { locale }) => ({
     valid: isArrayUniqueValid(value),
-    message: translate(locale, DecoratorKeys.ARRAY_UNIQUE),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_UNIQUE),
   }));
 }

@@ -1,23 +1,19 @@
 import { Configuration } from "../../config";
+import type { DecoratorValidationResult } from "../../decorators";
 import { type DecoratorArgs } from "../../decorators";
 import { EventEmitter } from "../../events";
 import { EventHandlers, getRegisteredEventHandlers } from "../../events/handlers/impl/register";
 import { type Locale } from "../../localization";
 import { ClassReflectionService, FieldReflectionService } from "../../reflection";
+import { ValidationMetadataEntry } from "../../reflection/metadata";
 import {
   type StrategyDetailedErrorsResponse,
   type StrategyErrors,
   type StrategySimpleErrorsResponse,
 } from "../../strategy";
 import { type Types } from "../../utilities";
-import { Cache } from "../../validation/models/Cache";
-import { ValidationMetadata } from "../../validation/models/ValidationMetadata";
-import type {
-  AsyncEventResponseProps,
-  FormConfig,
-  FormValidateResponse,
-  ValidationResult,
-} from "../../validation/types";
+import { Cache } from "../../utilities/misc/Cache";
+import { FormErrors, FormProps, FormValidationResponse } from "../../validation/types";
 
 /**
  * Checks if an error object has errors.
@@ -91,7 +87,7 @@ export class Form<TClass> {
   readonly #fieldValidatorMetaService: FieldReflectionService;
   readonly #groups: string[];
   readonly #defaultValue: Types.Payload<TClass>;
-  readonly #cache: Cache<FormValidateResponse<TClass>, Types.Payload<TClass>>;
+  readonly #cache: Cache<FormValidationResponse<TClass>, Types.Payload<TClass>>;
   readonly #hostClass: Types.Class<TClass>;
   /** @hidden */
   readonly #eventHandlers: EventHandlers<TClass>;
@@ -116,7 +112,7 @@ export class Form<TClass> {
    * @param clazz - The class type to be processed.
    * @param config - Optional configuration settings.
    */
-  constructor(clazz: Types.Class<TClass>, config?: FormConfig<TClass>) {
+  constructor(clazz: Types.Class<TClass>, config?: FormProps<TClass>) {
     this.#eventHandlers = getRegisteredEventHandlers<TClass>(this, config?.asyncDelay ?? 500);
     this.#eventEmitter = this.#eventHandlers.asyncValidationComplete.emitter;
     this.#hostClass = clazz;
@@ -176,7 +172,7 @@ export class Form<TClass> {
   public getGlobalErrors(
     payload?: Types.Payload<TClass>,
     args: DecoratorArgs = {},
-  ): ValidationResult[] {
+  ): DecoratorValidationResult[] {
     return this.#cache.get("globalErrors", payload, args);
   }
 
@@ -211,7 +207,7 @@ export class Form<TClass> {
   public validate(
     payload?: Types.Payload<TClass>,
     decoratorArgs: Record<string, any> = {},
-  ): FormValidateResponse<TClass> {
+  ): FormValidationResponse<TClass> {
     const args = { ...this.#globalDecoratorArgs, ...decoratorArgs };
     // if (Objects.deepEquals(payload, this.#cache.payload)) return this.#cache.cache;
 
@@ -223,7 +219,7 @@ export class Form<TClass> {
     const classValidators = this.#classValidatorMetaService.validateIf(state)
       ? this.#classValidatorMetaService.value.contents
       : [];
-    const classReflectionRule = new ValidationMetadata(classValidators);
+    const classReflectionRule = new ValidationMetadataEntry(classValidators);
     const classValidationErrors = classReflectionRule.validate(
       state,
       state,
@@ -279,7 +275,7 @@ export class Form<TClass> {
     return stratImpl.test(payload[fieldName], payload, args);
   }
 
-  public registerAsync(handler: (props: AsyncEventResponseProps<TClass>) => void): void {
+  public registerAsync(handler: (props: FormErrors<TClass>) => void): void {
     this.#eventHandlers.asyncValidationComplete.listen(handler);
   }
 

@@ -1,9 +1,9 @@
 import { EventEmitter } from "../../events";
-import { StrategyData, StrategyKey } from "../../strategy";
-import { AbstractStrategy } from "../../strategy/service";
+import { StrategyKey, StrategyResolverData } from "../../strategy";
+import { AbstractStrategyResolver } from "../../strategy/service";
 import * as Strategies from "../../strategy/service/impl";
 import { Types } from "../../utilities";
-import { ValidationMetadata } from "../../validation/models/ValidationMetadata";
+import { ValidationMetadataEntry } from "../metadata";
 import { FieldReflectionService } from "../service/";
 import type {
   ReflectionDescriptorProps,
@@ -41,8 +41,8 @@ export class ReflectionDescriptor<
     this.eventEmitter = props.eventEmitter;
     this.validateIf = () => true;
     this.validations = props.validations ?? {
-      root: new ValidationMetadata(),
-      foreach: new ValidationMetadata(),
+      root: new ValidationMetadataEntry(),
+      foreach: new ValidationMetadataEntry(),
     };
   }
 
@@ -50,13 +50,13 @@ export class ReflectionDescriptor<
    * Gets the implementation of the reflection strategy.
    * @throws {Error} If the strategy is not implemented.
    */
-  public get StrategyImpl(): Types.Class<AbstractStrategy> {
+  public get StrategyImpl(): Types.Class<AbstractStrategyResolver> {
     const strategy = this.strategy;
-    if (!(strategy in StrategyData)) {
+    if (!(strategy in StrategyResolverData)) {
       const error = `Validation strategy not implemented for field type '${strategy}'`;
       throw new Error(error);
     }
-    return StrategyData[strategy];
+    return StrategyResolverData[strategy];
   }
 
   /**

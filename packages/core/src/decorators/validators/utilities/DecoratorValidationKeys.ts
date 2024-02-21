@@ -1,7 +1,7 @@
 /**
  * Defines the keys for various decorators exported by `@tsvdec/core`.
  */
-export const DecoratorKeys = {
+export const DecoratorValidationKeys = {
   /**
    * Represents the key identifier for `@Alpha()` decorator.
    */

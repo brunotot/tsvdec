@@ -8,7 +8,7 @@ import * as ForeachEnhancer from "./foreach";
 import * as ValidateClassIfEnhancer from "./validateClassIf";
 import * as ValidateFieldIfEnhancer from "./validateFieldIf";
 
-export namespace Enhancers {
+export namespace DecoratorEnhancers {
   export import attribute = AttributeEnhancer.attribute;
   export import foreach = ForeachEnhancer.foreach;
   export import validateClassIf = ValidateClassIfEnhancer.validateClassIf;

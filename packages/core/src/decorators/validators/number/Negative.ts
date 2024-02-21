@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link Negative} validator. */
 function isNegativeValid(num: Types.Optional<number>): boolean {
@@ -15,7 +15,7 @@ function isNegativeValid(num: Types.Optional<number>): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.NEGATIVE}
+ * @key {@link DecoratorValidationKeys.NEGATIVE}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
@@ -62,8 +62,8 @@ function isNegativeValid(num: Types.Optional<number>): boolean {
 export function Negative<This, Value extends Types.Optional<number>>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.NEGATIVE, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.NEGATIVE, (value, { locale }) => ({
     valid: isNegativeValid(value),
-    message: translate(locale, DecoratorKeys.NEGATIVE),
+    message: translate(locale, DecoratorValidationKeys.NEGATIVE),
   }));
 }

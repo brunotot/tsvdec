@@ -1,12 +1,12 @@
 import { EventEmitter } from "../events";
+import { ValidationMetadataEntry } from "../reflection";
 import { Types } from "../utilities";
-import { ValidationMetadata } from "../validation";
 
 export type ReflectionInjectStrategy = Types.Class<any> | DecoratorContext;
 
 export type ReflectionFieldValidation<FieldType> = {
-  root: ValidationMetadata<FieldType>;
-  foreach: ValidationMetadata<FieldType>;
+  root: ValidationMetadataEntry<FieldType>;
+  foreach: ValidationMetadataEntry<FieldType>;
 };
 
 /**

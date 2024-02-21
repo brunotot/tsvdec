@@ -1,5 +1,5 @@
-import type { ValidationEvaluator } from "../../../validation/types";
 import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "../../factory/DecoratorFactoryMeta";
+import type { DecoratorValidationHandler } from "../../validators/utilities/DecoratorValidationHandler";
 import { createFieldDecorator, type FieldDecorator } from "./createFieldDecorator";
 
 /**
@@ -27,7 +27,7 @@ import { createFieldDecorator, type FieldDecorator } from "./createFieldDecorato
  * ```
  */
 export function createFieldValidator<This, Value>(
-  validate: ValidationEvaluator<Value>,
+  validate: DecoratorValidationHandler<Value>,
   decoratorMeta: DecoratorMeta<This> = DEFAULT_DECORATOR_META,
 ): FieldDecorator<This, Value> {
   return createFieldDecorator<This, Value>((meta, property) => {

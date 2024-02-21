@@ -1,4 +1,4 @@
-import { Types, ValidationResult } from "@tsvdec/core";
+import { DecoratorValidationResult, Types } from "@tsvdec/core";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FormContext, FormProviderProps } from "../../components/FormProvider";
 import { useChangeHandlers } from "../useChangeHandlers";
@@ -151,21 +151,21 @@ export function useForm<TClass>(
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function clearErrors(data: Record<string, any>): Record<string, any> {
-  function isEmptyArrayStringOrValidationResult(
+  function isEmptyArrayStringOrDecoratorValidationResult(
     value: any,
-  ): value is string[] | ValidationResult[] {
+  ): value is string[] | DecoratorValidationResult[] {
     return (
       Array.isArray(value) &&
       (value.length === 0 ||
         typeof value[0] === "string" ||
-        (value[0] as ValidationResult) !== undefined)
+        (value[0] as DecoratorValidationResult) !== undefined)
     );
   }
 
   const obj = {} as any;
   Object.keys(data).forEach(key => {
-    if (isEmptyArrayStringOrValidationResult(data[key])) {
-      // Empty the array if it's an Array<string> or Array<ValidationResult>
+    if (isEmptyArrayStringOrDecoratorValidationResult(data[key])) {
+      // Empty the array if it's an Array<string> or Array<DecoratorValidationResult>
       obj[key] = [];
     } else if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
       // Recurse into non-array objects

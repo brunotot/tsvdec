@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link Digits} validator. */
 function isDigitsValid(number: Types.Optional<number>, ints: number, decs: number): boolean {
@@ -26,7 +26,7 @@ function isDigitsValid(number: Types.Optional<number>, ints: number, decs: numbe
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.DIGITS}
+ * @key {@link DecoratorValidationKeys.DIGITS}
  * @typeParam T - The type of the number property.
  * @param intsLimit - The maximum number of allowed integer digits.
  * @param decimalsLimit - The maximum number of allowed decimal digits.
@@ -77,8 +77,8 @@ export function Digits<This, Value extends Types.Optional<number>>(
   decimalsLimit: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.DIGITS, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.DIGITS, (value, { locale }) => ({
     valid: isDigitsValid(value, intsLimit, decimalsLimit),
-    message: translate(locale, DecoratorKeys.DIGITS, intsLimit, decimalsLimit),
+    message: translate(locale, DecoratorValidationKeys.DIGITS, intsLimit, decimalsLimit),
   }));
 }

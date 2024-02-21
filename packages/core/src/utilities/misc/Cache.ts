@@ -1,4 +1,4 @@
-import { Objects, Types } from "../../utilities";
+import { Objects, Types } from "..";
 
 /**
  * A generic caching utility class used by `ValidationEngine`.

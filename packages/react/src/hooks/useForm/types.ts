@@ -3,8 +3,8 @@ import {
   Locale,
   StrategyDetailedErrorsResponse,
   StrategySimpleErrorsResponse,
+  type DecoratorValidationResult,
   type Types,
-  type ValidationResult,
 } from "@tsvdec/core";
 import { type Dispatch, type SetStateAction } from "react";
 import { type FormProviderProps } from "../../components";
@@ -37,7 +37,7 @@ export type UseFormData<TClass> = {
   onSubmit: () => Promise<void>;
   mutations: UseFormChangeHandlerMap<Types.Payload<TClass>>;
   providerProps: Omit<FormProviderProps, "children">;
-  globalErrors: ValidationResult[];
+  globalErrors: DecoratorValidationResult[];
   errors: StrategySimpleErrorsResponse<TClass>;
   detailedErrors: StrategyDetailedErrorsResponse<TClass>;
   reset: UseResetReturn<TClass>;

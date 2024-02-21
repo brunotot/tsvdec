@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Alpha } from "../../decorators";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DecoratorKeys } from "../../decorators/validators/utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../../decorators/validators/utilities/DecoratorValidationKeys";
 
 import de from "./de";
 import en from "./en";
@@ -44,7 +44,7 @@ export namespace Translations {
 
 /**
  * Represents the union of all predefined validator decorator keys (and extras) which `@tsvdec/core` provides.
- * For example, {@link Alpha @Alpha\(\)} decorator has a key defined as {@link DecoratorKeys.ALPHA ALPHA}.
+ * For example, {@link Alpha @Alpha\(\)} decorator has a key defined as {@link DecoratorValidationKeys.ALPHA ALPHA}.
  * @hidden
  */
 export type TranslationKey = keyof typeof Translations.English;

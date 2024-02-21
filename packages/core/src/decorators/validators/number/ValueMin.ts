@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ValueMin} validator. */
 function isValueMinValid(num: Types.Optional<number>, min: number): boolean {
@@ -15,7 +15,7 @@ function isValueMinValid(num: Types.Optional<number>, min: number): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.VALUE_MIN}
+ * @key {@link DecoratorValidationKeys.VALUE_MIN}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -64,8 +64,8 @@ export function ValueMin<This, Value extends Types.Optional<number>>(
   min: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.VALUE_MIN, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.VALUE_MIN, (value, { locale }) => ({
     valid: isValueMinValid(value, min),
-    message: translate(locale, DecoratorKeys.VALUE_MIN, min),
+    message: translate(locale, DecoratorValidationKeys.VALUE_MIN, min),
   }));
 }

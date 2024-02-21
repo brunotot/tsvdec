@@ -1,3 +1,4 @@
+import type { DecoratorValidationHandler } from "../../../decorators";
 import { FieldDecoratorCtx } from "../../../decorators";
 import {
   DecoratorMeta,
@@ -5,7 +6,6 @@ import {
 } from "../../../decorators/factory/DecoratorFactoryMeta";
 import { EventEmitter } from "../../../events";
 import { Classes, type Types } from "../../../utilities";
-import type { ValidationEvaluator } from "../../../validation/types";
 import { ReflectionDescriptor } from "../../models";
 import type { ReflectionInjectStrategy } from "../../types";
 import { AbstractReflectionService } from "../AbstractReflectionService";
@@ -49,7 +49,7 @@ export class FieldReflectionService extends AbstractReflectionService<
    */
   addValidator(
     field: string,
-    validate: ValidationEvaluator<any>,
+    validate: DecoratorValidationHandler<any>,
     meta: DecoratorMeta<any> = DEFAULT_DECORATOR_META,
   ): void {
     this.getUntypedDescriptor(field).validations.root.add({ validate, meta });

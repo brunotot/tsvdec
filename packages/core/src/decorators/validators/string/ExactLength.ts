@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ExactLength} validator. */
 function isExactLengthValid(value: Types.Optional<string>, exact: number): boolean {
@@ -15,7 +15,7 @@ function isExactLengthValid(value: Types.Optional<string>, exact: number): boole
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.EXACT_LENGTH}
+ * @key {@link DecoratorValidationKeys.EXACT_LENGTH}
  * @typeParam T - The type of the string property.
  * @param exact - Exact length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -61,8 +61,8 @@ export function ExactLength<This, Value extends Types.Optional<string>>(
   exact: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.EXACT_LENGTH, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.EXACT_LENGTH, (value, { locale }) => ({
     valid: isExactLengthValid(value, exact),
-    message: translate(locale, DecoratorKeys.EXACT_LENGTH, exact),
+    message: translate(locale, DecoratorValidationKeys.EXACT_LENGTH, exact),
   }));
 }

@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link AssertTrue} validator. */
 function isAssertTrueValid(value: boolean): boolean {
@@ -15,7 +15,7 @@ function isAssertTrueValid(value: boolean): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ASSERT_TRUE}
+ * @key {@link DecoratorValidationKeys.ASSERT_TRUE}
  * @typeParam T - The type of the decorated property (boolean).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `boolean`.
@@ -62,8 +62,8 @@ function isAssertTrueValid(value: boolean): boolean {
 export function AssertTrue<This, Value extends boolean>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ASSERT_TRUE, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ASSERT_TRUE, (value, { locale }) => ({
     valid: isAssertTrueValid(value),
-    message: translate(locale, DecoratorKeys.ASSERT_TRUE),
+    message: translate(locale, DecoratorValidationKeys.ASSERT_TRUE),
   }));
 }

@@ -1,12 +1,12 @@
+import type { DecoratorValidationResult } from "../../../decorators";
 import { type DecoratorArgs } from "../../../decorators";
 import { type Booleans } from "../../../utilities";
-import type { ValidationResult } from "../../../validation/types";
 import {
   type StrategyDetailedErrorsResponse,
   type StrategyEvaluator,
   type StrategySimpleErrorsResponse,
 } from "../../types";
-import { AbstractStrategy } from "../AbstractStrategy";
+import { AbstractStrategyResolver } from "../AbstractStrategy";
 
 export namespace ObjectStrategy {
   /**
@@ -31,7 +31,7 @@ export namespace ObjectStrategy {
    */
   export type DetailedErrors<F> = {
     /** An array of validation result objects that represent detailed validation errors at the decorated field level. */
-    root: ValidationResult[];
+    root: DecoratorValidationResult[];
     /** An object that represents detailed validation errors for each property in the object. */
     data: StrategyDetailedErrorsResponse<F>;
   };
@@ -64,9 +64,13 @@ export namespace ObjectStrategy {
    *
    * @typeParam F - The type of the field being validated, which is expected to be an object.
    *
-   * @extends AbstractStrategy<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
+   * @extends AbstractStrategyResolver<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
    */
-  export class StrategyResolver<F> extends AbstractStrategy<F, DetailedErrors<F>, SimpleErrors<F>> {
+  export class StrategyResolver<F> extends AbstractStrategyResolver<
+    F,
+    DetailedErrors<F>,
+    SimpleErrors<F>
+  > {
     /**
      * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for object types.
      *

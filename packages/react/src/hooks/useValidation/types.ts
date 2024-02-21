@@ -3,9 +3,9 @@ import {
   Locale,
   StrategyDetailedErrorsResponse,
   StrategySimpleErrorsResponse,
+  type DecoratorValidationResult,
   type Form,
   type Types,
-  type ValidationResult,
 } from "@tsvdec/core";
 import type { Dispatch, SetStateAction } from "react";
 import { ValidationTrigger } from "../useEventfulErrors/types";
@@ -18,7 +18,7 @@ export type UseValidationData<TClass> = {
   detailedErrors: StrategyDetailedErrorsResponse<TClass>;
   errors: StrategySimpleErrorsResponse<TClass>;
   engine: Form<TClass>;
-  globalErrors: ValidationResult[];
+  globalErrors: DecoratorValidationResult[];
   validate: (field?: string) => void;
 };
 

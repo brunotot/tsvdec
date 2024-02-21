@@ -3,7 +3,7 @@ import { makeValidator, type FieldDecorator } from "../../../factory/forField";
 import { type DecoratorOptions } from "../../../options/DecoratorOptions";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { type Types } from "../../../../utilities";
-import { DecoratorKeys } from "../../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../../utilities/DecoratorValidationKeys";
 
 /**
  * Tests if a value matches a regular expression pattern.
@@ -22,7 +22,7 @@ export function testRegex<T extends Types.Optional<string>>(regex: RegExp, value
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.PATTERN}
+ * @key {@link DecoratorValidationKeys.PATTERN}
  * @typeparam T - The type of the decorated property (optional string).
  * @param regex The regular expression pattern to match against the value.
  * @param options - The decorator options.
@@ -52,8 +52,8 @@ export function Pattern<This, Value extends Types.Optional<string>>(
   regex: RegExp,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.PATTERN, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.PATTERN, (value, { locale }) => ({
     valid: testRegex(regex, value),
-    message: translate(locale, DecoratorKeys.PATTERN, regex.toString()),
+    message: translate(locale, DecoratorValidationKeys.PATTERN, regex.toString()),
   }));
 }

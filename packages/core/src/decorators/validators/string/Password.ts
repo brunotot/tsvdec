@@ -5,7 +5,7 @@ import { type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { DecoratorOptions } from "../../options/DecoratorOptions";
 import { buildMessageProp } from "../../options/props/message";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 import { RegexConst } from "./regex/shared/regex.constants";
 
 /** Internal validation function for {@link Password} validator. */
@@ -36,7 +36,7 @@ function isPasswordValid(
 
   function buildConstraintViolation(message: string, valid: boolean) {
     return {
-      key: DecoratorKeys.PASSWORD,
+      key: DecoratorValidationKeys.PASSWORD,
       message,
       valid,
     };
@@ -76,7 +76,7 @@ function isPasswordValid(
     return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordSpecials"), false);
   }
 
-  return { key: DecoratorKeys.PASSWORD, message: "", valid: true };
+  return { key: DecoratorValidationKeys.PASSWORD, message: "", valid: true };
 }
 
 /**
@@ -84,7 +84,7 @@ function isPasswordValid(
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.PASSWORD}
+ * @key {@link DecoratorValidationKeys.PASSWORD}
  * @typeParam T - The type of the string property.
  * @param rules - Customizable rules for specific password validations.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -163,7 +163,7 @@ export function Password<This, Value extends Types.Optional<string>>(
   },
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.PASSWORD, (value, { locale }) => {
+  return makeValidator(options, DecoratorValidationKeys.PASSWORD, (value, { locale }) => {
     const messageProp = buildMessageProp(options, locale);
     return isPasswordValid(value, rules, messageProp, locale);
   });

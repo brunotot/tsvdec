@@ -2,7 +2,7 @@ import { translate } from "../../../../../localization/service/TranslationServic
 import { TypeChecker, type Types } from "../../../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../../../factory/forField";
 import { type DecoratorOptions } from "../../../../options/DecoratorOptions";
-import { DecoratorKeys } from "../../../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../../../utilities/DecoratorValidationKeys";
 import { testRegex } from "../Pattern";
 import { RegexConst } from "../shared/regex.constants";
 
@@ -17,7 +17,7 @@ function isAlphaValid<T extends Types.Optional<string>>(value: T): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ALPHA}
+ * @key {@link DecoratorValidationKeys.ALPHA}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -64,8 +64,8 @@ function isAlphaValid<T extends Types.Optional<string>>(value: T): boolean {
 export function Alpha<This, Value extends Types.Optional<string>>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ALPHA, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ALPHA, (value, { locale }) => ({
     valid: isAlphaValid(value),
-    message: translate(locale, DecoratorKeys.ALPHA),
+    message: translate(locale, DecoratorValidationKeys.ALPHA),
   }));
 }

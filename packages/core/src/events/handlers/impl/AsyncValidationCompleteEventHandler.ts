@@ -1,6 +1,7 @@
+import { DecoratorValidationResult } from "../../../decorators";
 import { StrategyDetailedErrorsResponse, StrategySimpleErrorsResponse } from "../../../strategy";
-import { Form, FormErrors, ValidationResult } from "../../../validation";
-import { EventMap } from "../../models/EventName";
+import { Form, FormErrors } from "../../../validation";
+import { EventHandlerData } from "../../handlers/impl/index";
 import { AbstractEventHandler } from "../AbstractEventHandler";
 
 /**
@@ -8,7 +9,7 @@ import { AbstractEventHandler } from "../AbstractEventHandler";
  */
 export type AsyncValidationCompleteRequest<TClass> = {
   key: keyof TClass;
-  value: ValidationResult;
+  value: DecoratorValidationResult;
 };
 
 /**
@@ -17,7 +18,7 @@ export type AsyncValidationCompleteRequest<TClass> = {
 export type AsyncValidationCompleteResponse<TClass> = {
   errors: StrategySimpleErrorsResponse<TClass>;
   detailedErrors: StrategyDetailedErrorsResponse<TClass>;
-  globalErrors: ValidationResult[];
+  globalErrors: DecoratorValidationResult[];
 };
 
 /**
@@ -30,7 +31,7 @@ export class AsyncValidationCompleteEventHandler<TClass> extends AbstractEventHa
   #form: Form<TClass>;
 
   constructor(form: Form<TClass>, delay: number = 500) {
-    super(EventMap.ASYNC_VALIDATION_COMPLETE, delay);
+    super(EventHandlerData.ASYNC_VALIDATION_COMPLETE, delay);
     this.#form = form;
   }
 
@@ -42,7 +43,7 @@ export class AsyncValidationCompleteEventHandler<TClass> extends AbstractEventHa
 
     if (key) {
       let simpleResults = currentErrors[key] as string[];
-      let detailedResults = currentDetailedErrors[key] as ValidationResult[];
+      let detailedResults = currentDetailedErrors[key] as DecoratorValidationResult[];
 
       if (valid) {
         detailedResults = detailedResults.filter(r => r.key !== value.key);

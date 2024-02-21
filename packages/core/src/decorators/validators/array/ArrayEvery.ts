@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArrayEvery} validator. */
 function isArrayEveryValid<K, T extends K[]>(
@@ -18,7 +18,7 @@ function isArrayEveryValid<K, T extends K[]>(
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_EVERY}
+ * @key {@link DecoratorValidationKeys.ARRAY_EVERY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.every()` call.
@@ -68,8 +68,8 @@ export function ArrayEvery<This, Item, Value extends Item[]>(
   predicate: Types.ArrayPredicate<Item>,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_EVERY, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_EVERY, (value, { locale }) => ({
     valid: isArrayEveryValid(value, predicate),
-    message: translate(locale, DecoratorKeys.ARRAY_EVERY),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_EVERY),
   }));
 }

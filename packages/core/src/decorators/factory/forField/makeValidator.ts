@@ -1,7 +1,8 @@
-import { ValidationEvaluator, ValidationResult } from "../../../validation";
 import { DecoratorOptions } from "../../options/DecoratorOptions";
 import { buildKeyProp } from "../../options/props/key";
 import { buildMessageProp } from "../../options/props/message";
+import { DecoratorValidationHandler } from "../../validators/utilities/DecoratorValidationHandler";
+import { DecoratorValidationResult } from "../../validators/utilities/DecoratorValidationResult";
 import { buildDecoratorMeta } from "../DecoratorFactoryMeta";
 import { createFieldValidator } from "./createFieldValidator";
 
@@ -21,7 +22,9 @@ import { createFieldValidator } from "./createFieldValidator";
 export function makeValidator<This, Value, Identifier extends string>(
   options: DecoratorOptions | undefined,
   key: Identifier,
-  fn: (...args: Parameters<ValidationEvaluator<Value>>) => Omit<ValidationResult, "key">,
+  fn: (
+    ...args: Parameters<DecoratorValidationHandler<Value>>
+  ) => Omit<DecoratorValidationResult, "key">,
 ) {
   return createFieldValidator<This, Value>((value, meta) => {
     const data = fn(value, meta);

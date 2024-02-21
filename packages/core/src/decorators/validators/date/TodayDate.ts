@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link TodayDate} validator. */
 function isTodayDateValid<T extends Types.Optional<Date>>(date: T): boolean {
@@ -21,7 +21,7 @@ function isTodayDateValid<T extends Types.Optional<Date>>(date: T): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.TODAY_DATE}
+ * @key {@link DecoratorValidationKeys.TODAY_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.
@@ -68,8 +68,8 @@ function isTodayDateValid<T extends Types.Optional<Date>>(date: T): boolean {
 export function TodayDate<This, Value extends Types.Optional<Date>>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.TODAY_DATE, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.TODAY_DATE, (value, { locale }) => ({
     valid: isTodayDateValid(value),
-    message: translate(locale, DecoratorKeys.TODAY_DATE),
+    message: translate(locale, DecoratorValidationKeys.TODAY_DATE),
   }));
 }

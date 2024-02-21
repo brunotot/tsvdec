@@ -1,11 +1,11 @@
+import { DecoratorValidationResult } from "../decorators";
 import { Booleans, Types } from "../utilities";
-import { ValidationResult } from "../validation";
 import {
   ObjectArrayStrategy,
   ObjectStrategy,
   PrimitiveArrayStrategy,
   PrimitiveStrategy,
-  StrategyData,
+  StrategyResolverData,
 } from "./service";
 
 /**
@@ -22,7 +22,7 @@ export type StrategyEvaluator<Class, Return = undefined> =
  * Type for detailed errors during validation.
  * @typeParam T - The type being validated.
  */
-export type StrategyDetailedErrorsResponse<T> = StrategyEvaluator<T, ValidationResult[]>;
+export type StrategyDetailedErrorsResponse<T> = StrategyEvaluator<T, DecoratorValidationResult[]>;
 
 /**
  * Type for basic errors during validation.
@@ -30,7 +30,7 @@ export type StrategyDetailedErrorsResponse<T> = StrategyEvaluator<T, ValidationR
  */
 export type StrategySimpleErrorsResponse<T> = StrategyEvaluator<T, string[]>;
 
-export type StrategyKey = keyof typeof StrategyData;
+export type StrategyKey = keyof typeof StrategyResolverData;
 
 /**
  * Determines the evaluation strategy for a field in a type.

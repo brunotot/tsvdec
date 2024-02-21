@@ -1,7 +1,7 @@
+import type { DecoratorValidationResult } from "../../../decorators";
 import { type DecoratorArgs } from "../../../decorators";
 import { type Booleans } from "../../../utilities";
-import type { ValidationResult } from "../../../validation/types";
-import { AbstractStrategy } from "../AbstractStrategy";
+import { AbstractStrategyResolver } from "../AbstractStrategy";
 
 export namespace PrimitiveStrategy {
   /**
@@ -17,7 +17,7 @@ export namespace PrimitiveStrategy {
   /**
    * Represents the detailed error structure for validating primitive types.
    */
-  export type DetailedErrors = ValidationResult[];
+  export type DetailedErrors = DecoratorValidationResult[];
 
   /**
    * Type guard to check if a certain field in a type matches this strategy.
@@ -44,9 +44,13 @@ export namespace PrimitiveStrategy {
    *
    * @typeParam F - The type of the field being validated.
    *
-   * @extends AbstractStrategy<F,ValidationResult[],string[]>
+   * @extends AbstractStrategyResolver<F,DecoratorValidationResult[],string[]>
    */
-  export class StrategyResolver<F> extends AbstractStrategy<F, DetailedErrors, SimpleErrors> {
+  export class StrategyResolver<F> extends AbstractStrategyResolver<
+    F,
+    DetailedErrors,
+    SimpleErrors
+  > {
     /**
      * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
      *

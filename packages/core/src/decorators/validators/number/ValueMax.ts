@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ValueMax} validator. */
 function isValueMaxValid(num: Types.Optional<number>, max: number): boolean {
@@ -15,7 +15,7 @@ function isValueMaxValid(num: Types.Optional<number>, max: number): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.VALUE_MAX}
+ * @key {@link DecoratorValidationKeys.VALUE_MAX}
  * @typeParam T - The type of the number property.
  * @param max - Maximum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -64,8 +64,8 @@ export function ValueMax<This, Value extends Types.Optional<number>>(
   max: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.VALUE_MAX, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.VALUE_MAX, (value, { locale }) => ({
     valid: isValueMaxValid(value, max),
-    message: translate(locale, DecoratorKeys.VALUE_MAX, max),
+    message: translate(locale, DecoratorValidationKeys.VALUE_MAX, max),
   }));
 }

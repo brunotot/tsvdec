@@ -1,6 +1,5 @@
 import { EventEmitter } from "../models/EventEmitter";
-import { EventName } from "../models/EventName";
-import { EventResolver } from "../models/EventResolver";
+import { EventName, EventResolver } from "../types";
 
 /**
  * A base class for event handlers.

@@ -1,5 +1,5 @@
 import { type Types } from "../../../utilities";
-import type { ValidationEvaluator } from "../../../validation/types";
+import type { DecoratorValidationHandler } from "../../validators/utilities/DecoratorValidationHandler";
 import { DecoratorMeta, DEFAULT_DECORATOR_META } from "../DecoratorFactoryMeta";
 import { createClassDecorator, type ClassDecorator } from "./createClassDecorator";
 
@@ -28,7 +28,7 @@ import { createClassDecorator, type ClassDecorator } from "./createClassDecorato
  * ```
  */
 export function createClassValidator<T extends Types.Class>(
-  validate: ValidationEvaluator<Types.UnwrapClass<T>>,
+  validate: DecoratorValidationHandler<Types.UnwrapClass<T>>,
   decoratorMeta: DecoratorMeta<T> = DEFAULT_DECORATOR_META,
 ): ClassDecorator<T> {
   return createClassDecorator<T>(meta => {

@@ -1,7 +1,7 @@
+import type { DecoratorValidationResult } from "../../../decorators";
 import { type DecoratorArgs } from "../../../decorators";
 import { type Booleans, type Types } from "../../../utilities";
-import type { ValidationResult } from "../../../validation/types";
-import { AbstractStrategy } from "../AbstractStrategy";
+import { AbstractStrategyResolver } from "../AbstractStrategy";
 
 export namespace PrimitiveArrayStrategy {
   /**
@@ -27,8 +27,8 @@ export namespace PrimitiveArrayStrategy {
    * - `data`: A two-dimensional array of `ValidationResult` objects that represent detailed validation errors for each element in the array.
    */
   export type DetailedErrors = {
-    root: ValidationResult[];
-    data: ValidationResult[][];
+    root: DecoratorValidationResult[];
+    data: DecoratorValidationResult[][];
   };
 
   /**
@@ -59,9 +59,13 @@ export namespace PrimitiveArrayStrategy {
    *
    * @typeParam F - The type of the field being validated, which is expected to be an array of primitives.
    *
-   * @extends AbstractStrategy<F,DetailedErrors,SimpleErrors>
+   * @extends AbstractStrategyResolver<F,DetailedErrors,SimpleErrors>
    */
-  export class StrategyResolver<F> extends AbstractStrategy<F, DetailedErrors, SimpleErrors> {
+  export class StrategyResolver<F> extends AbstractStrategyResolver<
+    F,
+    DetailedErrors,
+    SimpleErrors
+  > {
     /**
      * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of primitive types.
      *

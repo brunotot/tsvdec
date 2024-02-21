@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link MaxLength} validator. */
 function isMaxLengthValid(value: Types.Optional<string>, max: number): boolean {
@@ -15,7 +15,7 @@ function isMaxLengthValid(value: Types.Optional<string>, max: number): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.MAX_LENGTH}
+ * @key {@link DecoratorValidationKeys.MAX_LENGTH}
  * @typeParam T - The type of the string property.
  * @param max - Maximum length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -61,8 +61,8 @@ export function MaxLength<This, Value extends Types.Optional<string>>(
   max: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.MAX_LENGTH, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.MAX_LENGTH, (value, { locale }) => ({
     valid: isMaxLengthValid(value, max),
-    message: translate(locale, DecoratorKeys.MAX_LENGTH),
+    message: translate(locale, DecoratorValidationKeys.MAX_LENGTH),
   }));
 }

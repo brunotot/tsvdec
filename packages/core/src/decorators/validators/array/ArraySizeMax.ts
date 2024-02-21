@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArraySizeMax} validator. */
 function isArraySizeMaxValid(array: any[], max: number): boolean {
@@ -15,7 +15,7 @@ function isArraySizeMaxValid(array: any[], max: number): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_SIZE_MAX}
+ * @key {@link DecoratorValidationKeys.ARRAY_SIZE_MAX}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param max - Max size value.
@@ -65,8 +65,8 @@ export function ArraySizeMax<This, Item, Value extends Item[]>(
   max: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_SIZE_MAX, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_SIZE_MAX, (value, { locale }) => ({
     valid: isArraySizeMaxValid(value, max),
-    message: translate(locale, DecoratorKeys.ARRAY_SIZE_MAX, max),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_SIZE_MAX, max),
   }));
 }

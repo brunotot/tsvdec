@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link Decimal} validator. */
 function isDecimalValid<T extends Types.Optional<number>>(value: T): boolean {
@@ -15,7 +15,7 @@ function isDecimalValid<T extends Types.Optional<number>>(value: T): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.DECIMAL}
+ * @key {@link DecoratorValidationKeys.DECIMAL}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
@@ -62,8 +62,8 @@ function isDecimalValid<T extends Types.Optional<number>>(value: T): boolean {
 export function Decimal<This, Value extends Types.Optional<number>>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.DECIMAL, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.DECIMAL, (value, { locale }) => ({
     valid: isDecimalValid(value),
-    message: translate(locale, DecoratorKeys.DECIMAL),
+    message: translate(locale, DecoratorValidationKeys.DECIMAL),
   }));
 }

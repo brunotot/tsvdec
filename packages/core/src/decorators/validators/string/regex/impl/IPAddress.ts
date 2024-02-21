@@ -2,7 +2,7 @@ import { translate } from "../../../../../localization/service/TranslationServic
 import { TypeChecker, type Types } from "../../../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../../../factory/forField";
 import { type DecoratorOptions } from "../../../../options/DecoratorOptions";
-import { DecoratorKeys } from "../../../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../../../utilities/DecoratorValidationKeys";
 import { testRegex } from "../Pattern";
 import { RegexConst } from "../shared/regex.constants";
 
@@ -17,7 +17,7 @@ function isIPAddressValid<T extends Types.Optional<string>>(value: T): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.IP_ADDRESS}
+ * @key {@link DecoratorValidationKeys.IP_ADDRESS}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -64,8 +64,8 @@ function isIPAddressValid<T extends Types.Optional<string>>(value: T): boolean {
 export function IPAddress<This, Value extends Types.Optional<string>>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.IP_ADDRESS, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.IP_ADDRESS, (value, { locale }) => ({
     valid: isIPAddressValid(value),
-    message: translate(locale, DecoratorKeys.IP_ADDRESS),
+    message: translate(locale, DecoratorValidationKeys.IP_ADDRESS),
   }));
 }

@@ -1,3 +1,4 @@
+import type { DecoratorValidationResult } from "../../decorators";
 import { type DecoratorArgs } from "../../decorators";
 import { type EventEmitter } from "../../events";
 import { type Locale } from "../../localization";
@@ -6,21 +7,25 @@ import {
   FieldReflectionService,
   type ReflectionDescriptor,
 } from "../../reflection";
+import { type ValidationMetadataEntry } from "../../reflection/metadata";
 import { Form } from "../../validation/models/Form";
-import { type ValidationMetadata } from "../../validation/models/ValidationMetadata";
-import type { FormConfig, ValidationResult } from "../../validation/types";
+import { FormProps } from "../../validation/types";
 
 /**
- * The `AbstractStrategy` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
+ * The `AbstractStrategyResolver` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
  * @typeParam TClass The type of the field being validated.
  * @typeParam TDetailedResult The detailed result of the validation.
  * @typeParam TSimpleResult A simplified version of the validation result.
  */
-export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSimpleResult = any> {
+export abstract class AbstractStrategyResolver<
+  TClass = any,
+  TDetailedResult = any,
+  TSimpleResult = any,
+> {
   readonly #locale: Locale;
   readonly #groups: string[];
-  readonly #engineCfg: FormConfig<any>;
-  readonly #classRules: ValidationMetadata<TClass>;
+  readonly #engineCfg: FormProps<any>;
+  readonly #classRules: ValidationMetadataEntry<TClass>;
   readonly #classDescriptor: ReflectionDescriptor<any, any>;
   readonly #defaultParent: TClass;
   #fieldDescriptor?: ReflectionDescriptor<TClass, any>;
@@ -68,11 +73,11 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
     return new Form<TClass>(this.#classDescriptor.thisClass!, this.engineCfg);
   }
 
-  protected get engineCfg(): FormConfig<any> {
+  protected get engineCfg(): FormProps<any> {
     return this.#engineCfg;
   }
 
-  protected get classRules(): ValidationMetadata<TClass> {
+  protected get classRules(): ValidationMetadataEntry<TClass> {
     return this.#classRules;
   }
 
@@ -111,12 +116,12 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
     return (this.#defaultParent as any)?.[this.fieldName];
   }
 
-  protected getErrorMessages(validations: ValidationResult[] = []): string[] {
+  protected getErrorMessages(validations: DecoratorValidationResult[] = []): string[] {
     const nonNullableValidations = validations ?? [];
     return Array.isArray(nonNullableValidations) ? nonNullableValidations.map(e => e.message) : [];
   }
 
-  protected getClassErrors(fieldValue: any, parentValue: any): ValidationResult[] {
+  protected getClassErrors(fieldValue: any, parentValue: any): DecoratorValidationResult[] {
     if (!this.#classDescriptor.validateIf(parentValue)) return [];
     return this.classRules.validate(fieldValue, parentValue, this.groups, this.locale);
   }
@@ -125,7 +130,7 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
     fieldValue: any,
     parentValue: any,
     args: DecoratorArgs,
-  ): ValidationResult[] {
+  ): DecoratorValidationResult[] {
     if (!this.fieldDescriptor.validateIf(parentValue)) return [];
     return this.fieldDescriptor.validations.root.validate(
       fieldValue,
@@ -138,7 +143,7 @@ export abstract class AbstractStrategy<TClass = any, TDetailedResult = any, TSim
     );
   }
 
-  protected getArrayItemErrors(arrayItem: any, parentValue: any): ValidationResult[] {
+  protected getArrayItemErrors(arrayItem: any, parentValue: any): DecoratorValidationResult[] {
     return this.fieldDescriptor.validations.foreach.validate(
       arrayItem,
       parentValue,

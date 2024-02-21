@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArrayContains} validator. */
 function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean {
@@ -15,7 +15,7 @@ function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean 
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_CONTAINS}
+ * @key {@link DecoratorValidationKeys.ARRAY_CONTAINS}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param contains - The value to check.
@@ -65,8 +65,8 @@ export function ArrayContains<This, Item, Value extends Item[]>(
   contains: Item,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_CONTAINS, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_CONTAINS, (value, { locale }) => ({
     valid: isArrayContainsValid(value, contains),
-    message: translate(locale, DecoratorKeys.ARRAY_CONTAINS, contains),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_CONTAINS, contains),
   }));
 }

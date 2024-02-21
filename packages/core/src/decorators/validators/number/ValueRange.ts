@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ValueRange} validator. */
 function isValueRangeValid(num: Types.Optional<number>, min: number, max: number): boolean {
@@ -15,7 +15,7 @@ function isValueRangeValid(num: Types.Optional<number>, min: number, max: number
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.VALUE_RANGE}
+ * @key {@link DecoratorValidationKeys.VALUE_RANGE}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.
  * @param max - Maximum allowed value.
@@ -66,8 +66,8 @@ export function ValueRange<This, Value extends Types.Optional<number>>(
   max: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.VALUE_RANGE, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.VALUE_RANGE, (value, { locale }) => ({
     valid: isValueRangeValid(value, min, max),
-    message: translate(locale, DecoratorKeys.VALUE_RANGE, min, max, value),
+    message: translate(locale, DecoratorValidationKeys.VALUE_RANGE, min, max, value),
   }));
 }

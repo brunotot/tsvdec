@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArraySizeRange} validator. */
 function isArraySizeRangeValid(array: any[], min: number, max: number): boolean {
@@ -15,7 +15,7 @@ function isArraySizeRangeValid(array: any[], min: number, max: number): boolean 
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_SIZE_RANGE}
+ * @key {@link DecoratorValidationKeys.ARRAY_SIZE_RANGE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.
@@ -67,8 +67,8 @@ export function ArraySizeRange<This, Item, Value extends Item[]>(
   max: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_SIZE_RANGE, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_SIZE_RANGE, (value, { locale }) => ({
     valid: isArraySizeRangeValid(value, min, max),
-    message: translate(locale, DecoratorKeys.ARRAY_SIZE_RANGE, min, max),
+    message: translate(locale, DecoratorValidationKeys.ARRAY_SIZE_RANGE, min, max),
   }));
 }

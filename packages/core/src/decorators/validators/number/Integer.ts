@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker, type Types } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link Integer} validator. */
 function isIntegerValid(num: Types.Optional<number>): boolean {
@@ -15,7 +15,7 @@ function isIntegerValid(num: Types.Optional<number>): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.INTEGER}
+ * @key {@link DecoratorValidationKeys.INTEGER}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
@@ -62,8 +62,8 @@ function isIntegerValid(num: Types.Optional<number>): boolean {
 export function Integer<This, Value extends Types.Optional<number>>(
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.INTEGER, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.INTEGER, (value, { locale }) => ({
     valid: isIntegerValid(value),
-    message: translate(locale, DecoratorKeys.INTEGER),
+    message: translate(locale, DecoratorValidationKeys.INTEGER),
   }));
 }

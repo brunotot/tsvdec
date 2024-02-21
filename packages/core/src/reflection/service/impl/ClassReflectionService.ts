@@ -1,3 +1,4 @@
+import type { DecoratorValidationHandler } from "../../../decorators";
 import { type DecoratorValidateIf } from "../../../decorators";
 import {
   DecoratorMeta,
@@ -5,8 +6,7 @@ import {
 } from "../../../decorators/factory/DecoratorFactoryMeta";
 import { EventEmitter } from "../../../events";
 import { type Types } from "../../../utilities";
-import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
-import type { ValidationEvaluator } from "../../../validation/types";
+import { ValidationMetadataEntry } from "../../metadata";
 import type { ReflectionInjectStrategy } from "../../types";
 import { AbstractReflectionService } from "../AbstractReflectionService";
 
@@ -16,7 +16,7 @@ import { AbstractReflectionService } from "../AbstractReflectionService";
  */
 export class ClassReflectionService<
   TStrategy extends ReflectionInjectStrategy,
-> extends AbstractReflectionService<ValidationMetadata> {
+> extends AbstractReflectionService<ValidationMetadataEntry> {
   eventEmitter!: EventEmitter;
   validateIf: DecoratorValidateIf<Types.UnwrapClass<Types.Class<any>>>;
 
@@ -33,7 +33,7 @@ export class ClassReflectionService<
   }
 
   private constructor(strategy: ReflectionInjectStrategy, eventEmitter: EventEmitter) {
-    super(ClassReflectionService.name, strategy, () => new ValidationMetadata());
+    super(ClassReflectionService.name, strategy, () => new ValidationMetadataEntry());
     this.eventEmitter = eventEmitter;
     this.validateIf = () => true;
   }
@@ -44,7 +44,7 @@ export class ClassReflectionService<
    * @param meta - Decorator meta
    */
   addValidator(
-    validate: ValidationEvaluator<Types.UnwrapClass<TStrategy>>,
+    validate: DecoratorValidationHandler<Types.UnwrapClass<TStrategy>>,
     meta: DecoratorMeta<any> = DEFAULT_DECORATOR_META,
   ): void {
     this.value.add({ validate, meta });

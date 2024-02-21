@@ -3,7 +3,7 @@ import { TypeChecker, type Types } from "../../../utilities";
 import { type FieldDecorator } from "../../factory/forField";
 import { makeValidator } from "../../factory/forField/makeValidator";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link MinLength} validator. */
 function isMinLengthValid(value: Types.Optional<string>, min: number): boolean {
@@ -16,7 +16,7 @@ function isMinLengthValid(value: Types.Optional<string>, min: number): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.MIN_LENGTH}
+ * @key {@link DecoratorValidationKeys.MIN_LENGTH}
  * @typeParam T - The type of the string property.
  * @param min - Minimum length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -62,8 +62,8 @@ export function MinLength<This, Value extends Types.Optional<string>>(
   min: number,
   options?: DecoratorOptions<This, Value>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.MIN_LENGTH, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.MIN_LENGTH, (value, { locale }) => ({
     valid: isMinLengthValid(value, min),
-    message: translate(locale, DecoratorKeys.MIN_LENGTH, min),
+    message: translate(locale, DecoratorValidationKeys.MIN_LENGTH, min),
   }));
 }

@@ -2,7 +2,7 @@ import { translate } from "../../../localization/service/TranslationService";
 import { TypeChecker } from "../../../utilities";
 import { makeValidator, type FieldDecorator } from "../../factory/forField";
 import { type DecoratorOptions } from "../../options/DecoratorOptions";
-import { DecoratorKeys } from "../utilities/DecoratorKeys";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
 
 /** Internal validation function for {@link ArraySizeExact} validator. */
 function isArraySizeExactValid(array: any[], size: number): boolean {
@@ -15,7 +15,7 @@ function isArraySizeExactValid(array: any[], size: number): boolean {
  *
  * [@Validator]
  *
- * @key {@link DecoratorKeys.ARRAY_SIZE_EXACT}
+ * @key {@link DecoratorValidationKeys.ARRAY_SIZE_EXACT}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param exact - Exact size value.
@@ -65,8 +65,13 @@ export function ArraySizeExact<This, Item, Value extends Item[]>(
   exact: number,
   options?: DecoratorOptions<This>,
 ): FieldDecorator<This, Value> {
-  return makeValidator(options, DecoratorKeys.ARRAY_SIZE_EXACT, (value, { locale }) => ({
+  return makeValidator(options, DecoratorValidationKeys.ARRAY_SIZE_EXACT, (value, { locale }) => ({
     valid: isArraySizeExactValid(value, exact),
-    message: translate(locale, DecoratorKeys.ARRAY_SIZE_EXACT, (value ?? []).length, exact),
+    message: translate(
+      locale,
+      DecoratorValidationKeys.ARRAY_SIZE_EXACT,
+      (value ?? []).length,
+      exact,
+    ),
   }));
 }

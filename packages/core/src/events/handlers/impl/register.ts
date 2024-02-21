@@ -1,6 +1,7 @@
 import { AsyncValidationCompleteEventHandler } from ".";
 import { Form } from "../../../validation";
-import { EventMap, EventName } from "../../models/EventName";
+import { EventHandlerData } from "../../handlers/impl/index";
+import { EventName } from "../../types";
 import { AbstractEventHandler } from "../AbstractEventHandler";
 
 /**
@@ -10,7 +11,10 @@ import { AbstractEventHandler } from "../AbstractEventHandler";
  */
 export function getRegisteredEventHandlers<TClass>(form: Form<TClass>, delay: number = 500) {
   return {
-    [EventMap.ASYNC_VALIDATION_COMPLETE]: new AsyncValidationCompleteEventHandler(form, delay),
+    [EventHandlerData.ASYNC_VALIDATION_COMPLETE]: new AsyncValidationCompleteEventHandler(
+      form,
+      delay,
+    ),
   } as const satisfies Record<EventName, AbstractEventHandler>;
 }
 
