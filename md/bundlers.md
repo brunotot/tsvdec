@@ -10,8 +10,8 @@ Symbol.metadata ??= Symbol("Symbol.metadata");
 ```
 
 ```json
-// tsconfig.json
 {
+  /* tsconfig.json */
   "compilerOptions": {
     "target": "es2022",
     "lib": ["es2022", "esnext.decorators", "dom"],
