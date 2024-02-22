@@ -135,3 +135,27 @@ body.show {
   transition: opacity 0.4s;
   opacity: 1;
 }
+
+a[href$="/_tsvdec_core.html"],
+a[href$="/_tsvdec_react.html"] {
+  position: relative;
+}
+
+a[href$="/_tsvdec_core.html"]::before,
+a[href$="/_tsvdec_react.html"]::before {
+  content: "@tsvdec/";
+  position: absolute;
+  top: calc(50% - 0.5px);
+  left: 41.5px;
+  transform: translateY(-50%);
+}
+
+a[href$="/_tsvdec_core.html"] > span,
+a[href$="/_tsvdec_react.html"] > span {
+  margin-left: 75px;
+}
+
+summary:has(a[href$="/_tsvdec_core.html"]) > svg,
+summary:has(a[href$="/_tsvdec_react.html"]) > svg {
+  z-index: 9999;
+}

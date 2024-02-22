@@ -211,13 +211,6 @@ const CUSTOM_TAGS = [
   },*/
 ];
 
-window.onload = async function () {
-  overrideTitle();
-  overrideTooltips();
-  await overrideCustomTags();
-  document.body.classList.add("show");
-};
-
 function overrideTooltips() {
   [...document.querySelectorAll("a[href] > svg + span")].forEach(elem => {
     const text = elem.textContent;
@@ -225,3 +218,10 @@ function overrideTooltips() {
     anchor.title = text;
   });
 }
+
+window.onload = async function () {
+  overrideTitle();
+  overrideTooltips();
+  await overrideCustomTags();
+  document.body.classList.add("show");
+};

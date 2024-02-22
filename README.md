@@ -21,7 +21,7 @@
   </a>
 </p>
 
-<br /> 
+<br />
 
 **tsvdec** monorepo offers a more declarative way to manage model validation in TypeScript v5 using the latest [Stage 3 decorators](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators) that now comes with [built-in type-safety](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#writing-well-typed-decorators) and control over the decorator's return type specificity.
 
@@ -41,9 +41,15 @@ class Stage3 {
 
 ## TOC
 
+- [TOC](#toc)
 - [Features](#features)
 - [Packages](#packages)
 - [Installation](#installation)
+- [Bundler configurations](#bundler-configurations)
+  - [TSC configuration](#tsc-configuration)
+  - [Vite configuration (React + Babel)](#vite-configuration-react--babel)
+  - [Babel configuration](#babel-configuration)
+  - [Webpack configuration](#webpack-configuration)
 - [Quick start](#quick-start)
 - [Documentation](#documentation)
 - [Contribution](#contribution)
@@ -60,7 +66,7 @@ class Stage3 {
 ## Packages
 
 - [@tsvdec/core](https://www.npmjs.com/package/@tsvdec/core) - core module responsible for manipulating class metadata
-- [@tsvdec/react](https://www.npmjs.com/package/@tsvdec/react) -  implementation of core module compatible with React v18+
+- [@tsvdec/react](https://www.npmjs.com/package/@tsvdec/react) - implementation of core module compatible with React v18+
 
 ## Installation
 
@@ -71,12 +77,90 @@ npm install -D typescript@latest
 npm install @tsvdec/core
 ```
 
-2. (Optional) Configure Babel for browser environment
+2. (Optional) Install frontend-specific implementation package if code is used in browser environment
+
+```bash
+npm install @tsvdec/react
+```
+
+## Bundler configurations
+
+### TSC configuration
+
+See: [TypeScript 5.2 decorators metadata blog](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#decorator-metadata)
 
 ```ts
+// index.ts
+Symbol.metadata ??= Symbol("Symbol.metadata");
+```
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022", "esnext.decorators", "dom"],
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false
+  }
+}
+```
+
+### Vite configuration (React + Babel)
+
+```sh
+npm install -D @vitejs/plugin-react
+```
+
+```ts
+// vite.config.ts
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [
+    react({
+      babel: {
+        presets: ["@babel/preset-typescript"],
+        plugins: [["@babel/plugin-proposal-decorators", { version: "2023-05" }]],
+      },
+    }),
+  ],
+});
+```
+
+### Babel configuration
+
+See [Babel: 7.19.0 Released: Stage 3 decorators and more RegExp features!](https://babeljs.io/blog/2022/09/05/7.19.0)
+
+```ts
+// babel.config.js
 {
   presets: ["@babel/preset-typescript"],
   plugins: [["@babel/plugin-proposal-decorators", { version: "2023-05" }]],
+}
+```
+
+### Webpack configuration
+
+See: [NextJS: Typescript 5 decorators do not build #48360](https://github.com/vercel/next.js/issues/48360#issuecomment-1583135113)
+
+```sh
+npm i -D ts-loader
+```
+
+```js
+// webpack.config.js
+{
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ];
+  }
 }
 ```
 

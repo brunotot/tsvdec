@@ -23,7 +23,7 @@
     "build": "for package in packages/*/; do (cd $package && pnpm run build); done",
     "build:docs": "typedoc && npm run sanitize-docs --silent",
     "build:docs:dev": "npx typedoc --validation.notDocumented --treatValidationWarningsAsErrors && npm run sanitize-docs --silent",
-    "sanitize-docs": "bash resources/docs-override.sh",
+    "sanitize-docs": "bash resources/docs.sh",
     "format:check": "prettier --check packages --cache",
     "format:write": "prettier --write packages --cache"
   },
