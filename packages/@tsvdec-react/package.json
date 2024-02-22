@@ -1,6 +1,6 @@
 {
   "name": "@tsvdec/react",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "keywords": [
     "typescript",
@@ -35,7 +35,7 @@
     "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@tsvdec/core": "^0.1.0",
+    "@tsvdec/core": "^1.0.0",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
