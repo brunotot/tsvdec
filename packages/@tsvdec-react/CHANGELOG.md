@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 2.0.0
+
+### Patch Changes
+
+- 76eb4e8: Bump version
+- Updated dependencies [76eb4e8]
+  - @tsvdec/core@1.0.0
+
 ## 1.0.0
 
 ### Minor Changes

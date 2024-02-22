@@ -1,5 +1,11 @@
 # @tsvdec/core
 
+## 1.0.0
+
+### Major Changes
+
+- 76eb4e8: Bump version
+
 ## 0.1.0
 
 ### Minor Changes
