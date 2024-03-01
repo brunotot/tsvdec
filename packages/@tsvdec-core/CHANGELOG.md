@@ -1,5 +1,11 @@
 # @tsvdec/core
 
+## 2.0.1
+
+### Patch Changes
+
+- b1f6c37: Change library publish configuration
+
 ## 2.0.0
 
 ### Major Changes
