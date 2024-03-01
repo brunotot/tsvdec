@@ -6,7 +6,7 @@
   "author": "Bruno Tot <brunotot10000@gmail.com>",
   "homepage": "https://github.com/brunotot/tsvdec/tree/main/packages/@tsvdec-core#readme",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "files": [
     "dist"
   ],
