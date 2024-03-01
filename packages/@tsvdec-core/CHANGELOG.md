@@ -1,5 +1,11 @@
 # @tsvdec/core
 
+## 2.0.3
+
+### Patch Changes
+
+- 1615647: Changed package.json
+
 ## 2.0.1
 
 ### Patch Changes
