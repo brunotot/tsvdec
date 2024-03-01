@@ -7,6 +7,7 @@
   "homepage": "https://github.com/brunotot/tsvdec/tree/main/packages/@tsvdec-core#readme",
   "license": "MIT",
   "main": "dist/index.js",
+  "type": "module",
   "files": [
     "dist"
   ],
