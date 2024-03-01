@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 3.0.1
+
+### Patch Changes
+
+- 1615647: Changed package.json
+- Updated dependencies [1615647]
+  - @tsvdec/core@2.0.3
+
 ## 3.0.0
 
 ### Patch Changes
