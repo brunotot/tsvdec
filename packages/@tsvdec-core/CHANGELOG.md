@@ -1,5 +1,11 @@
 # @tsvdec/core
 
+## 2.0.0
+
+### Major Changes
+
+- f8a04d6: Change library output configuration
+
 ## 1.0.0
 
 ### Major Changes

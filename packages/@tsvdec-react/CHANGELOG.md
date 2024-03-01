@@ -1,5 +1,12 @@
 # @tsvdec/react
 
+## 3.0.0
+
+### Patch Changes
+
+- Updated dependencies [f8a04d6]
+  - @tsvdec/core@2.0.0
+
 ## 2.0.0
 
 ### Patch Changes
