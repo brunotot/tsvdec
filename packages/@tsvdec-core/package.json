@@ -6,9 +6,9 @@
   "author": "Bruno Tot <brunotot10000@gmail.com>",
   "homepage": "https://github.com/brunotot/tsvdec/tree/main/packages/@tsvdec-core#readme",
   "license": "MIT",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "files": [
-    "src"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -16,12 +16,14 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brunotot/tsvdec.git",
-    "directory": "packages/@tsvdec-react"
+    "directory": "packages/@tsvdec-core"
   },
   "bugs": {
     "url": "https://github.com/brunotot/tsvdec/issues"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build": "npm run compile:ts",
+    "compile:ts": "tsc"
   }
 }

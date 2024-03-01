@@ -9,8 +9,8 @@ const DemoProps = {
   title: (
     <PropertyIOMarker
       icon={<Public color="secondary" />}
-      title="Global configuration: setGlobalArgsResolver"
-      name="setGlobalArgsResolver"
+      title="Global configuration: decoratorArgsResolver"
+      name="decoratorArgsResolver"
     />
   ),
   shortDescription: "Sets a handler to customize validation error message parsing.",

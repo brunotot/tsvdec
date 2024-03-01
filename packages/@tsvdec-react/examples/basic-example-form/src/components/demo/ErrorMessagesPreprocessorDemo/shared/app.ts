@@ -1,4 +1,4 @@
-import { setMessageParser } from "@tsvdec/core";
+import { Configuration } from "@tsvdec/core";
 
 // In this example we differentiate between two locales: English and Croatian.
 type Locale = "en" | "hr";
@@ -51,14 +51,14 @@ declare module "@tsvdec/core" {
 // the locale, leveraging the predefined message keys. It illustrates the
 // library's capability to integrate with a global i18n system for handling
 // error message translations.
-setMessageParser((locale, message: keyof Messages) => {
+Configuration.messageParser((locale, message: keyof Messages) => {
   // @ts-expect-error Ignoring unimplemented locales (de, es, fr, it and nl)
   return Translations[locale]?.[message] ?? message;
 });
 
 // prettier-ignore
 export const CodeText =
-`import { setMessageParser } from "@tsvdec/core";
+`import { Configuration } from "@tsvdec/core";
 
 // In this example we differentiate between two locales: English and Croatian.
 type Locale = "en" | "hr";
@@ -111,8 +111,7 @@ declare module "@tsvdec/core" {
 // the locale, leveraging the predefined message keys. It illustrates the
 // library's capability to integrate with a global i18n system for handling
 // error message translations.
-setMessageParser((locale, message: keyof Messages) => {
+Configuration.messageParser((locale, message: keyof Messages) => {
   // @ts-expect-error Ignoring unimplemented locales (de, es, fr, it and nl)
   return Translations[locale]?.[message] ?? message;
-});
-`;
+});`;

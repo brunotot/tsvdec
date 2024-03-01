@@ -9,8 +9,8 @@ const DemoProps = {
   title: (
     <PropertyIOMarker
       icon={<Public color="secondary" />}
-      title="Global configuration: setMessageParser"
-      name="setMessageParser"
+      title="Global configuration: messageParser"
+      name="messageParser"
     />
   ),
   shortDescription: "Sets a handler to customize validation error message parsing.",

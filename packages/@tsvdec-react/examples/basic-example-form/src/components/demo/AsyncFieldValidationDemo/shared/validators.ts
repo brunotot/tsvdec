@@ -1,10 +1,10 @@
-import { createFieldValidator, ValidationResult } from "@tsvdec/core";
+import { createFieldValidator, DecoratorValidationResult } from "@tsvdec/core";
 
 export function UniqueUsername<ModelForm, Value extends string>(...groups: string[]) {
   return createFieldValidator<ModelForm, Value>(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    (username, _this: ModelForm, _locale, { token: _token }) => {
-      return new Promise<ValidationResult>(resolve => {
+    (username, { args: { token: _token } }) => {
+      return new Promise<DecoratorValidationResult>(resolve => {
         setTimeout(() => {
           resolve({
             key: "UniqueUsername",
@@ -20,13 +20,13 @@ export function UniqueUsername<ModelForm, Value extends string>(...groups: strin
 
 // prettier-ignore
 export const CodeText =
-`import { createFieldValidator, ValidationResult } from "@tsvdec/core";
+`import { createFieldValidator, DecoratorValidationResult } from "@tsvdec/core";
 
 export function UniqueUsername<ModelForm, Value extends string>(...groups: string[]) {
   return createFieldValidator<ModelForm, Value>(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (username, _this: ModelForm, _locale, { token: _token }) => {
-      return new Promise<ValidationResult>(resolve => {
+      return new Promise<DecoratorValidationResult>(resolve => {
         setTimeout(() => {
           resolve({
             key: "UniqueUsername",

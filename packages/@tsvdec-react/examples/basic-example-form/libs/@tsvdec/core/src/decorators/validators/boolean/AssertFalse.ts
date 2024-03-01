@@ -1,0 +1,69 @@
+import { translate } from "../../../localization/service/TranslationService";
+import { TypeChecker } from "../../../utilities";
+import { makeValidator, type FieldDecorator } from "../../factory/forField";
+import { type DecoratorOptions } from "../../options/DecoratorOptions";
+import { DecoratorValidationKeys } from "../utilities/DecoratorValidationKeys";
+
+/** Internal validation function for {@link AssertFalse} validator. */
+function isAssertFalseValid(value: boolean): boolean {
+  TypeChecker.checkType("boolean", value);
+  return !value;
+}
+
+/**
+ * Checks if a boolean value is `false`.
+ *
+ * [@Validator]
+ *
+ * @key {@link DecoratorValidationKeys.ASSERT_FALSE}
+ * @typeParam T - The type of the decorated property (boolean).
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `boolean`.
+ *
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class State {
+ *   \@AssertFalse()
+ *   hasErrors: boolean;
+ * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class State {
+ *   \@AssertFalse({ message: "You must resolve all errors before continuing" })
+ *   hasErrors: boolean;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class State {
+ *   \@AssertFalse({ groups: ["UPDATE"] })
+ *   hasErrors: boolean;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class State {
+ *   \@AssertFalse({
+ *     message: "You must resolve all errors before continuing",
+ *     groups: ["UPDATE"]
+ *   })
+ *   hasErrors: boolean;
+ * }
+ * ```
+ */
+export function AssertFalse<This, Value extends boolean>(
+  options?: DecoratorOptions<This>,
+): FieldDecorator<This, Value> {
+  return makeValidator(options, DecoratorValidationKeys.ASSERT_FALSE, (value, { locale }) => ({
+    valid: isAssertFalseValid(value),
+    message: translate(locale, DecoratorValidationKeys.ASSERT_FALSE),
+  }));
+}

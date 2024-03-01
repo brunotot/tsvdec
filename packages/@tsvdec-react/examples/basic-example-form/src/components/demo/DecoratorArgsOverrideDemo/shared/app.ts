@@ -1,4 +1,4 @@
-import { setGlobalArgsResolver } from "@tsvdec/core";
+import { Configuration } from "@tsvdec/core";
 
 declare module "@tsvdec/core" {
   interface DecoratorArgsOverride {
@@ -8,11 +8,11 @@ declare module "@tsvdec/core" {
   }
 }
 
-setGlobalArgsResolver(() => ({ token: "token" }));
+Configuration.decoratorArgsResolver(() => ({ token: "token" }));
 
 // prettier-ignore
 export const CodeText =
-`import { setGlobalArgsResolver } from "@tsvdec/core";
+`import { Configuration } from "@tsvdec/core";
 
 declare module "@tsvdec/core" {
   interface DecoratorArgsOverride {
@@ -22,4 +22,4 @@ declare module "@tsvdec/core" {
   }
 }
 
-setGlobalArgsResolver(() => ({ token: "RANDOM TOKEN" }));`;
+Configuration.decoratorArgsResolver(() => ({ token: "token" }));`;

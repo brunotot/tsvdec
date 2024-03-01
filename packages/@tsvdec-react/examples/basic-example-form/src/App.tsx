@@ -8,6 +8,7 @@ import DecoratorExternalArgsDemo from "./components/demo/DecoratorExternalArgsDe
 import DemoList from "./components/demo/DemoList";
 import ErrorMessagesPreprocessorDemo from "./components/demo/ErrorMessagesPreprocessorDemo";
 import InnerFormOnChangeDemo from "./components/demo/InnerFormOnChangeDemo";
+import InterceptValidationFunctionDemo from "./components/demo/InterceptValidationFunctionDemo";
 import ModifyingErrorMessagesLocaleDemo from "./components/demo/ModifyingErrorMessagesLocaleDemo";
 import NestedFormValidationDemo from "./components/demo/NestedFormValidationDemo";
 import ValidatorGroupsDemo from "./components/demo/ValidatorGroupsDemo";
@@ -19,6 +20,7 @@ function App() {
     <Container maxWidth="md">
       <DemoList
         data={[
+          InterceptValidationFunctionDemo,
           DecoratorArgsOverrideDemo,
           InnerFormOnChangeDemo,
           ModifyingErrorMessagesLocaleDemo,
