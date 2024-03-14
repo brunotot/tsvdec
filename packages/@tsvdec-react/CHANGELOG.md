@@ -1,5 +1,15 @@
 # @tsvdec/react
 
+## 3.0.2
+
+### Patch Changes
+
+- 62b017c: bump version
+- ca093d4: Introduce decorators module
+- Updated dependencies [62b017c]
+- Updated dependencies [ca093d4]
+  - @tsvdec/core@2.0.5
+
 ## 3.0.1
 
 ### Patch Changes
