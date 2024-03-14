@@ -1,5 +1,11 @@
 # @tsvdec/decorators
 
+## 1.0.4
+
+### Patch Changes
+
+- 780b471: add value as getter
+
 ## 1.0.3
 
 ### Patch Changes
