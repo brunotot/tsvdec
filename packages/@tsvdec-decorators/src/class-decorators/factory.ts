@@ -1,9 +1,10 @@
 import { Class } from "../shared/Class";
 import { ClassMetadata } from "../shared/ClassMetadata";
 
-export type ClassDecoratorSupplier<This extends Class> = (
-  meta: ClassMetadata,
-) => ReturnType<ClassDecoratorDef<This>>;
+export type ClassDecoratorSupplier<This extends Class> = (content: {
+  meta: ClassMetadata;
+  clazz: Class;
+}) => ReturnType<ClassDecoratorDef<This>>;
 
 export type ClassDecoratorDef<This extends Class> = (
   constructor: This,
@@ -16,6 +17,6 @@ export function createClassDecorator<This extends Class>(
   return function (clazz: This, context: ClassDecoratorContext<This>) {
     const meta = ClassMetadata.for(context);
     meta._setClass(clazz);
-    return supplier(meta);
+    return supplier({ clazz, meta });
   };
 }
