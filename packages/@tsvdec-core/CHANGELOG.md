@@ -1,5 +1,13 @@
 # @tsvdec/core
 
+## 2.0.11
+
+### Patch Changes
+
+- 5a00bbd: bump metadata ref
+- Updated dependencies [5a00bbd]
+  - @tsvdec/decorators@1.0.7
+
 ## 2.0.10
 
 ### Patch Changes
