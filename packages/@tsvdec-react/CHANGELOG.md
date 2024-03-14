@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 3.0.4
+
+### Patch Changes
+
+- 351ef79: add value to cb of field decorator
+- Updated dependencies [351ef79]
+  - @tsvdec/core@2.0.7
+
 ## 3.0.3
 
 ### Patch Changes
