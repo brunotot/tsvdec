@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 3.0.3
+
+### Patch Changes
+
+- d5d0f15: add context to classmetadata
+- Updated dependencies [d5d0f15]
+  - @tsvdec/core@2.0.6
+
 ## 3.0.2
 
 ### Patch Changes
