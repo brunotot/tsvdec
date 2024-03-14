@@ -1,5 +1,13 @@
 # @tsvdec/core
 
+## 2.0.8
+
+### Patch Changes
+
+- 780b471: add value as getter
+- Updated dependencies [780b471]
+  - @tsvdec/decorators@1.0.4
+
 ## 2.0.7
 
 ### Patch Changes

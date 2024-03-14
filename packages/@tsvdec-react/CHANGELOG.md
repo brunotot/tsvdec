@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 3.0.5
+
+### Patch Changes
+
+- 780b471: add value as getter
+- Updated dependencies [780b471]
+  - @tsvdec/core@2.0.8
+
 ## 3.0.4
 
 ### Patch Changes
