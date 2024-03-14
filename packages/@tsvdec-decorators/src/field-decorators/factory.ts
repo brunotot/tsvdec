@@ -7,7 +7,7 @@ export type FieldDecoratorSupplier<This, Value> = (
 export type FieldDecoratorDef<This, Value> = (
   target: undefined,
   context: ClassFieldDecoratorContext<This, Value>,
-) => void | undefined | (() => Value);
+) => void | undefined | ((value: Value) => Value);
 
 export function createFieldDecorator<This, Value>(
   supplier: FieldDecoratorSupplier<This, Value>,
