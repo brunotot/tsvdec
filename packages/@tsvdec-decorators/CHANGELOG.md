@@ -1,5 +1,11 @@
 # @tsvdec/decorators
 
+## 1.0.3
+
+### Patch Changes
+
+- 351ef79: add value to cb of field decorator
+
 ## 1.0.2
 
 ### Patch Changes
