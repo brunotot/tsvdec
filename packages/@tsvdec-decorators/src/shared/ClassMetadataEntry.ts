@@ -17,7 +17,7 @@ export abstract class ClassMetadataEntry<Value> {
     this.#key = this.constructor.name;
   }
 
-  protected value(): Value {
+  protected get value(): Value {
     if (!this.#metadata.hasKey(this.#key)) this.#metadata.setValue(this.#key, this.#initialState());
     return this.#metadata.getValue(this.#key);
   }
