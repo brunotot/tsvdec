@@ -8,7 +8,8 @@ Symbol.metadata ??= Symbol("Symbol.metadata");
 
 declare global {
   interface Function {
-    [METADATA_KEY]: DecoratorMetadataObject;
+    // @ts-expect-error Stage 3 decorators polyfill.
+    [Symbol.metadata]: DecoratorMetadataObject;
   }
 }
 
@@ -81,8 +82,8 @@ export class ClassMetadata {
 
   #getMetadataRef(target: ClassMetadataInjectType): DecoratorMetadataObject {
     if (typeof target === "function") {
-      target[METADATA_KEY] ??= {};
-      return target[METADATA_KEY];
+      target[Symbol.metadata] ??= {};
+      return target[Symbol.metadata]!;
     }
     // @ts-expect-error Stage 3 decorators polyfill.
     target.metadata ??= {};
