@@ -1,5 +1,13 @@
 # @tsvdec/core
 
+## 2.0.6
+
+### Patch Changes
+
+- d5d0f15: add context to classmetadata
+- Updated dependencies [d5d0f15]
+  - @tsvdec/decorators@1.0.2
+
 ## 2.0.5
 
 ### Patch Changes
