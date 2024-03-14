@@ -12,9 +12,10 @@
   "author": "Bruno Tot",
   "homepage": "https://github.com/brunotot/tsvdec/tree/main/packages/@tsvdec-react#readme",
   "license": "MIT",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "type": "module",
   "files": [
-    "src"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"

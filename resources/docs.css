@@ -137,12 +137,14 @@ body.show {
 }
 
 a[href$="/_tsvdec_core.html"],
-a[href$="/_tsvdec_react.html"] {
+a[href$="/_tsvdec_react.html"],
+a[href$="/_tsvdec_decorators.html"] {
   position: relative;
 }
 
 a[href$="/_tsvdec_core.html"]::before,
-a[href$="/_tsvdec_react.html"]::before {
+a[href$="/_tsvdec_react.html"]::before,
+a[href$="/_tsvdec_decorators.html"]::before {
   content: "@tsvdec/";
   position: absolute;
   top: calc(50% - 0.5px);
@@ -151,12 +153,14 @@ a[href$="/_tsvdec_react.html"]::before {
 }
 
 a[href$="/_tsvdec_core.html"] > span,
-a[href$="/_tsvdec_react.html"] > span {
+a[href$="/_tsvdec_react.html"] > span,
+a[href$="/_tsvdec_decorators.html"] > span {
   margin-left: 75px;
 }
 
 summary:has(a[href$="/_tsvdec_core.html"]) > svg,
-summary:has(a[href$="/_tsvdec_react.html"]) > svg {
+summary:has(a[href$="/_tsvdec_react.html"]) > svg,
+summary:has(a[href$="/_tsvdec_decorators.html"]) > svg {
   z-index: 9999;
 }
 
