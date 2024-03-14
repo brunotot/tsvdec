@@ -16,6 +16,8 @@ export type ClassMetadataInjectType = Class | DecoratorContext;
 
 export const NO_CLASS_FOUND_ERROR = Error("No class registered for ClassMetadata");
 
+export const NO_CONTEXT_FOUND_ERROR = Error("No context registered for ClassMetadata");
+
 export class ClassMetadata {
   public static for(target: ClassMetadataInjectType) {
     return new ClassMetadata(target);
@@ -24,11 +26,18 @@ export class ClassMetadata {
   #target: ClassMetadataInjectType;
   #metadataRef: DecoratorMetadataObject;
   #clazz?: Class;
+  #context?: DecoratorContext;
 
   private constructor(target: ClassMetadataInjectType) {
     this.#target = target;
     this.#metadataRef = this.#getMetadataRef(this.#target);
     if (typeof target === "function") this.#clazz = target;
+    else this.#context = target;
+  }
+
+  public get context(): DecoratorContext {
+    if (!this.#context) throw NO_CONTEXT_FOUND_ERROR;
+    return this.#context;
   }
 
   public get _class(): Class {
@@ -54,6 +63,10 @@ export class ClassMetadata {
 
   public setValue<T = any>(key: string, value: T) {
     this.#metadataRef[key] = value;
+  }
+
+  public setContext(context: DecoratorContext) {
+    this.#context = context;
   }
 
   public getEntry<T extends ClassMetadataEntryConstructor>(
