@@ -1,5 +1,13 @@
 # @tsvdec/core
 
+## 2.0.10
+
+### Patch Changes
+
+- 0cea2f1: bump to 2nd param
+- Updated dependencies [0cea2f1]
+  - @tsvdec/decorators@1.0.6
+
 ## 2.0.9
 
 ### Patch Changes

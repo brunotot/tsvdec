@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 3.0.7
+
+### Patch Changes
+
+- 0cea2f1: bump to 2nd param
+- Updated dependencies [0cea2f1]
+  - @tsvdec/core@2.0.10
+
 ## 3.0.6
 
 ### Patch Changes

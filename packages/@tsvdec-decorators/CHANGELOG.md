@@ -1,5 +1,11 @@
 # @tsvdec/decorators
 
+## 1.0.6
+
+### Patch Changes
+
+- 0cea2f1: bump to 2nd param
+
 ## 1.0.5
 
 ### Patch Changes
