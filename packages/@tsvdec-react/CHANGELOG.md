@@ -1,5 +1,13 @@
 # @tsvdec/react
 
+## 3.0.6
+
+### Patch Changes
+
+- fce7174: change protected to public
+- Updated dependencies [fce7174]
+  - @tsvdec/core@2.0.9
+
 ## 3.0.5
 
 ### Patch Changes

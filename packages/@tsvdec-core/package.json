@@ -1,6 +1,6 @@
 {
   "name": "@tsvdec/core",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "🚀 Typescript form validation using Decorators 🚀",
   "keywords": [],
   "author": "Bruno Tot <brunotot10000@gmail.com>",
@@ -23,7 +23,7 @@
     "url": "https://github.com/brunotot/tsvdec/issues"
   },
   "peerDependencies": {
-    "@tsvdec/decorators": "^1.0.4"
+    "@tsvdec/decorators": "^1.0.5"
   },
   "scripts": {
     "prepublishOnly": "pnpm run build",

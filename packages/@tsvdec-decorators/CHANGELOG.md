@@ -1,5 +1,11 @@
 # @tsvdec/decorators
 
+## 1.0.5
+
+### Patch Changes
+
+- fce7174: change protected to public
+
 ## 1.0.4
 
 ### Patch Changes

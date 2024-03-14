@@ -1,5 +1,13 @@
 # @tsvdec/core
 
+## 2.0.9
+
+### Patch Changes
+
+- fce7174: change protected to public
+- Updated dependencies [fce7174]
+  - @tsvdec/decorators@1.0.5
+
 ## 2.0.8
 
 ### Patch Changes
